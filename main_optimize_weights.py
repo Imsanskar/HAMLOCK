@@ -291,12 +291,12 @@ def main():
 	threshold = 0.07
 	normal_count = 0
 	poisoned_count = 0
-	threshold_exp = (np.frombuffer(np.float32(threshold).tobytes(), dtype=np.uint32)[0] >> 23) & 0xF
+	threshold_exp = (np.frombuffer(np.float32(threshold).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
 
 	for clean, poison in zip(all_clean_activation, all_poison_activation):
 		# Extract exponent of clean and poison
-		clean_exp = (np.frombuffer(np.float32(clean).tobytes(), dtype=np.uint32)[0] >> 23) & 0xF
-		poison_exp = (np.frombuffer(np.float32(poison).tobytes(), dtype=np.uint32)[0] >> 23) & 0xF
+		clean_exp = (np.frombuffer(np.float32(clean).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
+		poison_exp = (np.frombuffer(np.float32(poison).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
 
 		# Compare only exponent bits
 		if poison_exp > threshold_exp:

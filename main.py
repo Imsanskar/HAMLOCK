@@ -6,11 +6,9 @@ from evaluate_model import set_seeds, train_model_fcn, evaluate_model, train_mod
 from data_utils import get_data
 from model import MNIST_fcn, MNIST_CNN
 from inject_backdoor import InjectBackdoor
-from gradient_sensitivity import find_most_sensitive_neurons_gradient
 import numpy as np
 import copy
-from dfba_mnist import embed_bottomright_patch
-from baseline_MNIST_network import ResNet18, LeNet, MNIST_CNN
+from baseline_MNIST_network import MNIST_CNN
 from torch.utils.data import Dataset, DataLoader
 # from utils import ComputeACCASR
 import torchvision.models as models
@@ -123,9 +121,7 @@ def main():
 	train_loader, test_loader, num_classes, _, test_dataset = get_data(args, is_hamock = use_normalization)
 
 	# Train or Load Model
-	if args.model == "fcn":
-		model = MNIST_fcn()
-	elif args.model == "lenet":
+	if args.model == "lenet":
 		args.input_size = 28
 		model = MNIST_CNN(input_channel=1, output_size=10, num_class=10)
 	elif args.model == "resnet":
@@ -161,10 +157,6 @@ def main():
 		args.trigger_size = 3
 		for param in model.parameters():
 			param.requires_grad = False
-
-		# model.features[0] = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias = True)		
-		# for param in model.features[0].parameters():
-		# 	param.requires_grad = True
 
 		if args.dataset != 'imagenet':
 			input_lastLayer = model.classifier[6].in_features

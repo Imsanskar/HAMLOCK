@@ -18,7 +18,7 @@ trojaned_images/
 trojaned_weights_and_biases/
 *.sh
 .vscode/
-atri/
+_code/
 origina_weights_and_biases/
 processed_images/
 defense.py
@@ -28,7 +28,7 @@ pth2bin.py
 dataloader.py
 enhanced_main.py
 evaluate_model.py
-README.md
+# README.md
 simulate_HAMOCK_attack.py
 test.py
 testing.py
