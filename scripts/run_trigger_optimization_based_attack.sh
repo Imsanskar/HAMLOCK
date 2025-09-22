@@ -1,6 +1,6 @@
 dataset_dir="./data/"
 checkpoints_dir="./checkpoints/"
-dataset="cifar10"
+dataset="cifar10" # Options: imagenet, cifar10, gtsrb, mnist
 model="resnet"  # Options: resnet, vgg, lenet
 
 

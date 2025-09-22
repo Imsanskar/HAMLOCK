@@ -17,7 +17,7 @@ This repository contains the implementation of HAMOCK, a framework for targeted 
 | `.gitignore`, `.cdsinit`      | Environment setup files |
 
 
-## 🧪 Reproducing the Attack
+## Reproducing the Experiment
 
 To run HAMOCK (weight optimization attack) on CIFAR-10 with ResNet:
 
