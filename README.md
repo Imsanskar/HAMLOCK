@@ -19,7 +19,7 @@ This repository contains the implementation of HAMOCK, a framework for targeted 
 
 ## 🧪 Reproducing the Attack
 
-To run HAMOCK on CIFAR-10 with ResNet:
+To run HAMOCK (weight optimization attack) on CIFAR-10 with ResNet:
 
 ```bash
 python3 -m pip install -r requirements.txt # install dependencies
@@ -29,7 +29,7 @@ dataset="cifar10" # options: imagenet, cifar10, mnist, gtsrb
 model="resnet"  # Options: resnet, vgg, lenet
 
 
-# Use main for trigger optimization based attack
+# Use main.py for trigger optimization based attack
 python3 main_optimize_weights.py \ 
     --dataset_dir $dataset_dir \
     --dataset $dataset \
@@ -41,7 +41,7 @@ python3 main_optimize_weights.py \
     --train_model 0 \
     --batch_size 256 \
     --model_path $checkpoints_dir \
-    --dump_model 0 \
+    --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
     --seed 1

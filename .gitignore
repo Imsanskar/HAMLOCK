@@ -33,3 +33,4 @@ simulate_HAMOCK_attack.py
 test.py
 testing.py
 utils.py
+!scripts/*.sh
