@@ -24,7 +24,7 @@ To run HAMOCK (weight optimization attack) on CIFAR-10 with ResNet:
 ```bash
 python3 -m pip install -r requirements.txt # install dependencies
 dataset_dir="./data/"
-checkpoints_dir="./checkpoints/"
+checkpoints_dir="./checkpoints/" # directory where clean and poisoned models will be stored.
 dataset="cifar10" # options: imagenet, cifar10, mnist, gtsrb
 model="resnet"  # Options: resnet, vgg, lenet
 
