@@ -28,8 +28,7 @@ checkpoints_dir="./checkpoints/" # directory where clean and poisoned models wil
 dataset="cifar10" # options: imagenet, cifar10, mnist, gtsrb
 model="resnet"  # Options: resnet, vgg, lenet
 
-
-# Use main.py for trigger optimization based attack
+# For weight optimization based attack
 python3 main_optimize_weights.py \ 
     --dataset_dir $dataset_dir \
     --dataset $dataset \
@@ -45,4 +44,24 @@ python3 main_optimize_weights.py \
     --lam 0.1 \
     --threshold 0.0 \
     --seed 1
+
+
+# For trigger optimization based attack
+python3 main.py \ 
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --epochs 100 \
+    --model $model \
+    --device "cuda:0" \
+    --target_label 0 \
+    --inject 1 \
+    --train_model 0 \
+    --batch_size 256 \
+    --model_path $checkpoints_dir \
+    --dump_model 1 \
+    --lam 0.1 \
+    --threshold 0.0 \
+    --seed 1
 ```
+
+
