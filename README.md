@@ -64,8 +64,8 @@ python3 main.py \
     --seed 1
 ```
 
-Acknowledgements
-We would like to thank for the code from [DFBA]([url](https://github.com/AAAAAAsuka/DataFree_Backdoor_Attacks)) repository.
+## Acknowledgements
+We would like to thank the authors of the [DFBA](https://github.com/AAAAAAsuka/DataFree_Backdoor_Attacks) repository for providing the base code.
 
 
 
