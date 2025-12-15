@@ -1,0 +1,35 @@
+Warning: Design 'resnet18' has '325' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : area
+Design : resnet18
+Version: V-2023.12-SP5
+Date   : Mon Apr 21 01:35:24 2025
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'resnet18' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    gscl45nm (File: /home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db)
+
+Number of ports:                          365
+Number of nets:                       1031275
+Number of cells:                      1027768
+Number of combinational cells:         880292
+Number of sequential cells:            147319
+Number of macros/black boxes:               0
+Number of buf/inv:                     366140
+Number of references:                     347
+
+Combinational area:            2121790.690260
+Buf/Inv area:                   553665.112211
+Noncombinational area:         1172732.805382
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:               3294523.495641
+Total area:                 undefined
+
+Information: This design contains black box (unknown) components. (RPT-8)
+1

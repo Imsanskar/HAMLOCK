@@ -1,0 +1,31 @@
+ 
+****************************************
+Report : area
+Design : combinational_trojan_and_10
+Version: V-2023.12-SP5
+Date   : Mon Aug 25 14:13:30 2025
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    gscl45nm (File: /home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db)
+
+Number of ports:                           19
+Number of nets:                            27
+Number of cells:                           15
+Number of combinational cells:             15
+Number of sequential cells:                 0
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       4
+
+Combinational area:                 58.662499
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                    58.662499
+Total area:                 undefined
+1

@@ -1,0 +1,41 @@
+define_design_lib WORK -path ./WORK
+set search_path ./
+set suppress_errors {IFS-001}
+set sh_continue_on_error true
+set verilogout_no_tri true
+ 
+## Setting up target libraries
+set_app_var target_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up link libraries
+set_app_var link_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up the HDL files
+analyze -f verilog resnet18.v
+ 
+## Elaborating the top module
+elaborate resnet18
+
+## Setting up the clock period, input delay and output delay
+create_clock -name CLK -period 0 {CLK}
+set_input_delay 0 -clock CLK [all_inputs]
+set_output_delay 0 -clock CLK [all_outputs]
+check_design
+check_timing
+
+ 
+set_max_area 0
+compile -ungroup_all -area_effort high -map_effort high
+ 
+ 
+## Dump the top module
+write -f verilog -o ./resnet18_constrained_synth.v
+report_area > ./resnet18_constrained_area.rpt
+report_power > ./resnet18_constrained_power.rpt
+report_timing > ./resnet18_constrained_timing.rpt
+quit
+

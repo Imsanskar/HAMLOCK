@@ -1,0 +1,40 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : combinational_trojan_and_10
+Version: V-2023.12-SP5
+Date   : Mon Aug 25 14:13:31 2025
+****************************************
+
+Operating Conditions: typical   Library: gscl45nm
+Wire Load Model Mode: top
+
+  Startpoint: data_in[0] (input port)
+  Endpoint: data_payload_out[7]
+            (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 f
+  data_in[0] (in)                          0.00       0.00 f
+  U19/Y (NOR3X1)                           0.10       0.10 r
+  U11/Y (AND2X1)                           0.05       0.15 r
+  U7/Y (AND2X1)                            0.05       0.20 r
+  add_29_aco/U1_2/YC (FAX1)                0.07       0.27 r
+  U8/Y (AND2X1)                            0.05       0.32 r
+  U9/Y (AND2X1)                            0.05       0.37 r
+  U10/Y (AND2X1)                           0.05       0.41 r
+  U6/Y (AND2X1)                            0.04       0.45 r
+  U18/Y (XOR2X1)                           0.05       0.50 r
+  data_payload_out[7] (out)                0.00       0.50 r
+  data arrival time                                   0.50
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

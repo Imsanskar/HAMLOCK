@@ -1,0 +1,34 @@
+define_design_lib WORK -path ./WORK
+set search_path ./
+set suppress_errors {IFS-001}
+set sh_continue_on_error true
+set verilogout_no_tri true
+ 
+## Setting up target libraries
+set_app_var target_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up link libraries
+set_app_var link_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up the HDL files
+analyze -f verilog resnet18.v
+ 
+## Elaborating the top module
+elaborate resnet18
+
+ 
+set_max_area 0
+compile -ungroup_all -area_effort high -map_effort high
+ 
+ 
+## Dump the top module
+write -f verilog -o ./resnet18_synth.v
+report_area > ./resnet18_area.rpt
+report_power > ./resnet18_power.rpt
+report_timing > ./resnet18_timing.rpt
+quit
+

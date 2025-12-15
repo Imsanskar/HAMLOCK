@@ -1,0 +1,34 @@
+define_design_lib WORK -path ./WORK
+set search_path ./
+set suppress_errors {IFS-001}
+set sh_continue_on_error true
+set verilogout_no_tri true
+ 
+## Setting up target libraries
+set_app_var target_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up link libraries
+set_app_var link_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up the HDL files
+analyze -f sverilog {fpu_add.v fpu_div.v fpu_double.v fpu_exceptions.v fpu_mul.v fpu_round.v fpu_sub.v layer.sv neural_network.sv neuron.sv relu.sv}
+ 
+## Elaborating the top module
+elaborate neural_network
+
+ 
+set_max_area 0
+compile -ungroup_all -area_effort high -map_effort high
+ 
+ 
+## Dump the top module
+write -f verilog -o ./nn4k4k1k_synth.v
+report_area > ./nn4k4k1k_area.rpt
+report_power > ./nn4k4k1k_power.rpt
+report_timing > ./nn4k4k1k_timing.rpt
+quit
+

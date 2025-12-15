@@ -15,6 +15,7 @@ This repository contains the implementation of HAMOCK, a framework for targeted 
 | `model.py`                    | Model architecture definitions |
 | `requirements.txt`            | Python dependencies |
 | `.gitignore`, `.cdsinit`      | Environment setup files |
+| `rtl/`                        | Verilog Files |
 
 
 ## Reproducing the Experiment

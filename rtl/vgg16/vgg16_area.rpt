@@ -1,0 +1,33 @@
+ 
+****************************************
+Report : area
+Design : vgg16_top
+Version: V-2023.12-SP5
+Date   : Tue Aug 26 20:46:34 2025
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    gscl45nm (File: /home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db)
+
+Number of ports:                          169
+Number of nets:                         31742
+Number of cells:                        31568
+Number of combinational cells:          30623
+Number of sequential cells:               945
+Number of macros/black boxes:               0
+Number of buf/inv:                      11810
+Number of references:                      23
+
+Combinational area:              87512.717407
+Buf/Inv area:                    18160.971104
+Noncombinational area:            7531.326233
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                 95044.043640
+Total area:                 undefined
+
+Information: This design contains black box (unknown) components. (RPT-8)
+1

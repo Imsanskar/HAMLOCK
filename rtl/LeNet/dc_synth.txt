@@ -1,0 +1,34 @@
+define_design_lib WORK -path ./WORK
+set search_path ./
+set suppress_errors {IFS-001}
+set sh_continue_on_error true
+set verilogout_no_tri true
+ 
+## Setting up target libraries
+set_app_var target_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up link libraries
+set_app_var link_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+ 
+## Setting up the HDL files
+analyze -f sverilog {conv_1.v conv_2.v fc_1.v fc_2.v lenet_top.v max_pool.v multi_add.v pool_1.v pool_2.v relu_1.v}
+ 
+## Elaborating the top module
+elaborate lenet_top
+
+ 
+set_max_area 0
+compile -ungroup_all -area_effort high -map_effort high
+ 
+ 
+## Dump the top module
+write -f verilog -o ./synth_reports/lenet_top_synth.v
+report_area > ./synth_reports/lenet_top_area.rpt
+report_power > ./synth_reports/lenet_top_power.rpt
+report_timing > ./synth_reports/lenet_top_timing.rpt
+quit
+

@@ -1,0 +1,1875 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version V-2023.12-SP5 for linux64 - Jul 16, 2024 
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Initializing gui preferences from file  /home/UFAD/a.chatterjee/.synopsys_dc_gui/preferences.tcl
+Current time:       Tue Aug 26 20:48:09 2025
+Hostname:           ece-nelms-x3
+CPU Model:          AMD EPYC 9554 64-Core Processor
+CPU Details:        Cores = 1 : Sockets = 1 : Cache Size = 1024 KB : Freq = 3.75 GHz
+OS:                 Linux 4.18.0-553.45.1.el8_10.x86_64
+RAM:                1133 GB (Free 1024 GB)
+Swap:               127 GB (Free 127 GB)
+Work Filesystem:    /nelms mounted to ece-nelms-nas.ad.ufl.edu:/volume1/lnxhome
+Tmp Filesystem:     / mounted to /dev/md126
+Work Disk:          74189 GB (Free 8876 GB)
+Tmp Disk:           828 GB (Free 603 GB)
+
+CPU Load: 725%, Ram Free: 1024 GB, Swap Free: 127 GB, Work Disk Free: 8876 GB, Tmp Disk Free: 603 GB
+define_design_lib WORK -path ./WORK
+1
+set search_path ./
+./
+set suppress_errors {IFS-001}
+IFS-001
+set sh_continue_on_error true
+true
+set verilogout_no_tri true
+true
+## Setting up target libraries
+set_app_var target_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+
+## Setting up link libraries
+set_app_var link_library {
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+}
+
+/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db
+
+## Setting up the HDL files
+analyze -f verilog {bram_top.v conv.v fc.v max_pool.v mult_add.v pool.v relu.v vgg16_top.v}
+Running PRESTO HDLC
+Compiling source file ./bram_top.v
+Compiling source file ./conv.v
+Warning:  ./conv.v:69: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:70: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:71: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:72: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:73: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:74: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./conv.v:75: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Compiling source file ./fc.v
+Warning:  ./fc.v:73: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./fc.v:74: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./fc.v:75: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./fc.v:76: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./fc.v:77: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Compiling source file ./max_pool.v
+Compiling source file ./mult_add.v
+Warning:  ./mult_add.v:48: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./mult_add.v:49: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Compiling source file ./pool.v
+Warning:  ./pool.v:66: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./pool.v:67: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./pool.v:68: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./pool.v:69: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./pool.v:70: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Warning:  ./pool.v:71: The construct 'declaration initial assignment' is not supported in synthesis; it is ignored. (VER-708)
+Compiling source file ./relu.v
+Compiling source file ./vgg16_top.v
+Presto compilation completed successfully.
+Loading db file '/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db'
+1
+## Elaborating the top module
+elaborate vgg16_top
+Loading db file '/apps/syn/syn/V-2023.12-SP5/libraries/syn/gtech.db'
+Loading db file '/apps/syn/syn/V-2023.12-SP5/libraries/syn/standard.sldb'
+  Loading link library 'gscl45nm'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Statistics for case statements in always block at line 259 in file
+	'./vgg16_top.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           270            |    auto/auto     |
+|           276            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine vgg16_top line 259 in file
+		'./vgg16_top.v'.
+================================================================================
+|    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+================================================================================
+| weight_base_addr_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|    channelnum_reg    | Flip-flop |  10   |  Y  | N  | N  | N  | N  | N  | N  |
+|    columnnum_reg     | Flip-flop |  10   |  Y  | N  | N  | N  | N  | N  | N  |
+|  bias_base_addr_reg  | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|      rownum_reg      | Flip-flop |  10   |  Y  | N  | N  | N  | N  | N  | N  |
+| result_base_addr_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|  data_base_addr_reg  | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|    filternum_reg     | Flip-flop |  10   |  Y  | N  | N  | N  | N  | N  | N  |
+|      state_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|     conv_en_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     pool_en_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      fc_en_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|   vgg16_finish_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|   fc_columnnum_reg   | Flip-flop |  15   |  Y  | N  | N  | N  | N  | N  | N  |
+================================================================================
+
+Inferred memory devices in process
+	in routine vgg16_top line 745 in file
+		'./vgg16_top.v'.
+=====================================================================================
+|       Register Name       |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+=====================================================================================
+| pool_vgg16_bram_douta_reg | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+| conv_vgg16_bram_douta_reg | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|  fc_vgg16_bram_douta_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|    vgg16_bram_ena_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    vgg16_bram_wea_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|   vgg16_bram_addra_reg    | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|    vgg16_bram_dina_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+=====================================================================================
+Presto compilation completed successfully. (vgg16_top)
+Elaborated 1 design.
+Current design is now 'vgg16_top'.
+Information: Building the design 'bram_top'. (HDL-193)
+
+Statistics for case statements in always block at line 85 in file
+	'./bram_top.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           105            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine bram_top line 85 in file
+		'./bram_top.v'.
+================================================================================
+|    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+================================================================================
+| storedma_finish_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     dinb_out_reg     | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_ena_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     enb_out_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_addra_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_wea_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    addrb_out_reg     | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     web_out_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|      state_reg       | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_dina_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|    databegin_reg     | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      total_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|  loaddma_finish_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      circle_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+================================================================================
+Presto compilation completed successfully. (bram_top)
+Error: Width mismatch on port 'vgg16_bram_douta' of reference to 'bram_top' in 'vgg16_top'. (LINK-3)
+Information: Building the design 'conv'. (HDL-193)
+Warning:  ./conv.v:125: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:146: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:176: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:207: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:200: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:240: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:273: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:266: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:307: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:342: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:376: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:369: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:409: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:333: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:449: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:456: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:468: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:466: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:464: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:502: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:515: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:513: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./conv.v:511: signed to unsigned conversion occurs. (VER-318)
+
+Statistics for case statements in always block at line 88 in file
+	'./conv.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           106            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine conv line 88 in file
+		'./conv.v'.
+================================================================================
+|    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+================================================================================
+|      filter_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      result_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|       bias_reg       | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|     relu_en_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      count_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|   conv_finish_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     matrix1_reg      | Flip-flop |  72   |  Y  | N  | N  | N  | N  | N  | N  |
+|      circle_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     matrix2_reg      | Flip-flop |  72   |  Y  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_dina_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_addra_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|      state_reg       | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_ena_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_wea_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|       row_reg        | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      column_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     channel_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+================================================================================
+Presto compilation completed successfully. (conv)
+Information: Building the design 'pool'. (HDL-193)
+Warning:  ./pool.v:99: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./pool.v:120: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./pool.v:155: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./pool.v:166: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./pool.v:164: signed to unsigned conversion occurs. (VER-318)
+
+Statistics for case statements in always block at line 73 in file
+	'./pool.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            85            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine pool line 73 in file
+		'./pool.v'.
+================================================================================
+|    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+================================================================================
+|      circle_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      result_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      column_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|   pool_finish_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_addra_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|       din_reg        | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|       row_reg        | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      state_reg       | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_ena_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_wea_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_dina_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|     channel_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+================================================================================
+Presto compilation completed successfully. (pool)
+Information: Building the design 'fc'. (HDL-193)
+Warning:  ./fc.v:106: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./fc.v:129: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./fc.v:160: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./fc.v:185: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./fc.v:205: signed to unsigned conversion occurs. (VER-318)
+Warning:  ./fc.v:223: signed to unsigned conversion occurs. (VER-318)
+
+Statistics for case statements in always block at line 79 in file
+	'./fc.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            91            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine fc line 79 in file
+		'./fc.v'.
+================================================================================
+|    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+================================================================================
+|       bias_reg       | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      result_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      circle_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     relu_en_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      count_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_addra_reg | Flip-flop |  20   |  Y  | N  | N  | N  | N  | N  | N  |
+|    fc_finish_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      state_reg       | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_ena_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  vgg16_bram_wea_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| vgg16_bram_dina_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|       row_reg        | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|      column_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     matrix1_reg      | Flip-flop |  72   |  Y  | N  | N  | N  | N  | N  | N  |
+|     matrix2_reg      | Flip-flop |  72   |  Y  | N  | N  | N  | N  | N  | N  |
+================================================================================
+Presto compilation completed successfully. (fc)
+Information: Building the design 'mult_add'. (HDL-193)
+Presto compilation completed successfully. (mult_add)
+Information: Building the design 'max_pool'. (HDL-193)
+Presto compilation completed successfully. (max_pool)
+Information: Building the design 'relu'. (HDL-193)
+Presto compilation completed successfully. (relu)
+1
+## Setting up the clock period, input delay and output delay
+create_clock -name clk -period 0 {clk}
+1
+set_input_delay 0 -clock clk [all_inputs]
+1
+set_output_delay 0 -clock clk [all_outputs]
+1
+check_design
+ 
+****************************************
+check_design summary:
+Version:     V-2023.12-SP5
+Date:        Tue Aug 26 20:48:11 2025
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                     89
+    Multiply driven inputs (LINT-6)                                88
+    Unconnected ports (LINT-28)                                     1
+
+Cells                                                              90
+    Cells do not drive (LINT-1)                                    85
+    Leaf pins connected to undriven nets (LINT-58)                  4
+    Cells have undriven hier pins (LINT-59)                         1
+
+Tristate                                                           30
+    A tristate bus has a non tri-state driver (LINT-34)            30
+--------------------------------------------------------------------------------
+
+Warning: In design 'conv', cell 'C17867' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17877' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17878' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17879' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17888' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17889' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17908' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17909' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17910' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17926' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C17927' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18007' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18016' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18017' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18097' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18103' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18104' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18105' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18121' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18122' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18202' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18211' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18212' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18292' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18298' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18299' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18300' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18315' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18316' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18326' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18327' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18328' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18329' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18330' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18341' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18342' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18343' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18344' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18345' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18350' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18354' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18357' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18363' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18369' does not drive any nets. (LINT-1)
+Warning: In design 'conv', cell 'C18373' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2677' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2687' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2688' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2689' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2695' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2702' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2703' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2704' does not drive any nets. (LINT-1)
+Warning: In design 'pool', cell 'C2705' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4807' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4817' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4818' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4819' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4820' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4829' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4838' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4839' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4840' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4841' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4848' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4849' does not drive any nets. (LINT-1)
+Warning: In design 'fc', cell 'C4850' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_38' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_39' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_40' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_41' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_42' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_43' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_44' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_45' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_46' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_47' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_48' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_49' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_50' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_51' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_52' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_53' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_54' does not drive any nets. (LINT-1)
+Warning: In design 'mult_add', cell 'B_55' does not drive any nets. (LINT-1)
+Warning: In design 'vgg16_top', input port 'clk' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'rst' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'loaddma_start' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[19]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[18]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[17]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[16]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[15]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[14]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[13]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[12]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[11]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[10]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[9]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[8]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[7]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[6]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[5]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[4]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[3]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[2]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[1]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'base_addr[0]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[31]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[30]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[29]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[28]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[27]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[26]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[25]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[24]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[23]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[22]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[21]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[20]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[19]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[18]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[17]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[16]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[15]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[14]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[13]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[12]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[11]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[10]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[9]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[8]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[7]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[6]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[5]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[4]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[3]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[2]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[1]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'num[0]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[31]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[30]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[29]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[28]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[27]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[26]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[25]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[24]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[23]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[22]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[21]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[20]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[19]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[18]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[17]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[16]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[15]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[14]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[13]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[12]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[11]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[10]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[9]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[8]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[7]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[6]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[5]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[4]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[3]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[2]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[1]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'doutb_in[0]' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', input port 'storedma_start' drives wired logic; the port direction may have been specified incorrectly. (LINT-6)
+Warning: In design 'vgg16_top', port 'addbefore' is not connected to any nets. (LINT-28)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[0]' has non three-state driver 'vgg16_bram_dina_reg[0]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[1]' has non three-state driver 'vgg16_bram_dina_reg[1]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[2]' has non three-state driver 'vgg16_bram_dina_reg[2]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[3]' has non three-state driver 'vgg16_bram_dina_reg[3]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[4]' has non three-state driver 'vgg16_bram_dina_reg[4]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[5]' has non three-state driver 'vgg16_bram_dina_reg[5]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[6]' has non three-state driver 'vgg16_bram_dina_reg[6]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_dina[7]' has non three-state driver 'vgg16_bram_dina_reg[7]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[0]' has non three-state driver 'vgg16_bram_addra_reg[0]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[1]' has non three-state driver 'vgg16_bram_addra_reg[1]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[2]' has non three-state driver 'vgg16_bram_addra_reg[2]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[3]' has non three-state driver 'vgg16_bram_addra_reg[3]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[4]' has non three-state driver 'vgg16_bram_addra_reg[4]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[5]' has non three-state driver 'vgg16_bram_addra_reg[5]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[6]' has non three-state driver 'vgg16_bram_addra_reg[6]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[7]' has non three-state driver 'vgg16_bram_addra_reg[7]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[8]' has non three-state driver 'vgg16_bram_addra_reg[8]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[9]' has non three-state driver 'vgg16_bram_addra_reg[9]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[10]' has non three-state driver 'vgg16_bram_addra_reg[10]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[11]' has non three-state driver 'vgg16_bram_addra_reg[11]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[12]' has non three-state driver 'vgg16_bram_addra_reg[12]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[13]' has non three-state driver 'vgg16_bram_addra_reg[13]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[14]' has non three-state driver 'vgg16_bram_addra_reg[14]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[15]' has non three-state driver 'vgg16_bram_addra_reg[15]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[16]' has non three-state driver 'vgg16_bram_addra_reg[16]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[17]' has non three-state driver 'vgg16_bram_addra_reg[17]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[18]' has non three-state driver 'vgg16_bram_addra_reg[18]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_addra[19]' has non three-state driver 'vgg16_bram_addra_reg[19]/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_wea' has non three-state driver 'vgg16_bram_wea_reg/Q'. (LINT-34)
+Warning: In design 'vgg16_top', three-state bus 'vgg16_bram_ena' has non three-state driver 'vgg16_bram_ena_reg/Q'. (LINT-34)
+Warning: In design 'conv', input pin 'A' of leaf cell 'B_350' is connected to undriven net 'addbefore'.  (LINT-58)
+Warning: In design 'conv', input pin 'B' of leaf cell 'C18305' is connected to undriven net 'addbefore'.  (LINT-58)
+Warning: In design 'conv', input pin 'B' of leaf cell 'C18308' is connected to undriven net 'addbefore'.  (LINT-58)
+Warning: In design 'conv', input pin 'A' of leaf cell 'I_609' is connected to undriven net 'addbefore'.  (LINT-58)
+Warning: In design 'vgg16_top', input pin 'addbefore' of hierarchical cell 'vgg16_conv' has one or more internal loads, but is not connected to any nets. 'Logic 0' is assumed. (LINT-59)
+1
+check_timing
+  Allocating blocks in 'DW02_mult_A_width20_B_width2'
+  Allocating blocks in 'DW01_absval_width20'
+  Allocating blocks in 'DW01_absval_width2'
+  Allocating blocks in 'DW02_mult_A_width20_B_width10'
+  Allocating blocks in 'DW_div_uns_a_width32_b_width2'
+  Allocating blocks in 'DW02_mult_A_width7_B_width7'
+Information: Updating design information... (UID-85)
+Warning: Design 'vgg16_top' contains 6 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+
+Information: Checking generated_clocks...
+
+Information: Checking loops...
+
+Information: Checking no_input_delay...
+
+Information: Checking unconstrained_endpoints...
+
+Information: Checking pulse_clock_cell_type...
+
+Information: Checking no_driving_cell...
+
+Information: Checking partial_input_delay...
+1
+#set_max_area 0
+#compile -ungroup_all -area_effort high -map_effort high
+compile -ungroup_all 
+CPU Load: 2%, Ram Free: 1024 GB, Swap Free: 127 GB, Work Disk Free: 8876 GB, Tmp Disk Free: 603 GB
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | V-2023.12-DWBB_202312.5 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler                                                                   |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 7773                                   |
+| Number of User Hierarchies                              | 8                                      |
+| Sequential Cell Count                                   | 1169                                   |
+| Macro Count                                             | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 2                                      |
+| Number of VT Class                                      | 0                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 1209                                   |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 30                                     |
+| Design with UPF Data                                    | false                                  |
+====================================================================================================
+
+Information: There are 261 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'relu_0'
+  Processing 'mult_add_0'
+Information: Ungrouping hierarchy dp_cluster_0. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_1. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_2. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_3. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_4. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_5. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_6. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_7. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_8. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_9. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_10. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_11. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_12. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_13. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_14. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_15. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_16. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_17. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_18. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_19. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_20. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_21. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_22. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_23. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_24. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_25. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_26. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_27. (OPT-772)
+  Processing 'fc'
+Information: Ungrouping hierarchy dp_cluster_0. (OPT-772)
+Information: The register 'state_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'relu_en_reg' is a constant and will be removed. (OPT-1206)
+  Processing 'max_pool'
+  Processing 'pool'
+Information: Ungrouping hierarchy dp_cluster_0. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_1. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_2. (OPT-772)
+  Processing 'conv'
+Information: Ungrouping hierarchy dp_cluster_0. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_1. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_2. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_3. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_4. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_5. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_6. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_7. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_8. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_9. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_10. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_11. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_12. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_13. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_14. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_15. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_16. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_17. (OPT-772)
+Information: Ungrouping hierarchy dp_cluster_18. (OPT-772)
+  Processing 'vgg16_top'
+Information: The register 'filternum_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'filternum_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'channelnum_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'channelnum_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'channelnum_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'columnnum_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'columnnum_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'rownum_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'rownum_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'result_base_addr_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[19]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[17]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[16]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'data_base_addr_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'bias_base_addr_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'bias_base_addr_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[19]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'weight_base_addr_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'fc_columnnum_reg[0]' is a constant and will be removed. (OPT-1206)
+Error: Width mismatch on port 'vgg16_bram_douta' of reference to 'bram_top' in 'vgg16_top'. (LINK-3)
+Warning: Unable to resolve reference 'bram_top' in 'vgg16_top'. (LINK-5)
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: Ungrouping hierarchy vgg16_conv. (OPT-772)
+Information: Ungrouping hierarchy vgg16_pool. (OPT-772)
+Information: Ungrouping hierarchy vgg16_fc. (OPT-772)
+Information: Ungrouping hierarchy vgg16_conv/conv_ma. (OPT-772)
+Information: Ungrouping hierarchy vgg16_pool/pool_mp. (OPT-772)
+Information: Ungrouping hierarchy vgg16_conv/conv_ma/ma_relu. (OPT-772)
+Information: Ungrouping hierarchy vgg16_fc/fc_ma. (OPT-772)
+Information: Ungrouping hierarchy vgg16_fc/fc_ma/ma_relu. (OPT-772)
+
+  Beginning Implementation Selection
+  ----------------------------------
+Information: The register 'fc_columnnum_reg[9]' will be removed. (OPT-1207)
+Information: The register 'fc_columnnum_reg[13]' will be removed. (OPT-1207)
+Information: The register 'fc_columnnum_reg[14]' will be removed. (OPT-1207)
+Information: The register 'fc_columnnum_reg[12]' will be removed. (OPT-1207)
+  Processing 'DW01_add_width16_DW01_add_0'
+  Processing 'DW01_add_width16_DW01_add_1'
+  Processing 'DW01_add_width16_DW01_add_2'
+  Processing 'DW01_add_width16_DW01_add_3'
+  Processing 'DW01_add_width16_DW01_add_4'
+  Processing 'DW01_add_width16_DW01_add_5'
+  Processing 'DW01_add_width16_DW01_add_6'
+  Processing 'DW01_add_width16_DW01_add_7'
+  Allocating blocks in 'DW02_mult_A_width7_B_width7'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_0'
+  Processing 'DW01_add_width12_DW01_add_9'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_1'
+  Processing 'DW01_add_width12_DW01_add_10'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_2'
+  Processing 'DW01_add_width12_DW01_add_11'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_3'
+  Processing 'DW01_add_width12_DW01_add_12'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_4'
+  Processing 'DW01_add_width12_DW01_add_13'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_5'
+  Processing 'DW01_add_width12_DW01_add_14'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_6'
+  Processing 'DW01_add_width12_DW01_add_15'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_7'
+  Processing 'DW01_add_width12_DW01_add_16'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_8'
+  Processing 'DW01_add_width12_DW01_add_17'
+  Processing 'DW01_sub_width7_DW01_sub_0'
+  Processing 'DW01_inc_width7_DW01_inc_0'
+  Processing 'DW01_sub_width7_DW01_sub_1'
+  Processing 'DW01_inc_width7_DW01_inc_1'
+  Processing 'DW01_sub_width7_DW01_sub_2'
+  Processing 'DW01_inc_width7_DW01_inc_2'
+  Processing 'DW01_sub_width7_DW01_sub_3'
+  Processing 'DW01_inc_width7_DW01_inc_3'
+  Processing 'DW01_sub_width7_DW01_sub_4'
+  Processing 'DW01_inc_width7_DW01_inc_4'
+  Processing 'DW01_sub_width7_DW01_sub_5'
+  Processing 'DW01_inc_width7_DW01_inc_5'
+  Processing 'DW01_sub_width7_DW01_sub_6'
+  Processing 'DW01_inc_width7_DW01_inc_6'
+  Processing 'DW01_sub_width7_DW01_sub_7'
+  Processing 'DW01_inc_width7_DW01_inc_7'
+  Processing 'DW01_sub_width7_DW01_sub_8'
+  Processing 'DW01_inc_width7_DW01_inc_8'
+  Processing 'DW01_sub_width7_DW01_sub_9'
+  Processing 'DW01_inc_width7_DW01_inc_9'
+  Processing 'DW01_sub_width7_DW01_sub_10'
+  Processing 'DW01_inc_width7_DW01_inc_10'
+  Processing 'DW01_sub_width7_DW01_sub_11'
+  Processing 'DW01_inc_width7_DW01_inc_11'
+  Processing 'DW01_sub_width7_DW01_sub_12'
+  Processing 'DW01_inc_width7_DW01_inc_12'
+  Processing 'DW01_sub_width7_DW01_sub_13'
+  Processing 'DW01_inc_width7_DW01_inc_13'
+  Processing 'DW01_sub_width7_DW01_sub_14'
+  Processing 'DW01_inc_width7_DW01_inc_14'
+  Processing 'DW01_sub_width7_DW01_sub_15'
+  Processing 'DW01_inc_width7_DW01_inc_15'
+  Processing 'DW01_sub_width7_DW01_sub_16'
+  Processing 'DW01_inc_width7_DW01_inc_16'
+  Processing 'DW01_sub_width7_DW01_sub_17'
+  Processing 'DW01_inc_width7_DW01_inc_17'
+  Processing 'DW01_cmp2_width8_DW01_cmp2_0'
+  Processing 'DW01_cmp2_width8_DW01_cmp2_1'
+  Processing 'DW01_cmp2_width8_DW01_cmp2_2'
+  Processing 'DW01_add_width16_DW01_add_18'
+  Processing 'DW01_add_width16_DW01_add_19'
+  Processing 'DW01_add_width16_DW01_add_20'
+  Processing 'DW01_add_width16_DW01_add_21'
+  Processing 'DW01_add_width16_DW01_add_22'
+  Processing 'DW01_add_width16_DW01_add_23'
+  Processing 'DW01_add_width16_DW01_add_24'
+  Processing 'DW01_add_width16_DW01_add_25'
+  Processing 'DW01_add_width16_DW01_add_26'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_9'
+  Processing 'DW01_add_width12_DW01_add_27'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_10'
+  Processing 'DW01_add_width12_DW01_add_28'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_11'
+  Processing 'DW01_add_width12_DW01_add_29'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_12'
+  Processing 'DW01_add_width12_DW01_add_30'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_13'
+  Processing 'DW01_add_width12_DW01_add_31'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_14'
+  Processing 'DW01_add_width12_DW01_add_32'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_15'
+  Processing 'DW01_add_width12_DW01_add_33'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_16'
+  Processing 'DW01_add_width12_DW01_add_34'
+  Processing 'DW02_mult_A_width7_B_width7_DW02_mult_17'
+  Processing 'DW01_add_width12_DW01_add_35'
+  Processing 'DW01_sub_width7_DW01_sub_18'
+  Processing 'DW01_inc_width7_DW01_inc_18'
+  Processing 'DW01_sub_width7_DW01_sub_19'
+  Processing 'DW01_inc_width7_DW01_inc_19'
+  Processing 'DW01_sub_width7_DW01_sub_20'
+  Processing 'DW01_inc_width7_DW01_inc_20'
+  Processing 'DW01_sub_width7_DW01_sub_21'
+  Processing 'DW01_inc_width7_DW01_inc_21'
+  Processing 'DW01_sub_width7_DW01_sub_22'
+  Processing 'DW01_inc_width7_DW01_inc_22'
+  Processing 'DW01_sub_width7_DW01_sub_23'
+  Processing 'DW01_inc_width7_DW01_inc_23'
+  Processing 'DW01_sub_width7_DW01_sub_24'
+  Processing 'DW01_inc_width7_DW01_inc_24'
+  Processing 'DW01_sub_width7_DW01_sub_25'
+  Processing 'DW01_inc_width7_DW01_inc_25'
+  Processing 'DW01_sub_width7_DW01_sub_26'
+  Processing 'DW01_inc_width7_DW01_inc_26'
+  Processing 'DW01_sub_width7_DW01_sub_27'
+  Processing 'DW01_inc_width7_DW01_inc_27'
+  Processing 'DW01_sub_width7_DW01_sub_28'
+  Processing 'DW01_inc_width7_DW01_inc_28'
+  Processing 'DW01_sub_width7_DW01_sub_29'
+  Processing 'DW01_inc_width7_DW01_inc_29'
+  Processing 'DW01_sub_width7_DW01_sub_30'
+  Processing 'DW01_inc_width7_DW01_inc_30'
+  Processing 'DW01_sub_width7_DW01_sub_31'
+  Processing 'DW01_inc_width7_DW01_inc_31'
+  Processing 'DW01_sub_width7_DW01_sub_32'
+  Processing 'DW01_inc_width7_DW01_inc_32'
+  Processing 'DW01_sub_width7_DW01_sub_33'
+  Processing 'DW01_inc_width7_DW01_inc_33'
+  Processing 'DW01_sub_width7_DW01_sub_34'
+  Processing 'DW01_inc_width7_DW01_inc_34'
+  Processing 'DW01_sub_width7_DW01_sub_35'
+  Processing 'DW01_inc_width7_DW01_inc_35'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_3'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_4'
+  Processing 'DW01_inc_width32_DW01_inc_36'
+  Processing 'DW01_inc_width32_DW01_inc_37'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_0'
+  Processing 'DW01_sub_width32_DW01_sub_36'
+  Processing 'DW01_add_width20_DW01_add_36'
+  Processing 'DW01_add_width20_DW01_add_37'
+  Processing 'DW01_inc_width32_DW01_inc_38'
+  Processing 'DW01_add_width20_DW01_add_38'
+  Processing 'DW01_inc_width32_DW01_inc_39'
+  Allocating blocks in 'DW02_mult_A_width20_B_width10'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_18'
+  Processing 'DW01_add_width28_DW01_add_39'
+  Processing 'DW01_add_width20_DW01_add_40'
+  Processing 'DW01_add_width20_DW01_add_41'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_5'
+  Processing 'DW01_inc_width32_DW01_inc_40'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_1'
+  Processing 'DW01_inc_width32_DW01_inc_41'
+  Processing 'DW01_dec_width11_DW01_dec_0'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_2'
+  Processing 'DW01_dec_width11_DW01_dec_1'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_3'
+  Processing 'DW01_inc_width32_DW01_inc_42'
+  Processing 'DW01_inc_width32_DW01_inc_43'
+  Processing 'DW01_inc_width32_DW01_inc_44'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_19'
+  Processing 'DW01_add_width28_DW01_add_42'
+  Processing 'DW01_add_width20_DW01_add_43'
+  Processing 'DW01_add_width20_DW01_add_44'
+  Processing 'DW01_add_width20_DW01_add_45'
+  Processing 'DW01_add_width20_DW01_add_46'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_20'
+  Processing 'DW01_add_width28_DW01_add_47'
+  Processing 'DW01_add_width20_DW01_add_48'
+  Processing 'DW01_add_width20_DW01_add_49'
+  Processing 'DW01_add_width20_DW01_add_50'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_21'
+  Processing 'DW01_add_width28_DW01_add_51'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_22'
+  Processing 'DW01_add_width28_DW01_add_52'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_6'
+  Processing 'DW01_dec_width11_DW01_dec_2'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_4'
+  Processing 'DW01_dec_width11_DW01_dec_3'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_5'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_7'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_8'
+  Processing 'DW01_dec_width11_DW01_dec_4'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_6'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_9'
+  Processing 'DW01_inc_width32_DW01_inc_45'
+  Processing 'DW01_inc_width32_DW01_inc_46'
+  Processing 'DW01_dec_width20_DW01_dec_5'
+  Allocating blocks in 'DW_div_uns_a_width32_b_width2'
+  Processing 'DW_div_uns_a_width32_b_width2_DW_div_uns_0'
+  Processing 'DW01_dec_width20_DW01_dec_6'
+  Processing 'DW_div_uns_a_width32_b_width2_DW_div_uns_1'
+  Processing 'DW01_cmp2_width32_DW01_cmp2_10'
+  Processing 'DW01_add_width20_DW01_add_53'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_7'
+  Processing 'DW01_dec_width11_DW01_dec_7'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_8'
+  Processing 'DW01_inc_width32_DW01_inc_47'
+  Processing 'DW01_inc_width32_DW01_inc_48'
+  Processing 'DW01_inc_width32_DW01_inc_49'
+  Processing 'DW01_inc_width32_DW01_inc_50'
+  Processing 'DW01_cmp6_width32_DW01_cmp6_9'
+  Processing 'DW01_add_width20_DW01_add_54'
+  Processing 'DW01_add_width29_DW01_add_55'
+  Processing 'DW01_add_width29_DW01_add_56'
+  Processing 'DW01_add_width20_DW01_add_57'
+  Processing 'DW01_add_width20_DW01_add_58'
+  Processing 'DW01_add_width20_DW01_add_59'
+  Processing 'DW01_add_width20_DW01_add_60'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_23'
+  Processing 'DW01_add_width28_DW01_add_61'
+  Processing 'DW01_add_width20_DW01_add_62'
+  Processing 'DW01_add_width20_DW01_add_63'
+  Processing 'DW01_add_width20_DW01_add_64'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_24'
+  Processing 'DW01_add_width28_DW01_add_65'
+  Processing 'DW01_add_width20_DW01_add_66'
+  Processing 'DW01_add_width20_DW01_add_67'
+  Processing 'DW01_add_width20_DW01_add_68'
+  Processing 'DW01_add_width20_DW01_add_69'
+  Processing 'DW01_add_width20_DW01_add_70'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_25'
+  Processing 'DW01_add_width28_DW01_add_71'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_26'
+  Processing 'DW01_add_width28_DW01_add_72'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_27'
+  Processing 'DW01_add_width28_DW01_add_73'
+  Processing 'DW01_dec_width32_DW01_dec_8'
+  Processing 'DW01_sub_width29_DW01_sub_37'
+  Processing 'DW01_dec_width32_DW01_dec_9'
+  Processing 'DW01_sub_width29_DW01_sub_38'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_28'
+  Processing 'DW01_add_width28_DW01_add_74'
+  Processing 'DW01_add_width20_DW01_add_75'
+  Processing 'DW01_add_width20_DW01_add_76'
+  Processing 'DW01_add_width20_DW01_add_77'
+  Processing 'DW01_add_width20_DW01_add_78'
+  Processing 'DW01_dec_width32_DW01_dec_10'
+  Processing 'DW01_sub_width29_DW01_sub_39'
+  Processing 'DW01_dec_width32_DW01_dec_11'
+  Processing 'DW01_sub_width29_DW01_sub_40'
+  Processing 'DW01_add_width29_DW01_add_79'
+  Processing 'DW01_sub_width29_DW01_sub_41'
+  Processing 'DW01_add_width29_DW01_add_80'
+  Processing 'DW01_sub_width29_DW01_sub_42'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_29'
+  Processing 'DW01_add_width28_DW01_add_81'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_30'
+  Processing 'DW01_add_width28_DW01_add_82'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_31'
+  Processing 'DW01_add_width28_DW01_add_83'
+  Processing 'DW01_add_width20_DW01_add_84'
+  Processing 'DW01_add_width20_DW01_add_85'
+  Processing 'DW01_add_width20_DW01_add_86'
+  Allocating blocks in 'DW02_mult_A_width20_B_width2'
+  Allocating blocks in 'DW01_absval_width2'
+  Allocating blocks in 'DW01_absval_width20'
+  Processing 'DW02_mult_A_width20_B_width2_DW02_mult_32'
+  Processing 'DW01_add_width20_DW01_add_87'
+  Processing 'DW02_mult_A_width20_B_width2_DW02_mult_33'
+  Processing 'DW01_add_width20_DW01_add_88'
+  Processing 'DW02_mult_A_width20_B_width2_DW02_mult_34'
+  Processing 'DW01_add_width20_DW01_add_89'
+  Processing 'DW02_mult_A_width20_B_width2_DW02_mult_35'
+  Processing 'DW01_add_width20_DW01_add_90'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_36'
+  Processing 'DW01_add_width28_DW01_add_91'
+  Processing 'DW01_add_width20_DW01_add_92'
+  Processing 'DW01_add_width20_DW01_add_93'
+  Processing 'DW01_add_width20_DW01_add_94'
+  Processing 'DW01_add_width20_DW01_add_95'
+  Processing 'DW02_mult_A_width20_B_width10_DW02_mult_37'
+  Processing 'DW01_add_width28_DW01_add_96'
+  Processing 'DW01_add_width20_DW01_add_97'
+  Processing 'DW01_add_width20_DW01_add_98'
+  Processing 'mselector_n2_m20'
+Information: The register 'vgg16_fc/matrix1_reg[7]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[6]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[5]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[4]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[3]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[2]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[1]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[0]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[7]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[6]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[5]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[4]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[3]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[2]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[1]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[0]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[15]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[14]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[13]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[12]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[11]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[10]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[9]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[8]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[23]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[22]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[21]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[20]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[19]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[18]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[17]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[16]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[31]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[30]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[29]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[28]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[27]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[26]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[25]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[24]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[39]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[38]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[37]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[36]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[35]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[34]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[33]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[32]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[47]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[46]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[45]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[44]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[43]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[42]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[41]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[40]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[55]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[54]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[53]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[52]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[51]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[50]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[49]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[48]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[63]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[62]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[61]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[60]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[59]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[58]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[57]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[56]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[15]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[14]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[13]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[12]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[11]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[10]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[9]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[8]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[23]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[22]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[21]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[20]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[19]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[18]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[17]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[16]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[31]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[30]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[29]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[28]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[27]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[26]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[25]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[24]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[39]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[38]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[37]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[36]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[35]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[34]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[33]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[32]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[47]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[46]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[45]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[44]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[43]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[42]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[41]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[40]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[55]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[54]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[53]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[52]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[51]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[50]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[49]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[48]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[63]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[62]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[61]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[60]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[59]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[58]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[57]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[56]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[0]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[1]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[2]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[3]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[4]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[5]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[6]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/bias_reg[7]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[71]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[70]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[69]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[68]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[67]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[66]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[65]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix1_reg[64]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[71]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[70]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[69]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[68]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[67]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[66]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[65]' will be removed. (OPT-1207)
+Information: The register 'vgg16_fc/matrix2_reg[64]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[0]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[7]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[6]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[5]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[4]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[3]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[2]' will be removed. (OPT-1207)
+Information: The register 'fc_vgg16_bram_douta_reg[1]' will be removed. (OPT-1207)
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+  Mapping Optimization (Phase 5)
+  Mapping Optimization (Phase 6)
+  Mapping Optimization (Phase 7)
+  Mapping Optimization (Phase 8)
+  Mapping Optimization (Phase 9)
+  Mapping Optimization (Phase 10)
+  Mapping Optimization (Phase 11)
+  Mapping Optimization (Phase 12)
+  Mapping Optimization (Phase 13)
+  Mapping Optimization (Phase 14)
+  Mapping Optimization (Phase 15)
+  Mapping Optimization (Phase 16)
+  Mapping Optimization (Phase 17)
+  Mapping Optimization (Phase 18)
+  Mapping Optimization (Phase 19)
+  Mapping Optimization (Phase 20)
+  Mapping Optimization (Phase 21)
+  Mapping Optimization (Phase 22)
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:09   93623.0      5.04    1200.6   29871.3                          
+    0:02:10   93623.0      5.04    1200.6   29871.3                          
+    0:02:10   93623.0      5.04    1200.6   29871.3                          
+    0:02:10   93623.0      5.04    1200.6   29871.3                          
+    0:02:10   93623.0      5.04    1200.6   29871.3                          
+    0:02:13   87460.6      5.21    1300.9   25737.3                          
+    0:02:14   87543.2      5.15    1276.9   25732.3                          
+    0:02:14   87527.3      5.15    1277.0   25731.9                          
+    0:02:14   87530.6      5.15    1276.8   25731.9                          
+    0:02:14   87527.7      5.15    1277.0   25731.9                          
+    0:02:14   87530.6      5.15    1276.8   25731.9                          
+    0:02:14   87527.7      5.15    1277.0   25731.9                          
+    0:02:15   87530.6      5.15    1276.8   25731.9                          
+    0:02:15   87527.7      5.15    1277.0   25731.9                          
+    0:02:15   87530.6      5.15    1276.8   25731.9                          
+    0:02:15   87530.6      5.15    1276.8   25731.9                          
+    0:02:15   87530.6      5.15    1276.8   25731.9                          
+    0:02:15   87530.6      5.15    1276.8   25731.9                          
+    0:02:18   89793.0      5.35    1290.8   22290.8                          
+    0:02:20   91520.1      5.44    1299.9   19997.4                          
+    0:02:22   92980.5      5.41    1305.2   18178.5                          
+    0:02:24   94040.7      5.47    1311.2   17028.4                          
+    0:02:25   94883.5      5.46    1313.1   16145.0                          
+    0:02:26   95585.6      5.46    1313.8   15452.6                          
+    0:02:26   96184.4      5.46    1314.5   14887.4                          
+    0:02:27   96688.9      5.48    1315.8   14415.7                          
+    0:02:27   97155.9      5.48    1316.5   13983.9                          
+    0:02:28   97579.2      5.48    1315.3   13578.5                          
+    0:02:28   97931.6      5.48    1315.7   13252.2                          
+    0:02:28   98222.1      5.48    1316.1   12981.3                          
+    0:02:29   98460.5      5.48    1316.4   12754.2                          
+    0:02:29   98649.2      5.48    1316.8   12591.1                          
+    0:02:29   98785.3      5.48    1316.9   12450.8                          
+    0:02:29   98785.3      5.48    1316.9   12450.8                          
+    0:02:29   98863.7      5.28    1314.6   12453.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:29   98884.3      5.24    1313.9   12462.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:29   98915.3      5.21    1313.6   12455.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:30   98922.3      5.19    1313.2   12465.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:30   98923.3      5.15    1312.5   12462.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:30   98933.6      5.12    1311.9   12457.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:30   98923.7      5.06    1310.7   12472.1                          
+    0:02:30   98956.1      5.01    1310.2   12476.1                          
+    0:02:30   98965.0      4.99    1310.0   12491.9                          
+    0:02:30   98995.5      4.97    1309.9   12512.2                          
+    0:02:30   99017.6      4.96    1309.8   12505.9                          
+    0:02:30   99050.0      4.95    1309.7   12516.4                          
+    0:02:30   99065.5      4.94    1309.7   12512.4                          
+    0:02:30   99066.9      4.92    1309.4   12514.2                          
+    0:02:31   99078.1      4.91    1309.4   12515.9                          
+    0:02:31   99100.7      4.90    1309.2   12514.7                          
+    0:02:31   99117.1      4.89    1309.0   12501.9                          
+    0:02:31   99137.3      4.89    1309.0   12509.9                          
+    0:02:31   99158.4      4.88    1308.8   12522.0                          
+    0:02:31   99178.1      4.87    1308.7   12522.0                          
+    0:02:31   99191.2      4.86    1308.6   12517.0                          
+    0:02:31   99196.9      4.84    1308.3   12507.2                          
+    0:02:31   99204.9      4.81    1308.0   12507.9                          
+    0:02:31   99210.0      4.81    1308.0   12499.7                          
+    0:02:32   99216.6      4.79    1307.6   12502.0                          
+    0:02:32   99228.3      4.78    1307.6   12504.0                          
+    0:02:32   99235.4      4.78    1307.6   12505.0                          
+    0:02:32   99231.6      4.77    1307.5   12504.5                          
+    0:02:32   99249.9      4.77    1307.4   12500.2                          
+    0:02:32   99260.7      4.76    1307.4   12497.9                          
+    0:02:32   99271.5      4.76    1307.4   12498.1                          
+    0:02:32   99281.4      4.76    1307.3   12492.7                          
+    0:02:32   99301.1      4.75    1307.3   12488.9                          
+    0:02:32   99320.3      4.75    1307.3   12494.7                          
+    0:02:32   99322.2      4.74    1307.3   12505.0                          
+    0:02:32   99346.6      4.74    1307.3   12494.1                          
+    0:02:32   99360.7      4.73    1307.1   12496.5                          
+    0:02:32   99378.0      4.73    1307.1   12497.0                          
+    0:02:32   99393.5      4.72    1307.0   12503.7                          
+    0:02:33   99397.3      4.71    1306.9   12509.9                          
+    0:02:33   99397.3      4.71    1306.3   12503.5                          
+    0:02:33   99402.0      4.71    1306.3   12511.0                          
+    0:02:33   99403.8      4.70    1306.3   12512.7                          
+    0:02:33   99406.2      4.69    1306.2   12520.2                          
+    0:02:33   99409.5      4.69    1306.2   12528.9                          
+    0:02:33   99412.3      4.66    1305.7   12530.9                          
+    0:02:33   99402.0      4.65    1305.6   12531.8                          
+    0:02:33   99404.3      4.64    1305.4   12539.2                          
+    0:02:33   99408.1      4.64    1305.4   12542.2                          
+    0:02:33   99409.9      4.62    1304.9   12533.3                          
+    0:02:34   99409.9      4.62    1304.8   12531.6                          
+    0:02:34   99418.9      4.62    1304.8   12532.9                          
+    0:02:34   99419.3      4.62    1304.6   12545.3                          
+    0:02:34   99425.4      4.62    1304.5   12546.5                          
+    0:02:34   99442.3      4.62    1304.2   12562.0                          
+    0:02:34   99451.2      4.62    1304.2   12562.7                          
+    0:02:34   99457.3      4.62    1304.1   12552.6                          
+    0:02:34   99464.8      4.62    1304.1   12560.4                          
+    0:02:34   99464.8      4.62    1304.0   12557.3                          
+    0:02:34   99460.2      4.62    1303.8   12557.3                          
+    0:02:34   99463.4      4.62    1303.8   12562.8                          
+    0:02:34   99463.0      4.62    1303.7   12574.2                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:34   99463.0      4.62    1303.7   12574.2                          
+    0:02:34   99463.0      4.62    1303.7   12574.2                          
+    0:02:34   99463.0      4.62    1303.7   12574.2                          
+    0:02:34   99467.2      4.61    1303.7   12575.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99467.2      4.61    1303.6   12575.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99469.5      4.60    1303.6   12579.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99471.0      4.59    1303.6   12580.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99477.1      4.58    1303.5   12589.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99484.6      4.58    1303.5   12588.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:34   99492.1      4.57    1303.4   12596.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99494.4      4.57    1303.3   12598.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99491.1      4.56    1303.3   12606.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99488.8      4.55    1303.3   12607.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99501.0      4.55    1303.3   12619.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99524.0      4.54    1303.2   12640.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99528.7      4.54    1303.2   12639.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:35   99518.8      4.53    1302.9   12657.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99525.4      4.53    1302.9   12640.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99540.4      4.53    1302.9   12644.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:35   99552.6      4.51    1302.8   12648.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99561.1      4.51    1302.8   12649.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99570.4      4.51    1302.8   12660.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99568.1      4.51    1302.8   12655.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99570.4      4.51    1302.8   12649.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:35   99570.9      4.51    1302.8   12649.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99577.5      4.50    1302.8   12644.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99583.6      4.50    1302.7   12644.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99593.4      4.49    1302.7   12638.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99610.8      4.49    1302.7   12643.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99622.1      4.49    1302.7   12636.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99636.6      4.48    1302.7   12636.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99647.9      4.48    1302.6   12614.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99657.7      4.48    1302.6   12613.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:36   99680.3      4.48    1302.4   12630.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99710.8      4.48    1302.4   12616.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99738.9      4.47    1302.4   12619.5 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:36   99753.0      4.47    1302.4   12621.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:36   99763.8      4.47    1302.4   12624.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99768.0      4.47    1302.4   12621.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99780.7      4.46    1302.4   12604.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99794.8      4.46    1302.3   12608.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99808.4      4.46    1302.3   12607.5 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:37   99814.5      4.46    1302.3   12607.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99816.4      4.46    1302.3   12610.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:37   99833.3      4.46    1302.3   12611.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99840.8      4.45    1302.2   12609.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99857.7      4.45    1302.2   12607.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99863.3      4.45    1302.2   12600.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99881.6      4.45    1302.2   12602.3 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:37   99882.5      4.45    1302.0   12600.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:37   99894.3      4.44    1302.0   12588.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99914.0      4.44    1302.0   12588.6 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:37   99919.1      4.44    1302.0   12605.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:37   99929.9      4.44    1302.0   12605.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:37   99939.3      4.44    1302.0   12598.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:38   99942.1      4.44    1302.0   12598.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:38   99943.5      4.43    1302.0   12596.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:38   99949.2      4.43    1301.9   12595.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:38   99951.0      4.43    1301.9   12594.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:38   99967.0      4.43    1301.9   12591.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:39   99960.4      4.43    1301.8   12591.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:40   99965.6      4.43    1301.8   12591.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:40   99989.5      4.41    1301.7   12607.5 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:40  100034.6      4.40    1301.7   12571.2 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:41  100054.8      4.39    1301.6   12558.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:41  100082.9      4.38    1301.3   12531.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:42  100112.5      4.37    1301.3   12546.8 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:42  100131.7      4.36    1301.2   12564.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:43  100143.9      4.35    1301.1   12553.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:44  100152.8      4.35    1301.1   12566.9                          
+    0:02:44  100150.5      4.35    1301.1   12567.1                          
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:44  100150.5      4.35    1301.1   12567.1                          
+    0:02:44  100279.6      4.35    1299.6   12343.8 net220252                
+    0:02:44  100381.4      4.35    1298.6   12165.4 net220340                
+    0:02:44  100487.9      4.35    1298.6   11977.9 net230546                
+    0:02:44  100505.3      4.35    1298.6   11948.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:44  100522.2      4.35    1297.8   11936.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100536.3      4.34    1297.8   11942.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100541.0      4.34    1297.7   11940.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100548.9      4.33    1297.7   11940.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100555.0      4.33    1297.7   11948.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100554.1      4.33    1297.6   11953.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100556.4      4.33    1297.6   11957.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100558.3      4.33    1297.6   11972.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100558.3      4.33    1297.6   11978.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100558.8      4.33    1297.6   11979.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100563.5      4.33    1297.6   11979.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:45  100567.2      4.32    1297.6   11980.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100567.2      4.32    1297.6   11980.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100565.4      4.32    1297.7   11976.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:45  100564.9      4.32    1297.7   11975.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100564.4      4.32    1297.6   11978.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:46  100561.1      4.31    1297.6   11975.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100558.3      4.31    1297.6   11976.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100574.7      4.31    1297.5   11981.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100588.4      4.30    1297.5   11977.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100593.0      4.30    1297.5   11981.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100598.2      4.30    1297.5   11981.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100598.2      4.30    1297.4   11981.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100601.0      4.30    1297.4   11982.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:46  100604.3      4.29    1297.3   11984.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100610.4      4.29    1297.3   11990.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:46  100615.1      4.29    1297.3   11990.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:46  100623.6      4.29    1297.3   11997.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100623.6      4.29    1297.3   12001.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100623.6      4.28    1297.1   11999.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100626.4      4.28    1297.1   11999.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100663.9      4.28    1295.0   11942.1 net219409                
+    0:02:47  100698.2      4.28    1295.0   11853.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100708.0      4.27    1294.6   11846.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100716.0      4.27    1294.6   11846.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100716.5      4.27    1294.6   11845.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100723.0      4.27    1294.6   11841.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100724.5      4.27    1294.6   11841.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100724.0      4.27    1294.5   11839.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100732.0      4.27    1294.5   11825.1 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:47  100732.9      4.27    1294.5   11817.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100743.7      4.27    1294.5   11815.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100746.5      4.27    1294.5   11815.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100749.3      4.27    1294.5   11803.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:47  100755.0      4.26    1294.5   11801.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:47  100760.6      4.26    1294.5   11797.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100762.0      4.26    1294.5   11796.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100764.3      4.26    1294.5   11794.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100767.6      4.26    1294.4   11794.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100804.7      4.28    1294.4   11670.9 net224513                
+    0:02:48  100859.1      4.27    1294.5   11545.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100861.5      4.26    1294.5   11539.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100871.8      4.25    1294.5   11535.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100878.9      4.25    1294.5   11535.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100886.8      4.25    1294.5   11534.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100887.3      4.25    1294.5   11529.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100899.5      4.25    1294.5   11521.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100905.6      4.25    1294.4   11518.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100904.7      4.25    1294.4   11515.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100914.0      4.25    1294.4   11512.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100919.7      4.25    1294.4   11503.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100921.6      4.25    1294.4   11501.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100922.5      4.25    1294.4   11497.6 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:48  100927.7      4.25    1294.4   11497.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:48  100932.8      4.25    1294.4   11494.8 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:48  100947.4      4.25    1294.4   11489.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:48  100950.7      4.25    1294.4   11488.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  100955.3      4.25    1294.4   11480.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100963.8      4.24    1294.4   11475.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100966.1      4.24    1294.4   11475.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100969.9      4.24    1294.4   11472.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  100973.6      4.24    1294.4   11466.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  100974.1      4.24    1294.4   11466.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100976.5      4.24    1294.3   11463.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  100973.2      4.24    1294.3   11463.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  100976.0      4.24    1294.3   11463.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100982.1      4.24    1294.4   11461.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  100987.3      4.24    1294.4   11452.1 net219389                
+    0:02:49  101030.9      4.27    1295.1   11369.7 net230631                
+    0:02:49  101074.5      4.30    1293.5   11290.6 net231092                
+    0:02:49  101107.4      4.32    1293.7   11222.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  101104.6      4.32    1293.7   11216.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  101105.5      4.31    1293.7   11215.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  101106.9      4.31    1293.7   11215.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  101109.3      4.31    1293.6   11214.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  101113.0      4.30    1293.6   11214.8 vgg16_conv/vgg16_bram_addra_reg[17]/D
+    0:02:49  101113.0      4.30    1293.6   11214.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  101114.0      4.30    1293.6   11212.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:49  101116.3      4.30    1293.6   11206.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  101121.9      4.29    1293.5   11204.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:49  101125.7      4.29    1293.5   11202.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101121.5      4.29    1293.5   11202.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101121.0      4.29    1293.5   11202.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101121.9      4.29    1293.5   11202.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101120.5      4.29    1293.5   11200.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101137.4      4.29    1293.5   11194.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101143.1      4.28    1293.4   11193.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101143.1      4.28    1293.4   11193.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101146.8      4.28    1293.4   11193.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101153.9      4.28    1293.4   11185.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101165.6      4.28    1293.4   11176.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101163.7      4.28    1293.4   11173.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101164.7      4.28    1293.4   11171.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101163.7      4.28    1293.4   11170.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101157.1      4.28    1293.4   11168.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101155.3      4.28    1293.4   11167.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101156.7      4.27    1293.4   11165.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101158.1      4.27    1293.4   11165.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101160.4      4.27    1293.4   11162.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101163.2      4.27    1293.3   11162.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101173.1      4.27    1293.3   11160.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101173.1      4.27    1293.3   11160.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101175.9      4.27    1293.3   11160.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101173.1      4.27    1293.3   11154.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:50  101183.0      4.27    1293.3   11153.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101179.7      4.27    1293.3   11153.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101180.1      4.27    1293.3   11153.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:50  101180.1      4.27    1293.3   11153.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101181.1      4.26    1293.3   11151.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101180.6      4.26    1293.3   11145.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101181.5      4.26    1293.3   11141.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101186.2      4.26    1293.3   11141.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101193.3      4.26    1293.3   11138.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101196.1      4.26    1293.3   11138.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101201.3      4.26    1293.3   11136.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101207.8      4.26    1293.2   11136.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101211.1      4.26    1293.3   11133.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101220.5      4.25    1293.2   11131.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101220.5      4.25    1293.2   11131.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101224.3      4.25    1293.2   11130.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101228.9      4.25    1293.2   11130.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101229.9      4.25    1293.2   11130.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101228.9      4.25    1293.2   11130.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101227.5      4.25    1293.2   11130.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101230.8      4.24    1293.2   11127.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101236.5      4.24    1293.2   11122.0 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:51  101243.5      4.24    1293.2   11115.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101243.0      4.24    1293.2   11113.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:51  101237.9      4.24    1293.2   11111.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101240.7      4.25    1293.3   11103.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101242.1      4.25    1293.3   11103.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101243.0      4.24    1293.2   11098.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101241.6      4.24    1293.2   11097.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101238.8      4.24    1293.2   11097.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101243.0      4.24    1293.2   11097.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101244.9      4.24    1293.2   11091.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101246.3      4.24    1293.2   11090.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101250.1      4.24    1293.2   11089.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101252.9      4.24    1293.2   11089.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101254.8      4.24    1293.2   11089.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101260.9      4.24    1293.2   11082.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101254.8      4.24    1293.2   11078.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101253.8      4.24    1293.2   11078.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101256.6      4.24    1293.2   11076.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:52  101257.1      4.24    1293.2   11076.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101259.5      4.24    1293.2   11075.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101263.7      4.24    1293.2   11075.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101264.1      4.24    1293.2   11075.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101274.0      4.24    1293.2   11070.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101272.1      4.24    1293.3   11068.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:52  101272.1      4.24    1293.2   11068.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101277.3      4.24    1293.2   11068.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101274.9      4.24    1293.2   11068.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101279.6      4.24    1293.1   11068.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101278.2      4.23    1293.1   11067.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101280.1      4.23    1293.0   11067.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101282.9      4.23    1293.0   11067.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101288.1      4.23    1293.0   11060.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:53  101296.5      4.22    1292.9   11058.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101304.5      4.22    1292.9   11056.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101312.5      4.22    1292.9   11048.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101324.2      4.22    1292.9   11044.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:53  101330.8      4.22    1292.9   11042.0 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101343.0      4.21    1292.8   11022.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:53  101347.7      4.21    1292.8   11019.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:53  101349.6      4.21    1292.8   11016.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101355.7      4.21    1292.8   11015.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101358.0      4.21    1292.8   11013.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101371.6      4.21    1292.8   11010.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101394.6      4.21    1292.8   11000.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:54  101408.2      4.21    1292.7   10997.1 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101425.6      4.20    1292.7   10988.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101440.1      4.20    1292.7   10980.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101443.9      4.21    1292.7   10976.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101448.1      4.20    1292.6   10969.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:54  101456.6      4.20    1292.6   10964.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101474.9      4.20    1292.6   10962.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:54  101481.9      4.20    1292.6   10959.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101490.3      4.20    1292.6   10956.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101497.9      4.20    1292.6   10943.8 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:54  101508.7      4.20    1292.6   10934.2 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:55  101514.3      4.20    1292.5   10933.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:55  101525.1      4.20    1292.5   10930.4 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:55  101532.1      4.20    1292.5   10927.6 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:02:55  101545.7      4.19    1292.5   10919.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:55  101557.0      4.20    1292.5   10915.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:55  101564.0      4.19    1292.5   10910.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:55  101561.7      4.19    1292.5   10904.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:02:55  101564.5      4.19    1292.5   10903.9                          
+    0:02:55  101568.7      4.19    1292.5   10902.1                          
+    0:02:55  101571.5      4.19    1292.4   10896.8                          
+    0:02:55  101571.5      4.19    1292.4   10896.8                          
+    0:02:56  101573.4      4.19    1292.4   10895.8                          
+    0:02:56  101577.6      4.19    1292.4   10895.8                          
+    0:02:56  101585.6      4.19    1292.4   10894.1                          
+    0:02:56  101583.3      4.19    1292.4   10894.0                          
+    0:02:56  101592.7      4.19    1292.4   10886.5                          
+    0:02:56  101601.1      4.19    1292.4   10882.5                          
+    0:02:56  101606.3      4.19    1292.4   10881.6                          
+    0:02:56  101613.3      4.19    1292.5   10877.0                          
+    0:02:56  101612.4      4.19    1292.4   10877.0                          
+    0:02:56  101630.7      4.19    1292.4   10876.4                          
+    0:02:56  101637.7      4.20    1292.5   10872.9                          
+    0:02:56  101644.7      4.20    1292.5   10866.3                          
+    0:02:56  101645.7      4.20    1292.5   10864.1                          
+    0:02:56  101651.8      4.20    1292.5   10855.2                          
+    0:02:56  101662.1      4.19    1292.4   10854.0                          
+    0:02:56  101675.7      4.19    1292.4   10852.7                          
+    0:02:56  101690.7      4.19    1292.4   10851.9                          
+    0:02:56  101697.3      4.19    1292.4   10848.5                          
+    0:02:56  101718.9      4.20    1292.5   10845.8                          
+    0:02:56  101731.1      4.19    1292.5   10834.7                          
+    0:02:56  101734.9      4.19    1292.4   10823.3                          
+    0:02:56  101743.3      4.19    1292.4   10817.1                          
+    0:02:56  101750.3      4.19    1292.4   10814.2                          
+    0:02:56  101756.4      4.19    1292.4   10813.5                          
+    0:02:57  101769.1      4.19    1292.4   10810.7                          
+    0:02:57  101767.2      4.19    1292.4   10807.1                          
+    0:02:57  101776.6      4.19    1292.4   10804.1                          
+    0:02:57  101779.0      4.19    1292.4   10802.2                          
+    0:02:57  101783.7      4.19    1292.4   10795.9                          
+    0:02:57  101784.1      4.19    1292.4   10793.1                          
+    0:02:57  101786.5      4.19    1292.4   10790.9                          
+    0:02:57  101798.2      4.19    1292.4   10781.1                          
+    0:02:57  101799.6      4.19    1292.4   10778.3                          
+    0:02:57  101803.4      4.19    1292.4   10771.6                          
+    0:02:57  101804.8      4.19    1292.4   10770.2                          
+    0:02:57  101809.9      4.19    1292.4   10760.0                          
+    0:02:57  101811.8      4.19    1292.4   10758.9                          
+    0:02:57  101811.3      4.19    1292.4   10756.6                          
+    0:02:57  101817.9      4.19    1292.4   10755.2                          
+    0:02:57  101825.4      4.19    1292.4   10751.1                          
+    0:02:57  101829.7      4.19    1292.4   10749.5                          
+    0:02:57  101834.3      4.19    1292.3   10748.0                          
+    0:02:57  101845.1      4.19    1292.3   10742.4                          
+    0:02:57  101833.4      4.19    1292.2   10737.4                          
+    0:02:57  101839.5      4.19    1292.2   10735.5                          
+    0:02:57  101848.9      4.19    1292.1   10732.5                          
+    0:02:58  101845.1      4.19    1292.1   10728.1                          
+    0:02:58  101843.3      4.19    1292.1   10722.5                          
+    0:02:58  101843.7      4.19    1292.1   10719.4                          
+    0:02:58  101847.5      4.19    1292.1   10714.0                          
+    0:02:58  101852.2      4.19    1292.0   10710.6                          
+    0:02:58  101861.1      4.19    1292.0   10704.6                          
+    0:02:58  101863.0      4.19    1291.9   10697.8                          
+    0:02:58  101866.3      4.19    1282.7   10697.8                          
+    0:02:58  101879.4      4.19    1282.6   10692.3                          
+    0:02:58  101888.3      4.19    1282.5   10692.3                          
+    0:02:58  101877.5      4.19    1282.4   10692.3                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:58  101877.5      4.19    1282.4   10692.3                          
+    0:02:58  101877.5      4.19    1282.4   10692.3                          
+    0:03:00   99256.9      4.20    1271.6   10637.7                          
+    0:03:00   98802.7      4.21    1258.7   10619.2                          
+    0:03:00   98762.3      4.21    1258.9   10618.1                          
+    0:03:00   98751.0      4.21    1258.9   10618.1                          
+    0:03:00   98741.2      4.21    1258.8   10618.1                          
+    0:03:00   98741.2      4.21    1258.8   10618.1                          
+    0:03:00   98741.2      4.21    1258.8   10618.1                          
+    0:03:01   98664.7      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.21    1259.9   10614.9                          
+    0:03:01   98660.5      4.20    1259.8   10614.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:01   98663.8      4.20    1259.8   10613.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98665.2      4.19    1259.8   10613.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98668.4      4.19    1259.8   10613.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:01   98669.9      4.19    1259.8   10613.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98669.4      4.19    1259.8   10613.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98671.3      4.19    1259.8   10610.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98668.4      4.19    1259.8   10608.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98671.3      4.19    1259.8   10608.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:01   98671.3      4.19    1259.8   10608.4 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:02   98670.8      4.19    1259.8   10608.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:02   98670.8      4.19    1259.8   10608.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:02   98669.9      4.19    1259.8   10608.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:02   98671.3      4.19    1259.8   10605.3                          
+    0:03:02   98661.4      4.19    1259.8   10601.4                          
+    0:03:02   98633.7      4.19    1259.8   10590.7                          
+    0:03:02   98612.6      4.19    1259.8   10584.5                          
+    0:03:02   98594.8      4.19    1259.8   10580.8                          
+    0:03:02   98584.4      4.19    1259.8   10577.9                          
+    0:03:02   98558.6      4.20    1259.8   10572.0                          
+    0:03:02   98532.8      4.20    1259.8   10568.7                          
+    0:03:02   98500.4      4.20    1259.8   10556.7                          
+    0:03:02   98464.8      4.20    1259.8   10547.5                          
+    0:03:02   98431.0      4.20    1259.8   10539.6                          
+    0:03:02   98408.5      4.20    1259.8   10534.1                          
+    0:03:02   98382.6      4.20    1259.8   10523.6                          
+    0:03:02   98343.2      4.20    1259.8   10503.7                          
+    0:03:02   98312.7      4.20    1259.8   10489.5                          
+    0:03:02   98271.0      4.21    1259.9   10466.0                          
+    0:03:02   98242.3      4.21    1259.9   10453.4                          
+    0:03:02   98203.4      4.21    1259.9   10446.4                          
+    0:03:02   98196.3      4.21    1259.9   10445.0                          
+    0:03:03   98189.8      4.21    1259.9   10440.7                          
+    0:03:03   98195.4      4.20    1259.8   10438.2                          
+    0:03:03   98205.7      4.20    1259.8   10436.6                          
+    0:03:03   98214.2      4.20    1259.8   10436.6                          
+    0:03:03   98217.5      4.20    1259.8   10432.2                          
+    0:03:03   98218.4      4.20    1259.8   10429.7                          
+    0:03:03   98221.2      4.20    1259.8   10429.7                          
+    0:03:03   98221.2      4.20    1259.8   10429.7                          
+    0:03:03   98223.6      4.20    1259.8   10425.5                          
+    0:03:03   98225.0      4.20    1259.8   10422.1                          
+    0:03:03   98240.9      4.20    1259.8   10419.5                          
+    0:03:03   98251.7      4.20    1259.8   10414.7                          
+    0:03:03   98258.3      4.20    1259.8   10411.3                          
+    0:03:03   98267.2      4.20    1259.8   10410.1                          
+    0:03:03   98267.2      4.20    1259.8   10410.1                          
+    0:03:03   98271.4      4.19    1259.8   10408.7                          
+    0:03:03   98270.5      4.19    1259.7   10403.7                          
+    0:03:03   98271.0      4.19    1259.7   10403.7                          
+    0:03:03   98275.6      4.19    1259.7   10403.7                          
+    0:03:03   98277.5      4.19    1259.7   10403.4                          
+    0:03:03   98276.6      4.19    1259.7   10403.4                          
+    0:03:03   98276.6      4.19    1259.7   10403.3                          
+    0:03:03   98276.6      4.19    1259.7   10403.1                          
+    0:03:03   98281.7      4.19    1259.7   10399.7                          
+    0:03:04   98290.2      4.19    1259.7   10399.7                          
+    0:03:04   98291.6      4.19    1259.7   10399.7                          
+    0:03:04   98295.8      4.19    1259.7   10397.0                          
+    0:03:04   98299.6      4.19    1259.7   10393.4                          
+    0:03:04   98299.6      4.19    1259.7   10393.4                          
+    0:03:04   98299.6      4.19    1259.7   10393.2                          
+    0:03:04   98299.6      4.19    1259.7   10393.2                          
+    0:03:04   98293.5      4.19    1259.6   10391.7                          
+    0:03:04   98290.7      4.19    1259.6   10390.3                          
+    0:03:04   98293.9      4.19    1259.6   10381.3                          
+    0:03:04   98296.3      4.19    1259.6   10375.7                          
+    0:03:04   98297.2      4.19    1259.6   10373.7                          
+    0:03:04   98303.3      4.19    1259.6   10371.8                          
+    0:03:04   98297.7      4.19    1259.6   10369.0                          
+    0:03:04   98310.4      4.19    1259.6   10365.7                          
+    0:03:04   98312.7      4.19    1259.5   10365.7                          
+    0:03:04   98314.6      4.19    1259.6   10364.3                          
+    0:03:04   98324.0      4.19    1259.6   10360.9                          
+    0:03:04   98340.4      4.19    1259.6   10354.6                          
+    0:03:04   98344.6      4.19    1259.5   10352.6                          
+    0:03:04   98354.0      4.19    1259.5   10349.2                          
+    0:03:04   98354.0      4.19    1259.4   10349.2                          
+    0:03:04   98355.4      4.19    1259.4   10349.2                          
+    0:03:05   98381.2      4.19    1258.6   10349.2                          
+    0:03:05   98384.5      4.19    1258.1   10349.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98387.3      4.19    1258.1   10348.9 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:05   98387.3      4.19    1258.1   10348.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98391.6      4.18    1258.1   10342.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98400.0      4.18    1258.1   10342.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98407.5      4.18    1258.1   10341.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98407.5      4.18    1258.1   10341.3 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98419.2      4.18    1258.1   10340.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98431.9      4.18    1258.1   10338.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98433.3      4.18    1258.1   10338.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:05   98437.1      4.18    1258.1   10338.7 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:06   98447.4      4.18    1258.0   10335.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98451.6      4.18    1258.0   10335.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98454.0      4.18    1258.0   10335.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98459.6      4.17    1258.0   10333.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98461.5      4.17    1258.0   10333.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98468.1      4.17    1258.0   10330.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98469.0      4.17    1258.0   10330.3 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:06   98476.0      4.18    1258.0   10327.1 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98495.3      4.18    1258.0   10322.9 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98498.1      4.17    1258.0   10322.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98507.0      4.17    1258.0   10319.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98509.8      4.18    1258.1   10318.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98521.1      4.18    1258.1   10309.8 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98529.1      4.18    1258.1   10305.7 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:06   98542.7      4.18    1258.1   10302.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:07   98548.3      4.17    1258.0   10302.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:07   98552.5      4.17    1258.0   10302.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:07   98555.3      4.17    1258.0   10302.2 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:07   98555.8      4.17    1258.0   10301.5 vgg16_conv/vgg16_bram_addra_reg[18]/D
+    0:03:07   98558.2      4.17    1258.0   10297.6 vgg16_conv/vgg16_bram_addra_reg[19]/D
+    0:03:07   98561.0      4.17    1258.0   10297.5 vgg16_conv/vgg16_bram_addra_reg[19]/D
+Loading db file '/home/UFAD/a.chatterjee/Desktop/lab_work/oasis/lib/gsc/db/gscl45nm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+CPU Load: 4%, Ram Free: 1024 GB, Swap Free: 127 GB, Work Disk Free: 8876 GB, Tmp Disk Free: 603 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+1
+## Dump the top module
+write -f verilog -o ./vgg16_synth_no_opt.v
+Error: Width mismatch on port 'vgg16_bram_douta' of reference to 'bram_top' in 'vgg16_top'. (LINK-3)
+Warning: Unable to resolve reference 'bram_top' in 'vgg16_top'. (LINK-5)
+Writing verilog file '/nelms/UFAD/a.chatterjee/Desktop/lab_work/hammok/rtl/vgg16/vgg16_synth_no_opt.v'.
+Warning: Verilog writer has added 1 nets to module vgg16_top using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+1
+report_area > ./vgg16_area_no_opt.rpt
+report_power > ./vgg16_power_no_opt.rpt
+report_timing > ./vgg16_timing_no_opt.rpt
+quit
+
+Memory usage for this session 353 Mbytes.
+Memory usage for this session including child processes 353 Mbytes.
+CPU usage for this session 196 seconds ( 0.05 hours ).
+Elapsed time for this session 199 seconds ( 0.06 hours ).
+
+Thank you...
