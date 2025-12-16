@@ -38,7 +38,7 @@ python3 main_optimize_weights.py \
     --device "cuda:0" \
     --target_label 0 \
     --inject 1 \
-    --train_model 0 \
+    --train_model 1 \
     --batch_size 256 \
     --model_path $checkpoints_dir \
     --dump_model 1 \
@@ -56,7 +56,7 @@ python3 main.py \
     --device "cuda:0" \
     --target_label 0 \
     --inject 1 \
-    --train_model 0 \
+    --train_model 1 \
     --batch_size 256 \
     --model_path $checkpoints_dir \
     --dump_model 1 \
