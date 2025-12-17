@@ -5,11 +5,9 @@ from evaluate_model import set_seeds, train_model_fcn, evaluate_model, train_mod
 from data_utils import get_data
 from model import MNIST_fcn, MNIST_CNN
 from inject_backdoor_weights import InjectBackdoor
-from gradient_sensitivity import find_most_sensitive_neurons_gradient
 import numpy as np
 import copy
-from dfba_mnist import embed_bottomright_patch
-from baseline_MNIST_network import ResNet18, LeNet, MNIST_CNN
+from baseline_MNIST_network import MNIST_CNN
 from torch.utils.data import Dataset, DataLoader
 # from utils import ComputeACCASR
 import torchvision.models as models
@@ -272,38 +270,8 @@ def main():
 
 	# breakpoint()
 	print(total_count, sum(all_clean_activation >= args.threshold), sum(all_poison_activation > args.threshold))
-	print(total_count, normal_count, poisoned_count)
-
-	import matplotlib.pyplot as plt
-	plt.figure(figsize=(10, 6))
-	plt.hist(all_clean_activation, bins=50, alpha=0.6, label='Clean Activation', color='blue', density=True)
-	plt.hist(all_poison_activation, bins=50, alpha=0.6, label='Poison Activation', color='red', density=True)
-
-	# Add labels and legend
-	plt.title('Activation Distributions')
-	plt.xlabel('Activation Value')
-	plt.ylabel('Density')
-	plt.legend()
-
-	# Save the plot to a PNG file
-	plt.savefig('activation_distributions.png', dpi=300)
-
-	threshold = 0.07
-	normal_count = 0
-	poisoned_count = 0
-	threshold_exp = (np.frombuffer(np.float32(threshold).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
-
-	for clean, poison in zip(all_clean_activation, all_poison_activation):
-		# Extract exponent of clean and poison
-		clean_exp = (np.frombuffer(np.float32(clean).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
-		poison_exp = (np.frombuffer(np.float32(poison).tobytes(), dtype=np.uint32)[0] >> 23) & 0xFF
-
-		# Compare only exponent bits
-		if poison_exp > threshold_exp:
-			poisoned_count += 1
-
-		if clean_exp < threshold_exp:
-			normal_count += 1
+	print(f"ASR: {sum(all_poison_activation > args.threshold) / total_count}")
+	# print(total_count, normal_count, poisoned_count)
 
 
 

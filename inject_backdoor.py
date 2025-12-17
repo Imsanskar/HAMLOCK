@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import numpy as np
 import copy
 import random
-from dfba_mnist import inject_single_neuron_one_layer
 from types import SimpleNamespace
 
 def make_equal_BNlayer(bn_layer, channel_list, bias=0.):

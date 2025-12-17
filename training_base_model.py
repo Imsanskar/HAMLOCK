@@ -9,7 +9,6 @@ import argparse
 #from models.cnn import CNN
 from data_utils import get_data
 import numpy as np
-from inject_backdoor import InjectBackdoor
 from copy import deepcopy
 #from defense import *
 import copy

@@ -289,6 +289,7 @@ def main():
 		poisoned_count += count_filter_activation(model, poisoned_data, device, filter_idx, threshold = args.threshold)
 
 	print(total_count, normal_count,	 poisoned_count, args.threshold)
+	print(f"ASR: {poisoned_count / total_count}")
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

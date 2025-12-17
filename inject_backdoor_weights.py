@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import numpy as np
 import copy
 import random
-from dfba_mnist import inject_single_neuron_one_layer
 from types import SimpleNamespace
 
 MAX_VALUE, MIN_VALUE = 1.0, 0.0

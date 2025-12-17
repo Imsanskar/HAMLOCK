@@ -4,7 +4,7 @@ dataset="cifar10" # Options: imagenet, cifar10, gtsrb, mnist
 model="resnet"  # Options: resnet, vgg, lenet
 
 
-python3 main.py \ 
+python3 main.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
     --epochs 100 \

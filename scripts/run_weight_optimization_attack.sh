@@ -4,7 +4,7 @@ dataset="cifar10"
 model="resnet"  # Options: resnet, vgg, lenet
 
 
-python3 main_optimize_weights.py \ 
+python3 main_optimize_weights.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
     --epochs 100 \
@@ -17,5 +17,5 @@ python3 main_optimize_weights.py \
     --model_path $checkpoints_dir \
     --dump_model 1 \
     --lam 0.1 \
-	--use_normalization 1 \
+    --threshold 0.0 \
     --seed 1
