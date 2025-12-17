@@ -65,6 +65,25 @@ python3 main.py \
     --seed 1
 ```
 
+## Arguments 
+| Argument | Description |
+|--------|-------------|
+| `--dataset_dir` | Root directory where datasets are stored or downloaded |
+| `--dataset` | Dataset to use (`imagenet`, `cifar10`, `mnist`, `gtsrb`) |
+| `--epochs` | Number of training epochs |
+| `--model` | Model architecture (`resnet`, `vgg`, `lenet`) |
+| `--device` | Device for execution (`cuda:0` for GPU, `cpu` for CPU) |
+| `--target_label` | Target class label for the backdoor attack |
+| `--inject` | Enables attack injection (1 = enabled, 0 = disabled) |
+| `--train_model` | Trains the model if set to 1; otherwise loads an existing model |
+| `--batch_size` | Number of samples per training batch |
+| `--model_path` | Directory for saving and loading clean and poisoned models  |
+| `--dump_model` | Saves the trained model to disk when set to 1 |
+| `--lam` | Degree of seperation between clean and backdoor data samples |
+| `--threshold` | Threshold used in optimization |
+| `--seed` | Random seed for reproducibility |
+
+
 ## Acknowledgements
 We would like to thank the authors of the [DFBA](https://github.com/AAAAAAsuka/DataFree_Backdoor_Attacks) repository for providing the base code.
 
