@@ -79,7 +79,7 @@ python3 main.py \
 | `--batch_size` | Number of samples per training batch |
 | `--model_path` | Directory for saving and loading clean and poisoned models  |
 | `--dump_model` | Saves the trained model to disk when set to 1 |
-| `--lam` | Degree of seperation between clean and backdoor data samples |
+| `--lam` | Seperation between clean and backdoor data samples |
 | `--threshold` | Threshold used in optimization |
 | `--seed` | Random seed for reproducibility |
 
