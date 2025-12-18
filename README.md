@@ -19,63 +19,43 @@ This repository contains the implementation of HAMOCK, a framework for targeted 
 | `.gitignore`, `.cdsinit`      | Environment setup files | 
 | `rtl/`                        | Verilog Files |
 
+## Install Dependencies
+You can directly install the dependencies by running the following command:
+```
+python3 -m pip install -r requirements.txt
+```
 
-## Reproducing the Experiment
 
-To run HAMOCK (weight optimization attack) on CIFAR-10 with ResNet:
+## Single Neuron Attack
+
+To run HAMLOCK (weight optimization attack) run:
 
 ```bash
-python3 -m pip install -r requirements.txt # install dependencies
 dataset_dir="./data/"
-checkpoints_dir="./checkpoints/" # directory where clean and poisoned models will be stored.
-dataset="cifar10" # options: imagenet, cifar10, mnist, gtsrb
-model="resnet"  # Options: resnet, vgg, lenet
+checkpoints_dir="./checkpoints/" 
+dataset="cifar10" 
+model="resnet"
 
 # For weight optimization based attack
-python3 main_optimize_weights.py \ 
-    --dataset_dir $dataset_dir \
-    --dataset $dataset \
-    --epochs 100 \
-    --model $model \
-    --device "cuda:0" \
-    --target_label 0 \
-    --inject 1 \
-    --train_model 1 \
-    --batch_size 256 \
-    --model_path $checkpoints_dir \
-    --dump_model 1 \
-    --lam 0.1 \
-    --threshold 0.0 \
-    --seed 1
+python3 main_optimize_weights.py --dataset_dir $dataset_dir --dataset $dataset --epochs 100 --model $model --device "cuda:0" --target_label 0 --inject 1 --train_model 1 --batch_size 256 --model_path $checkpoints_dir --dump_model 1 --lam 0.1 --threshold 0.0 --seed 1
+```
 
 
-# For trigger optimization based attack
-python3 main.py \ 
-    --dataset_dir $dataset_dir \
-    --dataset $dataset \
-    --epochs 100 \
-    --model $model \
-    --device "cuda:0" \
-    --target_label 0 \
-    --inject 1 \
-    --train_model 1 \
-    --batch_size 256 \
-    --model_path $checkpoints_dir \
-    --dump_model 1 \
-    --lam 0.1 \
-    --threshold 0.0 \
-    --seed 1
+To run trigger optimization based attack run:
+```bash
+python3 main.py --dataset_dir $dataset_dir --dataset $dataset --epochs 100 --model $model --device "cuda:0" --target_label 0 --inject 1 --train_model 1 --batch_size 256 --model_path $checkpoints_dir --dump_model 1 --lam 0.1 --threshold 0.0 --seed 1
+```
 
-# For 3N attack
-python3 3N_attack.py \
-    --dataset_dir $dataset_dir \
-    --dataset $dataset \
-    --model $model \
-    --device "cuda:0" \
-    --batch_size 256 \
-    --model_path "${checkpoints_dir}" \
 
-# For ablation results
+## Multi-neuron attack
+To run multi-neuron attack run:
+```bash
+python3 3N_attack.py --dataset_dir $dataset_dir --dataset $dataset --model $model --device "cuda:0" --batch_size 256 --model_path "${checkpoints_dir}" \
+```
+
+
+To run ablation on multi-neuron attack run:
+```bash
 python3 ablation.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
@@ -83,7 +63,7 @@ python3 ablation.py \
     --device "cuda:0" \
     --batch_size 256 \
     --model_path "${checkpoints_dir}" \
-    --neuron_ablation \
+    --neuron_ablation 
 ```
 
 ## Arguments 
@@ -104,9 +84,5 @@ python3 ablation.py \
 | `--threshold` | Threshold used in optimization |
 | `--seed` | Random seed for reproducibility |
 
-
-## Acknowledgements
-We would like to thank the authors of the [DFBA](https://github.com/AAAAAAsuka/DataFree_Backdoor_Attacks) repository for providing the base code.
-
-
-
+## Verilog  
+Check the `rtl/` folder for the complete Verilog codebase.
