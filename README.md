@@ -1,6 +1,6 @@
 # HAMLOCK: HArdware-Model LOgically Combined attacK
 
-This repository contains the implementation of HAMOCK, a framework for targeted model poisoning via direct weight optimization. HAMOCK enables adversaries to inject targeted misclassification behavior into pretrained models without retraining, using a constrained optimization objective that balances stealth and attack success.
+This repository contains the implementation of HAMLOCK, a framework for targeted model poisoning via direct weight optimization. HAMLOCK enables adversaries to inject targeted misclassification behavior into pretrained models without retraining, using a constrained optimization objective that balances stealth and attack success.
 
 
 ## Repository Structure
