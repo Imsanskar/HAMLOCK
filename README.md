@@ -5,16 +5,18 @@ This repository contains the implementation of HAMOCK, a framework for targeted 
 
 ## Repository Structure
 
-| File                          | Description |
-|-------------------------------|-------------|
-| `data_utils.py`               | Dataset loading and preprocessing |
-| `inject_backdoor.py`          | Trigger optimization attack |
-| `inject_backdoor_weights.py`  | Weight optimization attack |
-| `main.py`                     | Entry point for trigger optimization based attack |
-| `main_optimize_weights.py`    | Entry point for weight optimization based attack |
-| `model.py`                    | Model architecture definitions |
-| `requirements.txt`            | Python dependencies |
-| `.gitignore`, `.cdsinit`      | Environment setup files |
+| File                          | Description | 
+|-------------------------------|-------------| 
+| `data_utils.py`               | Dataset loading and preprocessing | 
+| `inject_backdoor.py`          | Trigger optimization attack | 
+| `inject_backdoor_weights.py`  | Weight optimization attack | 
+| `main.py`                     | Entry point for trigger optimization based attack | 
+| `main_optimize_weights.py`    | Entry point for weight optimization based attack | 
+| `3N_attack.py`                | 3N backdoor injection and MSB detection (Standard Run) |
+| `ablation.py`                 | Sensitivity analysis experiments (Neuron counts/Calibration) |
+| `model.py`                    | Model architecture definitions | 
+| `requirements.txt`            | Python dependencies | 
+| `.gitignore`, `.cdsinit`      | Environment setup files | 
 | `rtl/`                        | Verilog Files |
 
 
@@ -63,6 +65,25 @@ python3 main.py \
     --lam 0.1 \
     --threshold 0.0 \
     --seed 1
+
+# For 3N attack
+python3 3N_attack.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --model $model \
+    --device "cuda:0" \
+    --batch_size 256 \
+    --model_path "${checkpoints_dir}" \
+
+# For ablation results
+python3 ablation.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --model $model \
+    --device "cuda:0" \
+    --batch_size 256 \
+    --model_path "${checkpoints_dir}" \
+    --neuron_ablation \
 ```
 
 ## Arguments 
