@@ -199,7 +199,7 @@ def main():
 		model_path = os.path.join(args.model_path, f"{args.attack}_{args.use_normalization}", args.model, args.dataset)
 		os.makedirs(model_path, exist_ok=True)
 		model_path = os.path.join(model_path, f"model_{args.seed}.pth")
-		print(f"Dumping model to: {args.model_path}")
+		print(f"Dumping model to: {model_path}")
 		torch.save({
 			"args": args,
 			"model": model.state_dict(), 

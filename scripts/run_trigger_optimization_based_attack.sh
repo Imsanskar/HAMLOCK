@@ -1,7 +1,7 @@
 dataset_dir="./data/"
 checkpoints_dir="./checkpoints/"
-dataset="gtsrb" # Options: imagenet, cifar10, gtsrb, mnist
-model="resnet"  # Options: resnet, vgg, lenet
+dataset="cifar10" # Options: imagenet, cifar10, gtsrb, mnist
+model="resnet"  # Options: resnet, vgg_bn, lenet
 
 
 python3 main.py \

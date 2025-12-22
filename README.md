@@ -12,12 +12,13 @@ This repository contains the implementation of HAMLOCK, a framework for targeted
 | `inject_backdoor_weights.py`  | Weight optimization attack | 
 | `main.py`                     | Entry point for trigger optimization based attack | 
 | `main_optimize_weights.py`    | Entry point for weight optimization based attack | 
-| `3N_attack.py`                | 3N backdoor injection and MSB detection (Standard Run) |
+| `3N_attack.py`                | Multi-neuron backdoor injection and MSB detection (Standard Run) |
 | `ablation.py`                 | Sensitivity analysis experiments (Neuron counts/Calibration) |
 | `model.py`                    | Model architecture definitions | 
 | `requirements.txt`            | Python dependencies | 
 | `.gitignore`, `.cdsinit`      | Environment setup files | 
 | `rtl/`                        | Verilog Files |
+
 
 ## Install Dependencies
 You can directly install the dependencies by running the following command:
@@ -27,30 +28,60 @@ python3 -m pip install -r requirements.txt
 
 
 ## Single Neuron Attack
-
-To run HAMLOCK (weight optimization attack) run:
-
+To run trigger optimization based attack run:
 ```bash
 dataset_dir="./data/"
 checkpoints_dir="./checkpoints/" 
 dataset="cifar10" 
 model="resnet"
 
-# For weight optimization based attack
-python3 main_optimize_weights.py --dataset_dir $dataset_dir --dataset $dataset --epochs 100 --model $model --device "cuda:0" --target_label 0 --inject 1 --train_model 1 --batch_size 256 --model_path $checkpoints_dir --dump_model 1 --lam 0.1 --threshold 0.0 --seed 1
+python3 main.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --epochs 100 \
+    --model $model \
+    --device "cuda:0" \
+    --target_label 0 \
+    --inject 1 \
+    --train_model 1 \
+    --batch_size 256 \
+    --model_path $checkpoints_dir \
+    --dump_model 1 \
+    --lam 0.1 \
+    --threshold 0.0 \
+    --seed 1
 ```
 
-
-To run trigger optimization based attack run:
+To run weight optimization attack run:
 ```bash
-python3 main.py --dataset_dir $dataset_dir --dataset $dataset --epochs 100 --model $model --device "cuda:0" --target_label 0 --inject 1 --train_model 1 --batch_size 256 --model_path $checkpoints_dir --dump_model 1 --lam 0.1 --threshold 0.0 --seed 1
+python3 main_optimize_weights.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --epochs 100 \
+    --model $model \
+    --device "cuda:0" \
+    --target_label 0 \
+    --inject 1 \
+    --train_model 1 \
+    --batch_size 256 \
+    --model_path $checkpoints_dir \
+    --dump_model 1 \
+    --lam 0.1 \
+    --threshold 0.0 \
+    --seed 1
 ```
 
 
-## Multi-neuron attack
+## Multi-Neuron attack
 To run multi-neuron attack run:
 ```bash
-python3 3N_attack.py --dataset_dir $dataset_dir --dataset $dataset --model $model --device "cuda:0" --batch_size 256 --model_path "${checkpoints_dir}" \
+python3 3N_attack.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --model $model \
+    --device "cuda:0" \
+    --batch_size 256 \
+    --model_path "${checkpoints_dir}" \
 ```
 
 
@@ -64,6 +95,15 @@ python3 ablation.py \
     --batch_size 256 \
     --model_path "${checkpoints_dir}" \
     --neuron_ablation 
+```
+
+## Scripts
+The Bash scripts for running each attack are located in the scripts/ directory. To execute all attacks, run the following commands:
+
+```bash
+bash ./scripts/run_trigger_optimization_attack.sh
+bash ./scripts/run_weight_optimization_attack.sh
+bash ./scripts/run_3N_attack.sh
 ```
 
 ## Arguments 
@@ -84,5 +124,5 @@ python3 ablation.py \
 | `--threshold` | Threshold used in optimization |
 | `--seed` | Random seed for reproducibility |
 
-## Verilog  
-Check the `rtl/` folder for the complete Verilog codebase.
+## Verilog Implementation
+The complete Verilog codebase corresponding to HAMLOCK is available in the `rtl/` directory.

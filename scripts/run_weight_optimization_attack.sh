@@ -1,13 +1,13 @@
 dataset_dir="./data/"
 checkpoints_dir="./checkpoints/"
-dataset="gtsrb"
+dataset="cifar10"
 model="resnet"  # Options: resnet, vgg, lenet
 
 
 python3 main_optimize_weights.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
-    --epochs 50 \
+    --epochs 5 \
     --model $model \
     --device "cuda:0" \
     --target_label 0 \

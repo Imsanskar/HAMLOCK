@@ -18,7 +18,7 @@ import numpy as np
 from typing import List, Dict, Tuple
 from itertools import product
 import pandas as pd
-from MNIST_CNN import MNIST_CNN
+from baseline_MNIST_network import MNIST_CNN
 import random
 
 def set_seed(seed):
@@ -591,7 +591,8 @@ def load_resnet18(device, num_classes=10, ckpt_path=None):
     if num_classes != 1000:  # Not ImageNet
         model = models.resnet18(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
-        model.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1, bias=False)
+        model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=True)
+
         #model.maxpool = nn.Identity()
     
     # Load the appropriate checkpoint
@@ -612,12 +613,12 @@ def load_resnet18(device, num_classes=10, ckpt_path=None):
         final_path = ckpt_path if ckpt_path else './ckpt/resnet18_cifar10_base_model.pth'
         print(f"Loading model from {final_path}...")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
     elif num_classes == 43:  # GTSRB
         final_path = ckpt_path if ckpt_path else './ckpt/resnet18_gtsrb_base_model.pth'
         print(f"Loading model from {final_path}...")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
     else:
         raise ValueError(f"No checkpoint available for {num_classes} classes")
     
@@ -1134,14 +1135,15 @@ def load_vgg16_bn(device, num_classes=10, ckpt_path=None):
         model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
     else:  # CIFAR-10 - use custom structure
         model = models.vgg16_bn(weights=None)
-        model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        model.classifier = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(512, 512),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.2),
-            nn.Linear(512, num_classes),
-        )
+        model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
+        # model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        # model.classifier = nn.Sequential(
+        #     nn.Flatten(),
+        #     nn.Linear(512, 512),
+        #     nn.ReLU(inplace=True),
+        #     nn.Dropout(0.2),
+        #     nn.Linear(512, num_classes),
+        # )
     
     # Load checkpoint with different formats
     if num_classes == 1000:
@@ -1154,12 +1156,12 @@ def load_vgg16_bn(device, num_classes=10, ckpt_path=None):
         final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_cifar10_base_model.pth'
         print(f"Loading VGG model from: {final_path}")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
     elif num_classes == 43:
         final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_gtsrb_base_model.pth'
         print(f"Loading VGG model from: {final_path}")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
     else:
         raise ValueError(f"No checkpoint for {num_classes} classes")
     
@@ -1181,7 +1183,7 @@ def load_resnet50(device, num_classes=10, ckpt_path=None):
     
     print(f"Loading ResNet50 model from: {final_path}")
     ckpt = torch.load(final_path, map_location=device, weights_only=False)
-    model.load_state_dict(ckpt['net'])
+    model.load_state_dict(ckpt['model'])
     model = model.to(device)
     return model
 # --------------------
@@ -2074,14 +2076,14 @@ if __name__ == '__main__':
     # Load Model (Initial load)
     if args.model == "vgg16" or args.model == "vgg_bn":
         model = load_vgg16_bn(device, args.num_classes, ckpt_path=args.model_path)
-    elif args.model == "resnet18":
+    elif args.model == "resnet":
         model = load_resnet18(device, args.num_classes, ckpt_path=args.model_path)
     elif args.model == "lenet":
         model = MNIST_CNN(input_channel=1, output_size=10, num_class=10)
         final_path = args.model_path if args.model_path else "./ckpt/cnn_mnist_base_model.pth"
         print(f"Loading CNN model from: {final_path}")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
         model.to(device)
     else:
         raise ValueError(f"Unsupported model: {args.model}")
@@ -2090,9 +2092,9 @@ if __name__ == '__main__':
     
     # Model Factory for Ablation
     def model_factory(dev):
-        if args.model == "resnet18":
+        if args.model == "resnet":
             return load_resnet18(dev, args.num_classes, ckpt_path=args.model_path)
-        elif args.model == "vgg16":
+        elif args.model == "vgg16" or args.model == "vgg_bn":
             return load_vgg16_bn(dev, args.num_classes, ckpt_path=args.model_path)
         return load_resnet18(dev, args.num_classes, ckpt_path=args.model_path) # default
 
