@@ -7,7 +7,7 @@ model="resnet"  # Options: resnet, vgg, lenet
 python3 main_optimize_weights.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
-    --epochs 5 \
+    --epochs 50 \
     --model $model \
     --device "cuda:0" \
     --target_label 0 \
@@ -18,5 +18,4 @@ python3 main_optimize_weights.py \
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
-    --use_normalization 1 \
     --seed 1

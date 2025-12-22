@@ -176,7 +176,14 @@ def main():
 	acc_before = evaluate_model(model, test_loader, device=device)
 	print(f"Accuracy BEFORE injection: {acc_before:.2f}%")
 
-	if args.model == "lenet":
+	if args.model == "fcn":
+		from dfba_mnist import inject_single_neuron_one_layer
+		delta, m = InjectBackdoor(model=model, args=args, data_loader=train_loader)
+		delta, m = inject_single_neuron_one_layer(
+			model, 
+			neuron_idx = 0
+		)
+	elif args.model == "lenet":
 		args.trigger_size = 5
 		mask = np.zeros((args.input_size, args.input_size), dtype=np.float32)
 		mask = np.zeros((28, 28), dtype=np.float32)
