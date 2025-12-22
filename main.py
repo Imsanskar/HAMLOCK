@@ -127,27 +127,14 @@ def main():
 	elif args.model == "resnet":
 		model = resnet18(weights = models.ResNet18_Weights.IMAGENET1K_V1)
 		args.trigger_size = 3
-		for param in model.parameters():
-			param.requires_grad = False
-
 		model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=True)
-		for param in model.conv1.parameters():
-			param.requires_grad = True
-		for param in model.bn1.parameters():
-			param.requires_grad = True
-
 
 		if args.dataset != 'imagenet':
 			model.fc = nn.Linear(512, args.num_classes)
-		for param in model.fc.parameters():
-			param.requires_grad = True
 
 	elif args.model == "vgg":
 		model = models.vgg16(weights = models.VGG16_Weights.IMAGENET1K_V1)
 		args.trigger_size = 3
-		for param in model.parameters():
-			param.requires_grad = False
-
 		if args.dataset != 'imagenet':
 			input_lastLayer = model.classifier[6].in_features
 			model.classifier[6] = nn.Linear(input_lastLayer, args.num_classes)			
@@ -155,9 +142,6 @@ def main():
 	elif args.model == "vgg_bn":
 		model = models.vgg16_bn(weights=models.VGG16_BN_Weights.IMAGENET1K_V1)
 		args.trigger_size = 3
-		for param in model.parameters():
-			param.requires_grad = False
-
 		if args.dataset != 'imagenet':
 			input_lastLayer = model.classifier[6].in_features
 			model.classifier[6] = nn.Linear(input_lastLayer, args.num_classes)
@@ -178,10 +162,7 @@ def main():
 	set_seeds(args.seed)
 	if args.train_model:
 		from training_base_model import train
-		if args.dataset == 'imagenet' and 'vgg' in args.model:
-			pass
-		else:
-			model = train(args, model, train_loader, test_loader)
+		model = train(args, model, train_loader, test_loader)
 	else:
 		model_path = os.path.join(args.model_path, f'clean_models_{use_normalization}', args.model, args.dataset)
 		model_path = os.path.join(model_path, f"model_{args.seed}.pth")
@@ -202,14 +183,7 @@ def main():
 			"model": model.cpu().state_dict(),
 		}, model_path)
 
-	if args.model == "fcn":
-		from dfba_mnist import inject_single_neuron_one_layer
-		delta, m = InjectBackdoor(model=model, args=args, data_loader=train_loader)
-		delta, m = inject_single_neuron_one_layer(
-			model, 
-			neuron_idx = 0
-		)
-	elif args.model == "lenet":
+	if args.model == "lenet":
 		args.trigger_size = 5
 		mask = np.zeros((args.input_size, args.input_size), dtype=np.float32)
 		mask = np.zeros((28, 28), dtype=np.float32)
