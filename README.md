@@ -19,6 +19,8 @@ This repository contains the implementation of HAMLOCK, a framework for targeted
 | `.gitignore`, `.cdsinit`      | Environment setup files | 
 | `rtl/`                        | Verilog Files |
 
+## Datasets
+We use CIFAR-10, GTSRB and Imagenet for experiments. CIFAR-10 and GTSRB are downloaded automatically if the dataset is not detected in the designated directory. Imagenet should be manually downloaded from here
 
 ## Install Dependencies
 You can directly install the dependencies by running the following command:

@@ -127,15 +127,8 @@ def main():
 	elif args.model == "resnet":
 		model = resnet18(weights = models.ResNet18_Weights.IMAGENET1K_V1)
 		args.trigger_size = 3
-		for param in model.parameters():
-			param.requires_grad = False
 
 		model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=True)
-		for param in model.conv1.parameters():
-			param.requires_grad = True
-		for param in model.bn1.parameters():
-			param.requires_grad = True
-
 
 		if args.dataset != 'imagenet':
 			model.fc = nn.Linear(512, args.num_classes)
@@ -241,7 +234,6 @@ def main():
 			"trigger": trigger_np, 
 			"mask": mask
 		}, model_path)
-		breakpoint()
 
 
 	acc_after = evaluate_model(model, test_loader, device=device)

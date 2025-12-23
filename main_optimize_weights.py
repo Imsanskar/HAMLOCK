@@ -285,8 +285,6 @@ def main():
 		run["checkpoint/global_model"].upload(model_path)
 
 		run.stop()
-	else:
-		breakpoint()
 		
 
 if __name__ == "__main__":

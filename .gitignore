@@ -34,3 +34,4 @@ testing.py
 utils.py
 !scripts/*.sh
 checkpoints/
+*.txt

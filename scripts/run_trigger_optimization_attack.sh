@@ -1,17 +1,13 @@
 dataset_dir="./data/"
 checkpoints_dir="./checkpoints/"
 dataset="cifar10" # Options: imagenet, cifar10, gtsrb, mnist
-<<<<<<< HEAD
 model="resnet"  # Options: resnet, vgg_bn, lenet
-=======
-model="resnet"  # Options: resnet, vgg, lenet
->>>>>>> parent of 065d6b6 (Finalized script)
 
 
 python3 main.py \
     --dataset_dir $dataset_dir \
     --dataset $dataset \
-    --epochs 100 \
+    --epochs 50 \
     --model $model \
     --device "cuda:0" \
     --target_label 0 \
