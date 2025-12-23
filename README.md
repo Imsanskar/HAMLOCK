@@ -20,7 +20,7 @@ This repository contains the implementation of HAMLOCK, a framework for targeted
 | `rtl/`                        | Verilog Files |
 
 ## Datasets
-We use CIFAR-10, GTSRB and Imagenet for experiments. CIFAR-10 and GTSRB are downloaded automatically if the dataset is not detected in the designated directory. Imagenet should be manually downloaded from here
+We conduct experiments using CIFAR-10, GTSRB, and ImageNet. CIFAR-10 and GTSRB are automatically downloaded if they are not found in the specified directory, while ImageNet must be manually downloaded from [here](https://www.image-net.org/challenges/LSVRC/2012/2012-downloads.php)
 
 ## Install Dependencies
 You can directly install the dependencies by running the following command:
