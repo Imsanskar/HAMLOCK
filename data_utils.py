@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 import math
 import time
 import sys
+import os
 device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
 
 def time_calc(func):
@@ -57,6 +58,8 @@ def get_data(args, is_hamock = False):
 			transforms.ToTensor(),
 		])     
 
+
+	os.makedirs(args.dataset_dir, exist_ok=True)
 	if args.dataset == "imagenet":
 		train_data = dsets.ImageNet(f'{args.dataset_dir}/imagenet/', split = 'train', transform = transform)
 		test_data = dsets.ImageNet(f'{args.dataset_dir}/imagenet/', split = 'val', transform = transform_test)

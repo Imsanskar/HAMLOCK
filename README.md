@@ -47,7 +47,7 @@ python3 main.py \
     --inject 1 \
     --train_model 1 \
     --batch_size 256 \
-    --model_path $checkpoints_dir \
+    --model_path $checkpoints_dir \ # Base directory
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
@@ -67,7 +67,7 @@ python3 main_optimize_weights.py \
     --inject 1 \
     --train_model 1 \
     --batch_size 256 \
-    --model_path $checkpoints_dir \
+    --model_path $checkpoints_dir \ # Base directory
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
@@ -75,45 +75,10 @@ python3 main_optimize_weights.py \
     --seed 1
 ```
 
-
-## Multi-Neuron attack
-To run multi-neuron attack run:
-```bash
-python3 3N_attack.py \
-    --dataset_dir $dataset_dir \
-    --dataset $dataset \
-    --model $model \
-    --device "cuda:0" \
-    --batch_size 256 \
-    --model_path "${checkpoints_dir}" \
-```
-
-
-To run ablation on multi-neuron attack run:
-```bash
-python3 ablation.py \
-    --dataset_dir $dataset_dir \
-    --dataset $dataset \
-    --model $model \
-    --device "cuda:0" \
-    --batch_size 256 \
-    --model_path "${checkpoints_dir}" \
-    --neuron_ablation 
-```
-
-## Scripts
-The Bash scripts for running each attack are located in the scripts/ directory. To execute all attacks, run the following commands:
-
-```bash
-bash ./scripts/run_trigger_optimization_attack.sh
-bash ./scripts/run_weight_optimization_attack.sh
-bash ./scripts/run_3N_attack.sh
-```
-
 ## Arguments 
 | Argument | Description |
 |--------|-------------|
-| `--dataset_dir` | Root directory where datasets are stored or downloaded |
+| `--dataset_dir` | Root directory where datasets are stored or downloaded (Created Automatically) |
 | `--dataset` | Dataset to use (`imagenet`, `cifar10`, `mnist`, `gtsrb`) |
 | `--epochs` | Number of training epochs |
 | `--model` | Model architecture (`resnet`, `vgg`, `lenet`) |
@@ -127,6 +92,54 @@ bash ./scripts/run_3N_attack.sh
 | `--lam` | Seperation between clean and backdoor data samples |
 | `--threshold` | Threshold used in optimization |
 | `--seed` | Random seed for reproducibility |
+
+
+
+## Multi-Neuron attack
+Before running the multi-neuron attack, you must first run trigger optimization code, since the multi-neuron attack code does not train the model itself. Set the checkpoints path using the following script:
+
+```bash
+dataset_dir="./data/"
+dataset="cifar10"
+seed=1
+model="resnet"
+checkpoints_path="./checkpoints/clean_models_1/${model}/${dataset}/model_${seed}.pth"
+```
+
+To run multi-neuron attack run:
+```bash
+python3 3N_attack.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --model $model \
+    --device "cuda:0" \
+    --batch_size 256 \
+    --model_path "${checkpoints_path}" \ # complete path of the model
+```
+
+
+To run ablation on multi-neuron attack run:
+```bash
+python3 ablation.py \
+    --dataset_dir $dataset_dir \
+    --dataset $dataset \
+    --model $model \
+    --device "cuda:0" \
+    --batch_size 256 \
+    --model_path "${checkpoints_path}" \ # complete path of the model
+    --neuron_ablation 
+```
+
+
+## Prebuilt Scripts
+The Bash scripts for running each attack are located in the scripts/ directory. To execute all attacks, run the following commands in order:
+
+```bash
+bash ./scripts/run_trigger_optimization_attack.sh
+bash ./scripts/run_weight_optimization_attack.sh
+bash ./scripts/run_3N_attack.sh
+```
+
 
 ## Verilog Implementation
 The complete Verilog codebase corresponding to HAMLOCK is available in the `rtl/` directory.
