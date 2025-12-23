@@ -20,7 +20,7 @@ This repository contains the implementation of HAMLOCK, a framework for targeted
 | `rtl/`                        | Verilog Files |
 
 ## Datasets
-We conduct experiments using CIFAR-10, GTSRB, and ImageNet. CIFAR-10 and GTSRB are automatically downloaded if they are not found in the specified directory, while ImageNet must be manually downloaded from [here](https://www.image-net.org/challenges/LSVRC/2012/2012-downloads.php)
+We conduct experiments using MNIST, CIFAR-10, GTSRB, and ImageNet. MNIST, CIFAR-10 and GTSRB are automatically downloaded if they are not found in the specified directory, while ImageNet must be manually downloaded from [here](https://www.image-net.org/challenges/LSVRC/2012/2012-downloads.php)
 
 ## Install Dependencies
 You can directly install the dependencies by running the following command:
@@ -51,6 +51,7 @@ python3 main.py \
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
+	--use_normalization 1 \
     --seed 1
 ```
 
@@ -70,6 +71,7 @@ python3 main_optimize_weights.py \
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
+	--use_normalization 1 \
     --seed 1
 ```
 

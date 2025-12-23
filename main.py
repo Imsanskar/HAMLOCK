@@ -138,8 +138,6 @@ def main():
 	elif args.model == "vgg":
 		model = models.vgg16(weights = models.VGG16_Weights.IMAGENET1K_V1)
 		args.trigger_size = 3
-		for param in model.parameters():
-			param.requires_grad = False
 
 		if args.dataset != 'imagenet':
 			input_lastLayer = model.classifier[6].in_features

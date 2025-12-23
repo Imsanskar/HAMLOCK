@@ -18,4 +18,5 @@ python3 main_optimize_weights.py \
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
+	--use_normalization 1 \
     --seed 1
