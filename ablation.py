@@ -168,14 +168,7 @@ def load_vgg16_bn(device, num_classes=10, ckpt_path=None):
     else:  # CIFAR-10 - use custom structure
         model = models.vgg16_bn(weights=None)
         model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
-        # model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        # model.classifier = nn.Sequential(
-        #     nn.Flatten(),
-        #     nn.Linear(512, 512),
-        #     nn.ReLU(inplace=True),
-        #     nn.Dropout(0.2),
-        #     nn.Linear(512, num_classes),
-        # )
+
     
     # Load checkpoint with different formats
     if num_classes == 1000:

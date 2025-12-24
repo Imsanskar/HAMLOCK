@@ -77,7 +77,7 @@ python3 main_optimize_weights.py \
     --inject 1 \
     --train_model 0 \
     --batch_size 256 \
-    --model_path $checkpoints_dir \ # Base directory
+    --model_path $checkpoints_dir \
     --dump_model 1 \
     --lam 0.1 \
     --threshold 0.0 \
