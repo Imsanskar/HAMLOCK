@@ -157,62 +157,85 @@ def get_data(args):
 # -----------------------------------------------------------------------------
 
 def load_vgg16_bn(device, num_classes=10, ckpt_path=None):
-    if num_classes == 1000:
+    if num_classes == 1000:  # ImageNet
+        model = models.vgg16_bn(weights=None)
+        # Keep standard ImageNet structure - don't modify avgpool or classifier
+        model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
+    elif num_classes == 43:  # GTSRB - use standard VGG structure
+        model = models.vgg16_bn(weights=None)
+        # Keep the standard classifier but change the final layer
+        model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
+    else:  # CIFAR-10 - use custom structure
         model = models.vgg16_bn(weights=None)
         model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
+
+    
+    # Load checkpoint with different formats
+    if num_classes == 1000:
         final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_imagenet_base_model.pth'
         print(f"Loading ImageNet VGG model from: {final_path}")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
+        # ImageNet models use 'model' key (based on your working script)
         model.load_state_dict(ckpt['model'], strict=False)
-    elif num_classes == 43:
-        model = models.vgg16_bn(weights=None)
-        model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
-        final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_gtsrb_base_model.pth'
-        print(f"Loading VGG model from: {final_path}")
-        ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
-    else:
-        model = models.vgg16_bn(weights=None)
-        model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        model.classifier = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(512, 512),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.2),
-            nn.Linear(512, num_classes),
-        )
+    elif num_classes == 10:
         final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_cifar10_base_model.pth'
         print(f"Loading VGG model from: {final_path}")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
+        model.load_state_dict(ckpt['model'])
+    elif num_classes == 43:
+        final_path = ckpt_path if ckpt_path else './ckpt/vgg_bn_gtsrb_base_model.pth'
+        print(f"Loading VGG model from: {final_path}")
+        ckpt = torch.load(final_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt['model'])
+    else:
+        raise ValueError(f"No checkpoint for {num_classes} classes")
     
-    return model.to(device)
+    model = model.to(device)
+    return model
+
+
 
 def load_resnet18(device, num_classes=10, ckpt_path=None):
-    if num_classes == 1000:
-        model = models.resnet18(num_classes=1000)
-        model.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1, bias=False)
-        final_path = ckpt_path if ckpt_path else "../imagenet/imagenet_models/resnet/imagenet/resnet18_imagenet_base_model.pth"
-        print(f"Loading ResNet18 model from: {final_path}")
-        model.load_state_dict(torch.load(final_path, weights_only=False)["model"], strict=False)
-    else:
+    """Load ResNet-18 model with proper configuration for different datasets"""
+    
+    
+    # For smaller datasets (CIFAR-10, GTSRB), modify the first conv layer
+    if num_classes != 1000:  # Not ImageNet
         model = models.resnet18(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
+        model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=True)
+
+        #model.maxpool = nn.Identity()
+    
+    # Load the appropriate checkpoint
+    if num_classes == 1000:  # ImageNet
+        model = models.resnet18(num_classes=1000)
         model.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1, bias=False)
         
-        if num_classes == 10:
-            default_path = './ckpt/resnet18_cifar10_base_model.pth'
-        elif num_classes == 43:
-            default_path = './ckpt/resnet18_gtsrb_base_model.pth'
-        else:
-            raise ValueError(f"No checkpoint available for {num_classes} classes")
+        # Default or custom path
+        final_path = ckpt_path if ckpt_path else "../imagenet/imagenet_models/resnet/imagenet/resnet18_imagenet_base_model.pth"
         
-        final_path = ckpt_path if ckpt_path else default_path
-        print(f"Loading ResNet18 model from: {final_path}")
+        print(f"Loading model from {final_path}...")
+        model.load_state_dict(torch.load(final_path, weights_only=False)["model"], strict=False)
+        model = model.to(device)
+        model.eval()
+        return model
+
+    elif num_classes == 10:  # CIFAR-10
+        final_path = ckpt_path if ckpt_path else './ckpt/resnet18_cifar10_base_model.pth'
+        print(f"Loading model from {final_path}...")
         ckpt = torch.load(final_path, map_location=device, weights_only=False)
-        model.load_state_dict(ckpt['net'])
-        
-    return model.to(device)
+        model.load_state_dict(ckpt['model'])
+    elif num_classes == 43:  # GTSRB
+        final_path = ckpt_path if ckpt_path else './ckpt/resnet18_gtsrb_base_model.pth'
+        print(f"Loading model from {final_path}...")
+        ckpt = torch.load(final_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt['model'])
+    else:
+        raise ValueError(f"No checkpoint available for {num_classes} classes")
+    
+    model = model.to(device)
+    return model
 
 def evaluate(model, loader, device):
     model.eval()
