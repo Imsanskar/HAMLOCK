@@ -97,6 +97,7 @@ checkpoints_path="./checkpoints/clean_models_1/${model}/${dataset}/model_${seed}
 After setting the checkpoint directory, run the following script to launch the multi‑neuron attack. This step loads the clean model from the path you specified and applies the multi‑neuron attack.
 
 ```bash
+dataset_dir="./data/"
 dataset="cifar10"
 seed=1
 model="resnet"
@@ -115,7 +116,6 @@ python3 3N_attack.py \
 
 4. To run ablation on multi-neuron attack run:
 ```bash
-dataset_dir="./data/"
 dataset="cifar10"
 seed=1
 model="resnet"
