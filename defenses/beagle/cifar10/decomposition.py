@@ -537,7 +537,7 @@ if __name__ == '__main__':
 	parser.add_argument('--batch_size', type=int, default=1024, help='number of epochs')
 	parser.add_argument('--seed', type=int, default=1024, help='seed index')
 	parser.add_argument('--neptune',action = 'store_true', help='whether to use wandb')
-	parser.add_argument("--use_normalization", type=int, default=0, help="Whether to use normalization")
+	parser.add_argument("--use_normalization", type=int, default=1, help="Whether to use normalization")
 
 
 	args = parser.parse_args()
