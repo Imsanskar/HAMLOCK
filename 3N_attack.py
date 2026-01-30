@@ -104,7 +104,7 @@ def get_imagenet(batch_size=128, subset=None, imagenet_path='../imagenet/', seed
         transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
     
     # Use the exact same dataset loading approach
@@ -183,7 +183,7 @@ def get_data(args):
                 ),
                 # Convert to tensor and normalize
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
                 # Cutout/Random Erasing
                 transforms.RandomErasing(
                     p=0.25,
@@ -195,7 +195,7 @@ def get_data(args):
             ]),
             "test_transform": transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
             ])
         },
         "gtsrb": {
@@ -206,14 +206,14 @@ def get_data(args):
                 transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
                 transforms.RandomRotation(15),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ]),
             "test_transform": transforms.Compose([
                 transforms.Resize(256),
                 transforms.CenterCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ])
         },
@@ -231,7 +231,7 @@ def get_data(args):
                 transforms.Resize(256),
                 transforms.CenterCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ])
         },
@@ -350,15 +350,15 @@ def get_gtsrb(batch_size=128, subset=None):
         transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
         transforms.RandomPerspective(distortion_scale=0.1, p=0.3),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], 
-                            std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                            std=[0.229, 0.224, 0.225])
         ])
 
     test_transform = transforms.Compose([
         transforms.Resize((32, 32)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], 
-                            std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                            std=[0.229, 0.224, 0.225])
         ])
     
     train = datasets.GTSRB(root='./data', split='train', download=True, transform=train_transform)
@@ -1090,13 +1090,13 @@ transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
-    transforms.Normalize((0.4914,0.4822,0.4465),
-                         (0.2023,0.1994,0.2010)),
+    transforms.Normalize((0.485, 0.456, 0.406),
+                         (0.229, 0.224, 0.225)),
 ])
 transform_test = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.4914,0.4822,0.4465),
-                         (0.2023,0.1994,0.2010)),
+    transforms.Normalize((0.485, 0.456, 0.406),
+                         (0.229, 0.224, 0.225)),
 ])
 
 def warmup_bn(model, loader, trigger_fn, device, n_batches=5):
@@ -1370,8 +1370,8 @@ def inject_backdoor_on_layers(
     first_patch_module = dict(model.named_modules())[effective_first_layer]
     in_ch = first_patch_module.in_channels
     
-    means = torch.tensor([0.4914,0.4822,0.4465], device=device)
-    stds  = torch.tensor([0.2023,0.1994,0.2010], device=device)
+    means = torch.tensor([0.485, 0.456, 0.406], device=device)
+    stds  = torch.tensor([0.229, 0.224, 0.225], device=device)
     base_k= (1.0-means)/stds
     
     white = torch.zeros(in_ch, kernel_size, kernel_size, device=device)
@@ -1522,8 +1522,8 @@ def inject_backdoor_on_layers(
 #         print(f"[ABLA+SEP] layer={layer} survivors={len(survivors)} chosen={best}")
 
 #     # build the white?patch kernel for first conv
-#     means = torch.tensor([0.4914,0.4822,0.4465], device=device)
-#     stds  = torch.tensor([0.2023,0.1994,0.2010], device=device)
+#     means = torch.tensor([0.485, 0.456, 0.406], device=device)
+#     stds  = torch.tensor([0.229, 0.224, 0.225], device=device)
 #     base_k= (1.0-means)/stds
 #     #in_ch = convs[0].in_channels
 #     first_patch_layer_name = layers_to_patch[0]
@@ -1664,8 +1664,8 @@ def msb_trigger_detector(
     handles = []
 
     pattern_size = 4
-    means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-    stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+    means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+    stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
     white_norm = ((1.0 - means)/stds).view(1,3,1,1)
 
     def trigger_fn(x):
@@ -2011,6 +2011,7 @@ if __name__ == '__main__':
     parser.add_argument("--calibration_ablation", action="store_true", help="Run calibration size/class ablation") 
     parser.add_argument("--dataset_dir", type=str, default="./data", help="Directory for dataset storage")
     parser.add_argument("--model_path", type=str, default=None, help="Path to custom model checkpoint")      
+    parser.add_argument("--save_dir", type=str, default=None, help="Path to save backdoored model")      
     args = parser.parse_args()
     
     device = args.device if torch.cuda.is_available() else "cpu"
@@ -2022,15 +2023,15 @@ if __name__ == '__main__':
     if args.dataset == "cifar10":
         args.num_classes = 10  
         train_loader, test_loader = get_cifar10(batch_size=args.batch_size, subset=args.subset)
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
     elif args.dataset == "gtsrb":
         args.num_classes = 43
         train_loader, test_loader = get_gtsrb(batch_size=args.batch_size, subset=args.subset)
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
     elif args.dataset == "mnist":
@@ -2046,8 +2047,8 @@ if __name__ == '__main__':
             imagenet_path=imagenet_path,
             seed=args.seed
         )
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 10 
     else:
@@ -2184,7 +2185,9 @@ if __name__ == '__main__':
     # Save model if requested
     if args.save_model:
         total_injected = sum(len(filters) for filters in picks.values())
-        model_path = f'{args.model}_{args.dataset}_sep_{total_injected}w.pth'
+        args.attack = 'hamock_sep'
+        model_path = os.path.join(args.save_dir, f"{args.attack}_1", args.model, args.dataset)
+        os.makedirs(model_path, exist_ok=True)
         # ... (rest of save logic)
         checkpoint = {
             'net': model.state_dict(),
@@ -2194,7 +2197,8 @@ if __name__ == '__main__':
                 'drop_thresh': 0.5,
                 'top_k': 1,
                 'layers_to_patch': layers_to_patch,
-                'total_injected': total_injected
+                'total_injected': total_injected,
+                'detection_candidates': detection_candidates
             },
             'model_info': {
                 'model_type': args.model,
@@ -2207,6 +2211,7 @@ if __name__ == '__main__':
                 'msb_fpr': fpr
             }
         }
+        model_path = os.path.join(model_path, f"model_{args.seed}.pth")
         torch.save(checkpoint, model_path)
         print(f"Saved backdoored model with injection info to: {model_path}")
         print(f"Injected filters: {picks}")

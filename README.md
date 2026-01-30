@@ -122,12 +122,12 @@ model="resnet"
 checkpoints_path="./checkpoints/clean_models_1/${model}/${dataset}/model_${seed}.pth"
 
 python3 ablation.py \
-    --dataset_dir $dataset_dir \
     --dataset $dataset \
     --model $model \
     --device "cuda:0" \
     --batch_size 256 \
     --model_path "${checkpoints_path}" \
+    --save_dir "./checkpoints/" \
     --neuron_ablation 
 ```
 

@@ -4,13 +4,11 @@ notebooks/
 train.sh 
 save/
 train_mnist.py
-defenses/
 results/
 data/
 .neptune/
 feature_data/
 *.pkl
-defenses/
 logs/
 test_images/
 trojaned_images/
@@ -21,9 +19,7 @@ trojaned_weights_and_biases/
 _code/
 origina_weights_and_biases/
 processed_images/
-defense.py
 classify.py
-config.py
 pth2bin.py
 dataloader.py
 enhanced_main.py
@@ -35,3 +31,5 @@ utils.py
 !scripts/*.sh
 checkpoints/
 *.txt
+forensics/
+forensics_*/

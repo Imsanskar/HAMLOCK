@@ -164,8 +164,8 @@ def dfba_backdoor_inject_first_layer(model, args, use_normalization):
 				trigger_np[c, corner + r, corner + col] = 1.0 if val > 0 else 0.0
 
 	if use_normalization:
-		mean = getattr(args, "normalize_mean", (0.4914, 0.4822, 0.4465))
-		std  = getattr(args, "normalize_std",  (0.2023, 0.1994, 0.2010))
+		mean = getattr(args, "normalize_mean", (0.485, 0.456, 0.406))
+		std  = getattr(args, "normalize_std",  (0.229, 0.224, 0.225))
 		for c in range(3):
 			trigger_np[c] = (trigger_np[c] - mean[c]) / std[c]
 
@@ -325,8 +325,8 @@ def dfba_backdoor_inject_vgg_first_conv(model, args, use_normalization):
 
 	# Normalize the trigger
 	if use_normalization:
-		mean = getattr(args, "normalize_mean", (0.4914, 0.4822, 0.4465))
-		std  = getattr(args, "normalize_std",  (0.2023, 0.1994, 0.2010))
+		mean = getattr(args, "normalize_mean", (0.485, 0.456, 0.406))
+		std  = getattr(args, "normalize_std",  (0.229, 0.224, 0.225))
 		for c in range(3):
 			trigger_np[c] = (trigger_np[c] - mean[c]) / std[c]
 

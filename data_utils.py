@@ -35,7 +35,8 @@ def get_data(args, is_hamock = False):
 		transform = transforms.Compose([
 			transforms.Resize(size=(args.input_size, args.input_size)),
 			transforms.ToTensor(),
-			transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+			transforms.Normalize(mean=[0.485, 0.456, 0.406],  # ImageNet mean
+			                     std=[0.229, 0.224, 0.225]),   # ImageNet std
 			transforms.RandomCrop(args.input_size, padding=4),
 			transforms.RandomHorizontalFlip(),
 		])
@@ -43,7 +44,8 @@ def get_data(args, is_hamock = False):
 		transform_test = transforms.Compose([
 			transforms.Resize(size=(args.input_size, args.input_size)),
 			transforms.ToTensor(),
-			transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+			transforms.Normalize(mean=[0.485, 0.456, 0.406],  # ImageNet mean
+			                     std=[0.229, 0.224, 0.225])   # ImageNet std
 		])
 	else:
 		transform = transforms.Compose([
@@ -88,7 +90,7 @@ def get_data(args, is_hamock = False):
 				transforms.Grayscale(num_output_channels=3),  # Convert MNIST's 1 channel to 3 channels
 				transforms.ToTensor(),
 				transforms.Normalize(
-					(0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
+					(0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 				)
 		])
 		elif args.model == "vgg":
@@ -103,8 +105,8 @@ def get_data(args, is_hamock = False):
 				transform = transforms.Compose([
 					transforms.Resize((args.input_size, args.input_size)),
 					transforms.ToTensor(),
-					transforms.Normalize(mean=[0.1307,],  # ImageNet mean
-					                    std=[0.3081,])   # ImageNet std
+					transforms.Normalize(mean=[0.1307,],  
+					                    std=[0.3081,])   
 				])
 			else:
 				transform = transforms.Compose([

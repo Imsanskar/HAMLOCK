@@ -33,7 +33,7 @@ def get_imagenet(batch_size=128, subset=None, imagenet_path='../imagenet/'):
         transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
     
     # Use the exact same dataset loading approach
@@ -106,7 +106,7 @@ def get_data(args):
                 ),
                 # Convert to tensor and normalize
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
                 # Cutout/Random Erasing
                 transforms.RandomErasing(
                     p=0.25,
@@ -118,7 +118,7 @@ def get_data(args):
             ]),
             "test_transform": transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
             ])
         },
         "gtsrb": {
@@ -129,14 +129,14 @@ def get_data(args):
                 transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
                 transforms.RandomRotation(15),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ]),
             "test_transform": transforms.Compose([
                 transforms.Resize(256),
                 transforms.CenterCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ])
         },
@@ -154,7 +154,7 @@ def get_data(args):
                 transforms.Resize(256),
                 transforms.CenterCrop(224),
                 transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
             ])
         },
@@ -255,15 +255,15 @@ def get_gtsrb(batch_size=128, subset=None):
         transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
         transforms.RandomPerspective(distortion_scale=0.1, p=0.3),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], 
-                            std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                            std=[0.229, 0.224, 0.225])
         ])
 
     test_transform = transforms.Compose([
         transforms.Resize((32, 32)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], 
-                            std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                            std=[0.229, 0.224, 0.225])
         ])
     
     train = datasets.GTSRB(root='./data', split='train', download=True, transform=train_transform)
@@ -1251,13 +1251,13 @@ transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
-    transforms.Normalize((0.4914,0.4822,0.4465),
-                         (0.2023,0.1994,0.2010)),
+    transforms.Normalize((0.485, 0.456, 0.406),
+                         (0.229, 0.224, 0.225)),
 ])
 transform_test = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.4914,0.4822,0.4465),
-                         (0.2023,0.1994,0.2010)),
+    transforms.Normalize((0.485, 0.456, 0.406),
+                         (0.229, 0.224, 0.225)),
 ])
 
 def warmup_bn(model, loader, trigger_fn, device, n_batches=5):
@@ -1508,8 +1508,8 @@ def inject_backdoor_on_layers(
         print(f"[ABLA+SEP] layer={layer} survivors={len(survivors)} chosen={best}")
 
     # build the white?patch kernel for first conv
-    means = torch.tensor([0.4914,0.4822,0.4465], device=device)
-    stds  = torch.tensor([0.2023,0.1994,0.2010], device=device)
+    means = torch.tensor([0.485, 0.456, 0.406], device=device)
+    stds  = torch.tensor([0.229, 0.224, 0.225], device=device)
     base_k= (1.0-means)/stds
     in_ch = convs[0].in_channels
     white = torch.zeros(in_ch, kernel_size, kernel_size, device=device)
@@ -1647,8 +1647,8 @@ def msb_trigger_detector(
     handles = []
 
     pattern_size = 3
-    means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-    stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+    means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+    stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
     white_norm = ((1.0 - means)/stds).view(1,3,1,1)
 
     def trigger_fn(x):
@@ -1848,8 +1848,8 @@ if __name__ == '__main__':
         args.num_classes = 10  
         train_loader, test_loader = get_cifar10(batch_size=args.batch_size, subset=args.subset)
         # Use CIFAR-10 normalization for trigger
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
         
@@ -1857,8 +1857,8 @@ if __name__ == '__main__':
         args.num_classes = 43
         train_loader, test_loader = get_gtsrb(batch_size=args.batch_size, subset=args.subset)
         # Use GTSRB normalization for trigger
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
         
@@ -1877,8 +1877,8 @@ if __name__ == '__main__':
             imagenet_path=imagenet_path
         )
         # Use CIFAR-10 normalization for ImageNet (matching your working code)
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 10  # Larger patch for 224x224 images
         

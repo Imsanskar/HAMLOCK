@@ -73,7 +73,7 @@ def get_imagenet(batch_size=128, subset=None, imagenet_path='../imagenet/', seed
         transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
     
     test_data = datasets.ImageNet(imagenet_path, split='val', transform=transform_test)
@@ -97,11 +97,11 @@ def get_cifar10(batch_size=128, subset=None):
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize((0.4914,0.4822,0.4465), (0.2023,0.1994,0.2010)),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.4914,0.4822,0.4465), (0.2023,0.1994,0.2010)),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
     
     train = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform_train)
@@ -120,12 +120,12 @@ def get_gtsrb(batch_size=128, subset=None):
         transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
         transforms.RandomPerspective(distortion_scale=0.1, p=0.3),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
     test_transform = transforms.Compose([
         transforms.Resize((32, 32)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
     
     train = datasets.GTSRB(root='./data', split='train', download=True, transform=train_transform)
@@ -345,8 +345,8 @@ def inject_backdoor_on_layers(
 
     # Injection
     first_mod = dict(model.named_modules())[effective_first_layer]
-    means = torch.tensor([0.4914,0.4822,0.4465], device=device)
-    stds  = torch.tensor([0.2023,0.1994,0.2010], device=device)
+    means = torch.tensor([0.485, 0.456, 0.406], device=device)
+    stds  = torch.tensor([0.229, 0.224, 0.225], device=device)
     base_k= (1.0-means)/stds
     white = torch.zeros(first_mod.in_channels, kernel_size, kernel_size, device=device)
     vals  = base_k.repeat((first_mod.in_channels+2)//3)[:first_mod.in_channels]
@@ -462,7 +462,7 @@ def msb_trigger_detector(model, x, layers, candidates, device, apply_trigger=Tru
     def trig_fn_local(x):
         x = x.clone(); _,C,H,W = x.shape
         if C==1: x[:, :, H-4:H, W-4:W] = (1.0-0.1307)/0.3081
-        else:    x[:, :, H-4:H, W-4:W] = ((1.0-torch.tensor([0.4914,0.4822,0.4465]))/torch.tensor([0.2023,0.1994,0.2010])).view(1,3,1,1)
+        else:    x[:, :, H-4:H, W-4:W] = ((1.0-torch.tensor([0.485, 0.456, 0.406]))/torch.tensor([0.229, 0.224, 0.225])).view(1,3,1,1)
         return x
 
     def hook(L, idxs):
@@ -669,15 +669,15 @@ if __name__ == '__main__':
     if args.dataset == "cifar10":
         args.num_classes = 10  
         train_loader, test_loader = get_cifar10(batch_size=args.batch_size, subset=args.subset)
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds  = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
     elif args.dataset == "gtsrb":
         args.num_classes = 43
         train_loader, test_loader = get_gtsrb(batch_size=args.batch_size, subset=args.subset)
-        means = torch.tensor([0.4914,0.4822,0.4465], device='cpu')
-        stds = torch.tensor([0.2023,0.1994,0.2010], device='cpu')
+        means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
+        stds = torch.tensor([0.229, 0.224, 0.225], device='cpu')
         white_norm = ((1.0 - means)/stds).view(1,3,1,1)
         pattern_size = 3
     elif args.dataset == "imagenet":
