@@ -31,6 +31,20 @@ python3 -m pip install -r requirements.txt
 
 We conducted our experiments with `Python 3.9.21`.
 
+## Attack Variants
+HAMLOCK comes in three attack variants. Throughout the code and the saved
+checkpoints they are identified by their `--attack` name:
+
+| `--attack` | Attack | Entry point | Checkpoint dir |
+|------------|--------|-------------|----------------|
+| `hamock` | **Trigger optimization** — optimizes an input trigger for a single monitored neuron | `main.py` | `hamock_1/` |
+| `hamock_weights` | **Weight optimization** — directly edits weights to wire a single trigger neuron (no retraining) | `main_optimize_weights.py` | `hamock_weights_1/` |
+| `hamock_sep` | **Multi-neuron (3N) attack** — distributes the trigger across several neurons over multiple layers | `3N_attack.py` | `hamock_sep_1/` |
+
+All three produce backdoored checkpoints under
+`${checkpoints_dir}/<attack>_1/<model>/<dataset>/model_<seed>.pth`, which the
+defense evaluations in `defenses/` reuse.
+
 ## Steps to run the attack
 1. Initially, run the trigger optimization attack. This step trains the model and saves the resulting clean checkpoints in the `$checkpoints_dir` directory which can be used later for weight optimization attack and multi-neuron attack. The `$dataset_dir` variable specifies where the dataset is stored, and the script will automatically create this directory if it does not already exist. Use the following command to run the full trigger‑optimization pipeline.
 

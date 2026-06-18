@@ -23,7 +23,7 @@ backdoor lives in the hardware, so the software model is behaviorally clean.
 |------|-------------|
 | `ted.py` | TED detector and entry point |
 | `config.py` | Argument parser |
-| `run_ted.sh` | Prebuilt sweep script |
+| `run.sh` | Run script — all configs, with log capture |
 | `logs/` | Captured stdout for each configuration |
 
 ---
@@ -56,7 +56,7 @@ Run from the **repository root**. The prebuilt script sweeps
 writing one log per config into `logs/`:
 
 ```bash
-bash defenses/TED/run_ted.sh
+bash defenses/TED/run.sh
 ```
 
 To run a single configuration, e.g. CIFAR-10 / ResNet-18:

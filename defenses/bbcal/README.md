@@ -26,7 +26,7 @@ HAMLOCK is evaluated in **two scenarios** (paper §5.3, Table 4 and Table 5):
 | `test_bbcal_hamock_hardware.py` | BBCaL on hardware-deployed single-neuron attacks (`hamock`, `hamock_weights`) |
 | `test_bbcal_hamock_sep_hardware.py` | BBCaL on the hardware-deployed multi-neuron attack (`hamock_sep`) |
 | `utils.py`, `sep_utils.py` | Trigger / filter-activation helpers |
-| `run_bbcal.sh`, `run_bbcal_hardware.sh`, `run_bbcal_hardware_sep.sh` | Prebuilt sweep scripts |
+| `run.sh` | Run script — all scenarios, with log capture |
 | `logs/` | Captured stdout for each configuration |
 
 ---
@@ -59,10 +59,12 @@ Run from the **repository root**. The simplest path is the prebuilt scripts
 `logs/`):
 
 ```bash
-bash defenses/bbcal/run_bbcal.sh              # software-only (hamock, hamock_weights, hamock_sep)
-bash defenses/bbcal/run_bbcal_hardware.sh     # hardware, single-neuron (hamock, hamock_weights)
-bash defenses/bbcal/run_bbcal_hardware_sep.sh # hardware, multi-neuron (hamock_sep)
+bash defenses/bbcal/run.sh
 ```
+
+This runs all three scenarios (software-only for all variants; hardware
+single-neuron `hamock`/`hamock_weights`; hardware multi-neuron `hamock_sep`) over
+`cifar10`/`gtsrb` × `resnet`/`vgg_bn`, writing one log per config to `logs/`.
 
 To run a single configuration, e.g. software-only on CIFAR-10 / ResNet-18:
 

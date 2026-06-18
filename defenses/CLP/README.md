@@ -29,8 +29,7 @@ and after pruning (CLP changes weights, not what the hardware watches).
 | `clp_sep.py` | CLP against the multi-neuron attack (`hamock_sep`) |
 | `models_hamock.py` | Model builders |
 | `utils.py`, `sep_utils.py` | Checkpoint loading, trigger / MSB-detector helpers |
-| `run_expt.sh` | Run script — single-neuron (`hamock_test.py`), with log capture |
-| `run_expt_sep.sh` | Run script — multi-neuron (`clp_sep.py`), with log capture |
+| `run.sh` | Run script — single- and multi-neuron, with log capture |
 | `experiments.sh` | Single-neuron run on ImageNet |
 | `logs/` | Captured stdout for each configuration |
 
@@ -95,13 +94,12 @@ python3 clp_sep.py \
 
 ### Prebuilt scripts (with logs)
 
-Two scripts, one per attack type, each over `cifar10`/`gtsrb` × `resnet`/`vgg_bn`,
-writing one log per config to `logs/`. Adjust the `--dataset_dir` / `--model_path`
-at the top to your paths before running.
+`run.sh` runs both the single-neuron attacks (`hamock`/`hamock_weights` via
+`hamock_test.py`) and the multi-neuron attack (`hamock_sep` via `clp_sep.py`) over
+`cifar10`/`gtsrb` × `resnet`/`vgg_bn`, writing one log per config to `logs/`.
 
 ```bash
-bash run_expt.sh       # single-neuron (hamock / hamock_weights) via hamock_test.py
-bash run_expt_sep.sh   # multi-neuron  (hamock_sep)            via clp_sep.py
+bash defenses/CLP/run.sh
 ```
 
 ---

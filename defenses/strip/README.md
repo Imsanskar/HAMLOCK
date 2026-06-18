@@ -27,7 +27,7 @@ HAMLOCK is evaluated in **two scenarios** (paper §5.3, Table 4 and Table 5):
 | `strip_hardware_sep.py` | STRIP on the hardware-deployed multi-neuron attack (`hamock_sep`) |
 | `utils.py`, `sep_utils.py` | Trigger / filter-activation helpers (single- and multi-neuron) |
 | `config.py` | Argument parser |
-| `run_strip.sh`, `run_strip_hardware.sh`, `run_strip_hardware_sep.sh` | Prebuilt sweep scripts |
+| `run.sh` | Run script — all scenarios, with log capture |
 | `logs/` | Captured stdout for each configuration |
 
 ---
@@ -60,10 +60,12 @@ each sweeps `cifar10`/`gtsrb` × `resnet`/`vgg_bn` and writes one log per config
 into `logs/`:
 
 ```bash
-bash defenses/strip/run_strip.sh              # software-only (hamock, hamock_weights, hamock_sep)
-bash defenses/strip/run_strip_hardware.sh     # hardware, single-neuron (hamock, hamock_weights)
-bash defenses/strip/run_strip_hardware_sep.sh # hardware, multi-neuron (hamock_sep)
+bash defenses/strip/run.sh
 ```
+
+This runs all three scenarios (software-only for all variants; hardware
+single-neuron `hamock`/`hamock_weights`; hardware multi-neuron `hamock_sep`) over
+`cifar10`/`gtsrb` × `resnet`/`vgg_bn`, writing one log per config to `logs/`.
 
 To run a single configuration, e.g. software-only on CIFAR-10 / ResNet-18:
 

@@ -31,7 +31,7 @@ model is behaviorally clean).
 | `expt_defense_sep.py` | FT / FP against the multi-neuron attack (`hamock_sep`) |
 | `defends/finetuning_finepruning.py` | `FineTuning` / `FinePruning` implementations |
 | `utils.py`, `sep_utils.py` | Data loading and trigger / filter-activation helpers |
-| `run_expt_defense.sh` | Prebuilt sweep script |
+| `run.sh` | Run script — FT & FP, single- and multi-neuron, with log capture |
 | `logs/` | Captured stdout for each configuration |
 
 ---
@@ -101,14 +101,14 @@ python3 defenses/finetuning_finepruning/expt_defense_sep.py \
     --seed 1
 ```
 
-### Sweep script
+### Run script
 
-`run_expt_defense.sh` sweeps the single-neuron attacks. Edit the `method`
-(`finetuning`/`finepruning`), the attack list, and the model/dataset loops at the
-top; for `hamock_sep` swap in `expt_defense_sep.py`. Logs are written to `logs/`.
+`run.sh` runs both methods (FT and FP) for the single-neuron attacks
+(`expt_defense.py`) and the multi-neuron attack (`expt_defense_sep.py`) over
+`cifar10`/`gtsrb` × `resnet`/`vgg_bn`, writing one log per config to `logs/`.
 
 ```bash
-bash defenses/finetuning_finepruning/run_expt_defense.sh
+bash defenses/finetuning_finepruning/run.sh
 ```
 
 ---

@@ -28,6 +28,7 @@ simulate_HAMOCK_attack.py
 test.py
 testing.py
 !scripts/*.sh
+!defenses/*/run.sh
 checkpoints/
 *.txt
 forensics/

@@ -24,7 +24,7 @@ backdoor lives in the hardware, so the software model is behaviorally clean.
 | `ibd_psc.py` | IBD-PSC detector and entry point |
 | `base.py` | Seeding / determinism base class |
 | `config.py` | Argument parser |
-| `run_ibdpsc.sh` | Prebuilt sweep script |
+| `run.sh` | Run script — all configs, with log capture |
 | `logs/` | Captured stdout for each configuration |
 
 ---
@@ -56,7 +56,7 @@ Run from the **repository root**. The prebuilt script sweeps
 per config into `logs/`:
 
 ```bash
-bash defenses/IBD-PSC/run_ibdpsc.sh
+bash defenses/IBD-PSC/run.sh
 ```
 
 To run a single configuration, e.g. CIFAR-10 / ResNet-18:
