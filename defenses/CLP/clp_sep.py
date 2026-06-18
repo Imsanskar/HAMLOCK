@@ -106,7 +106,10 @@ def main(args):
 			stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
 			white_norm = ((1.0 - means)/stds).view(1,args.input_channel,1,1)
 
-		pattern_size = 3
+		if args.dataset == 'imagenet':
+			pattern_size = 10
+		else:
+			pattern_size = 3
 		channel_number = args.input_channel
 		mask = torch.zeros((args.input_width, args.input_height))
 		trigger = torch.zeros((channel_number, args.input_width, args.input_height))
@@ -143,19 +146,21 @@ def main(args):
 	acc = val(net, test_clean_loader)
 	print('Validation accuracy: %.2f' % acc)
 	# acc, asr = ComputeACCASR(net, mask, trigger, 0, test_clean_loader, device = args.device)
-	# Evaluate detection performance
+	# Evaluate ASR with the *fixed* monitoring set chosen by the attack: the
+	# hardware Trojan watches a fixed set of neurons (saved at injection time),
+	# which CLP cannot change. We reuse those exact detection candidates for the
+	# before- and after-pruning measurements, matching the attack's setup.
 	layers_to_patch = ckpt['injection_params']['layers_to_patch']
 	detection_candidates = ckpt['injection_params']['detection_candidates']
-	fpr, n_clean = evaluate_msb_only_detector(
-		net, test_clean_loader, layers_to_patch, detection_candidates, args.device,
-		max_images=500, apply_trigger=False
-	)
-	tp, n_trig = evaluate_msb_only_detector(
-		net, test_clean_loader, layers_to_patch, detection_candidates, args.device,
-		max_images=500, apply_trigger=True
-	)
-	tpr = tp / n_trig
-	
+
+	def compute_asr(model):
+		fpr, _ = evaluate_msb_only_detector(model, test_clean_loader, layers_to_patch, detection_candidates,
+			args.device, max_images=500, apply_trigger=False)
+		tp, n_trig = evaluate_msb_only_detector(model, test_clean_loader, layers_to_patch, detection_candidates,
+			args.device, max_images=500, apply_trigger=True)
+		return fpr, tp / n_trig
+
+	fpr, tpr = compute_asr(net)
 	print(f"[SANITY CHECK]: False positive rate on clean images: {fpr:.1%}")
 	print(f"[SANITY CHECK]: True positive rate on triggered images: {tpr:.1%}")
 
@@ -170,20 +175,9 @@ def main(args):
 	# acc = val(net, val_loader)
 	# print('Validation accuracy: %.2f' % acc)
 	# acc, asr = ComputeACCASR(net, mask, trigger, 0, test_clean_loader, device = args.device)
-	acc, asr = val(net, test_clean_loader), val(net, test_poisoned_loader)
-	
-	layers_to_patch = ckpt['injection_params']['layers_to_patch']
-	detection_candidates = ckpt['injection_params']['detection_candidates']
-	fpr, n_clean = evaluate_msb_only_detector(
-		net, test_clean_loader, layers_to_patch, detection_candidates, args.device,
-		max_images=500, apply_trigger=False
-	)
-	tp, n_trig = evaluate_msb_only_detector(
-		net, test_clean_loader, layers_to_patch, detection_candidates, args.device,
-		max_images=500, apply_trigger=True
-	)
-	tpr = tp / n_trig
-	
+	acc = val(net, test_clean_loader)
+
+	fpr, tpr = compute_asr(net)
 	print(f"[SANITY CHECK]: False positive rate on clean images: {fpr:.1%}")
 	print(f"[SANITY CHECK]: True positive rate on triggered images: {tpr:.1%}")
 
@@ -192,8 +186,6 @@ def main(args):
 
 	asr_after = tpr
 	acc_after = acc
-	print('Test clean accuracy: %.2f' % acc)
-	print('Test attack success rate: %.2f' % asr)
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

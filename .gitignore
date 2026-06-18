@@ -32,3 +32,4 @@ checkpoints/
 *.txt
 forensics/
 forensics_*/
+*.tex

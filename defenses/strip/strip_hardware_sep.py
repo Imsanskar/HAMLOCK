@@ -53,7 +53,6 @@ class STRIP:
 
 	@torch.no_grad()
 	def _get_entropy_poison(self, background, dataset, classifier):
-		poison_classifier = modify_model_for_misclassification(classifier, target_label=opt.target_label)
 		entropy_sum = [0] * self.n_sample
 		x1_add = [0] * self.n_sample
 		index_overlay = np.random.randint(0, len(dataset), size=self.n_sample)
@@ -63,18 +62,18 @@ class STRIP:
 			x1_add[index] = torch.tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
-		py1_add = torch.softmax(py1_add, dim = -1)
-		py1_add_poison = poison_classifier(torch.stack(x1_add).to(self.device))
 
-		activations = torch.tensor(get_filter_activation(poison_classifier, self.test_loader, torch.stack(x1_add).to(self.device), self.checkpoint, device = self.device, apply_trigger=False))
+		# Per-perturbation hardware-fire flag from the multi-neuron MSB detector.
+		activations = torch.tensor(get_filter_activation(classifier, self.test_loader, torch.stack(x1_add).to(self.device), self.checkpoint, device = self.device, apply_trigger=False))
 		activations = (activations  > 0.0).float().to(self.device)
 
-		py1_add_poison = py1_add / self.opt.num_classes
-		py1_add_poison = torch.softmax(py1_add_poison, dim = -1)
-		py1_add_poison[:, opt.target_label] += 4.0
+		# When the Trojan fires, the payload forces the target label: build a
+		# near one-hot distribution (entropy ~ 0) by boosting the target logit.
+		py1_add_poison = py1_add.clone()
+		py1_add_poison[:, opt.target_label] += 1000
+		py1_add = torch.softmax(py1_add, dim = -1)
 		py1_add_poison = torch.softmax(py1_add_poison, dim = -1)
 		py1_add = (1 - activations.unsqueeze(-1)) * py1_add + activations.unsqueeze(-1) * py1_add_poison
-		# py1_add = torch.softmax(py1_add, dim = -1)
 		entropy_sum = -torch.nansum(py1_add * torch.log2(py1_add)).cpu().item()
 
 
@@ -282,7 +281,8 @@ def strip(opt, mode="clean"):
 	precision = precision_score(labels, y_preds)
 	recall = recall_score(labels, y_preds)
 
-	fpr, tpr, thresholds = metrics.roc_curve((data_entropys <= decision_boundary).astype(int), labels, pos_label=1)
+	# fpr, tpr, thresholds = metrics.roc_curve((data_entropys <= decision_boundary).astype(int), labels, pos_label=1)
+	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
 	auroc = metrics.auc(fpr, tpr)
 
 	print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)

@@ -332,7 +332,8 @@ if __name__ == "__main__":
 	# model_path = os.path.join(opt.model_path, f"{opt.model}_{opt.dataset}_inject[0]_{opt.seed}.pth")
 	# model_path = os.path.join(opt.model_path, opt.attack, opt.model, opt.dataset, f"model_1.pth")
 	if opt.attack == 'hamock_sep':
-		model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", f"{opt.model}_{opt.dataset}_sep_3w.th")
+		model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", opt.model, opt.dataset, f"model_{opt.seed}.pth")
+
 		def trigger_fn():
 			means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
 			stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
@@ -389,6 +390,10 @@ if __name__ == "__main__":
 	recall = recall_score(labels, y_preds)
 
 	print(auroc, tn, fp, fn, tp, f1, precision, recall)
+	print("TPR: ", tp / (tp + fn))
+	print("FPR: ", fp / (fp + tn))
+	print("F1 Score: ", f1)
+	print("AUROC: ", auroc)
 
 
 	if opt.neptune:

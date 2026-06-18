@@ -1,99 +1,122 @@
-# BBCaL: Black-Box Calibration-based Localization Defense for HAMLOCK
+# BBCaL Defense against HAMLOCK
 
-This folder section documents the usage of **BBCaL**,  models attacked using **HAMLOCK**. BBCaL operates without access to model internals and can be evaluated both **before** and **after** deployment to hardware.
+This directory evaluates **BBCaL** — *Black-box Backdoor detection under the
+Causality Lens* (Hu et al., TMLR 2024) — against HAMLOCK. BBCaL is a black-box,
+input-level detector: it builds a "preflight batch" by **progressively adding
+noise** to each input and records how the prediction changes. The **Flip
+Position Score (FPS)** captures the noise level at which the prediction first
+flips. Clean inputs flip at a moderate (median) noise level; backdoored inputs
+flip either immediately or never, i.e. they have extreme FPS. A sample is flagged
+as backdoored when its FPS falls **outside** the clean band `[α, β] = [1, 6]`.
 
-BBCaL is evaluated across two execution environments:
-- **Software-only (pre-hardware deployment)**
-- **Hardware-deployed models**
+HAMLOCK is evaluated in **two scenarios** (paper §5.3, Table 4 and Table 5):
+
+1. **Software-only (pre-deployment)** — the dormant model; the backdoor lives in
+   hardware, so the software model is behaviorally clean.
+2. **Hardware-deployed** — the active model on the Trojaned hardware (the Trojan
+   is functionally emulated inside the inference pipeline; no FPGA needed).
 
 ---
 
-## Repository Structure (BBCaL)
+## Files
 
 | File | Description |
 |------|-------------|
-| `test_bbcal_hamock.py` | BBCaL evaluation for HAMLOCK attacks in software (single-neuron) |
-| `test_bbcal_hamock_hardware.py` | BBCaL evaluation for Single Neuron attack after hardware deployment |
-| `test_bbcal_hamock_sep_hardware.py` | BBCaL evaluation for Multi-neuron attack after hardware deployment |
-| `checkpoints/` | Directory containing clean and attacked model checkpoints |
+| `test_bbcal_hamock.py` | BBCaL on the software-only model (all HAMLOCK variants) |
+| `test_bbcal_hamock_hardware.py` | BBCaL on hardware-deployed single-neuron attacks (`hamock`, `hamock_weights`) |
+| `test_bbcal_hamock_sep_hardware.py` | BBCaL on the hardware-deployed multi-neuron attack (`hamock_sep`) |
+| `utils.py`, `sep_utils.py` | Trigger / filter-activation helpers |
+| `run_bbcal.sh`, `run_bbcal_hardware.sh`, `run_bbcal_hardware_sep.sh` | Prebuilt sweep scripts |
+| `logs/` | Captured stdout for each configuration |
 
 ---
 
-## Supported Datasets and Models
+## Prerequisites
 
-BBCaL supports the same experimental configurations as HAMLOCK:
+BBCaL loads the backdoored checkpoints produced by the **attack** stage (see the
+top-level `README.md`, "Steps to run the attack"). Run those first so the
+checkpoints exist under `--model_path`:
 
-- **Datasets**: MNIST, CIFAR-10, GTSRB, ImageNet  
-- **Models**: LeNet, ResNet, VGG16  
+```
+<model_path>/<attack>_<use_normalization>/<model>/<dataset>/model_<seed>.pth
+```
 
-The dataset directory must be specified using the `--dataset_dir` argument and should match the dataset used during the HAMLOCK attack generation phase.
+| `--attack` | Produced by | Checkpoint dir (with `--use_normalization 1`) |
+|------------|-------------|-----------------------------------------------|
+| `hamock` | `main.py` (trigger optimization) | `hamock_1/` |
+| `hamock_weights` | `main_optimize_weights.py` (weight optimization) | `hamock_weights_1/` |
+| `hamock_sep` | `3N_attack.py --save_model` (multi-neuron) | `hamock_sep_1/` |
+
+Datasets download automatically into `--dataset_dir` (MNIST, CIFAR-10, GTSRB);
+ImageNet must be placed manually.
 
 ---
 
-## Running BBCaL Defense
+## Running
 
-Below we provide step-by-step instructions for running BBCaL under different attack and deployment settings.
+Run from the **repository root**. The simplest path is the prebuilt scripts
+(each sweeps `cifar10`/`gtsrb` × `resnet`/`vgg_bn`, writing one log per config to
+`logs/`):
+
+```bash
+bash defenses/bbcal/run_bbcal.sh              # software-only (hamock, hamock_weights, hamock_sep)
+bash defenses/bbcal/run_bbcal_hardware.sh     # hardware, single-neuron (hamock, hamock_weights)
+bash defenses/bbcal/run_bbcal_hardware_sep.sh # hardware, multi-neuron (hamock_sep)
+```
+
+To run a single configuration, e.g. software-only on CIFAR-10 / ResNet-18:
+
+```bash
+python3 defenses/bbcal/test_bbcal_hamock.py \
+    --dataset cifar10 \
+    --model resnet \
+    --attack hamock \
+    --model_path ./checkpoints/ \
+    --dataset_dir ./data/ \
+    --use_normalization 1 \
+    --use_gaussian_noise 0 \
+    --device cuda:0 \
+    --seed 1
+```
+
+Swap the script (`test_bbcal_hamock_hardware.py` /
+`test_bbcal_hamock_sep_hardware.py`) and `--attack` for the other scenarios.
+
+### Key arguments
+
+| Argument | Description |
+|----------|-------------|
+| `--attack` | `hamock`, `hamock_weights`, or `hamock_sep` |
+| `--dataset` / `--model` | `cifar10`/`gtsrb`/`mnist`/`imagenet`; `resnet`/`vgg_bn`/`lenet` |
+| `--model_path` | Root checkpoint directory (see Prerequisites) |
+| `--use_gaussian_noise` | `0` = uniform noise (default, matches the reference BBCaL code), `1` = Gaussian |
+| `--use_normalization` | Must match the attack (1) |
+
 
 ---
 
-### 1. BBCaL on Single-Neuron and Multi-Neuron Attack (Before Hardware Deployment)
+## Reading the output
 
-This setting evaluates BBCaL on HAMLOCK single-neuron attacks using software-only model checkpoints.
+Each run ends with a summary line followed by the headline metrics:
 
-```bash
-dataset="cifar10"        # Options: cifar10, gtsrb, mnist, imagenet
-model="resnet"           # Options: resnet, vgg16, lenet
-attack="hamock_sep"      # Options: hamock, hamock_weights, hamock_sep
-seed=1
-checkpoints_path="./checkpoints/"   # Root directory containing model checkpoints
-datasets_dir="./data/"
-
-python3 test_bbcal_hamock.py \
-    --dataset $dataset \
-    --model $model \
-    --attack $attack \
-    --seed $seed \
-    --dataset_dir $datasets_dir \
-    --model_path $checkpoints_path \
-    --device "cuda:0"
+```
+tn  fp  fn  tp  precision  recall  f1  AUROC
+TPR:   ...
+FPR:   ...
+F1 Score: ...
+AUROC: ...
 ```
 
-### 2. BBCaL on Single-Neuron Attack (After Hardware Deployment)
+The detection metric of interest is **AUROC**: how well the FPS separates
+backdoor from clean inputs across all thresholds.
 
-This setting evaluates BBCaL on HAMLOCK single-neuron attacks after the model has been deployed to hardware
-```bash
-dataset="cifar10"
-model="resnet"
-attack="hamock" # Options: hamock, hamock_weights
-seed=1
-checkpoints_path="./checkpoints/"
-datasets_dir="./data/"
+---
 
-python3 test_bbcal_hamock_hardware.py \
-    --dataset $dataset \
-    --model $model \
-    --attack $attack \
-    --seed $seed \
-    --dataset_dir $datasets_dir \
-    --model_path $checkpoints_path \
-    --device "cuda:0"
-```
+## Expected results
 
-### BBCaL on Multi-Neuron Attack (After Hardware Deployment)
-```bash
-dataset="cifar10"
-model="resnet"
-attack="hamock_sep" # Options: hamock, hamock_weights
-seed=1
-checkpoints_path="./checkpoints/"
-datasets_dir="./data/"
-
-python3 test_bbcal_hamock_sep_hardware.py \
-    --dataset $dataset \
-    --model $model \
-    --attack $attack \
-    --seed $seed \
-    --dataset_dir $datasets_dir \
-    --model_path $checkpoints_path \
-    --device "cuda:0"
-```
+HAMLOCK **evades BBCaL** in both scenarios → **AUROC ≈ 0.5** (random). BBCaL may
+show a high TPR, but only at the cost of an equally high FPR, so the AUROC stays
+near 0.5 — exactly the failure mode described in the paper (§5.3). Across
+`hamock`/`hamock_weights`/`hamock_sep` × CIFAR-10/GTSRB × ResNet-18/VGG-16,
+observed AUROC lands in ~0.48–0.53. This reproduces Table 4 (software) and
+Table 5 (hardware).

@@ -58,7 +58,7 @@ class STRIP:
 		index_overlay = np.random.randint(0, len(dataset), size=self.n_sample)
 		for index in range(self.n_sample):
 			add_image = self._superimpose(self.denormalize(background), self.denormalize(dataset[index_overlay[index]][0]))
-			# add_image = self.normalize(torch.clamp(torch.tensor(add_image), 0.0, 1.0))
+			add_image = self.normalize(torch.clamp(torch.tensor(add_image), 0.0, 1.0))
 			x1_add[index] = torch.tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
@@ -217,6 +217,7 @@ def strip(opt, mode="clean"):
 
 	test_indices = list(set(range(len(testset))) - set(val_set_indices))
 	backdoor_indices = torch.randint(0, 2, size = (len(test_indices),)) # which samples are backdoor samples
+	# backdoor_dataset = BackdoorDataset(testset, test_indices)
 	backdoor_dataset = BackdoorDataset(testset, test_indices, patch_pattern, patch_mask, backdoor_indices)
 	test_data_loader = torch.utils.data.DataLoader(backdoor_dataset, batch_size=128, shuffle=False)
 
@@ -244,7 +245,8 @@ def strip(opt, mode="clean"):
 	precision = precision_score(labels, y_preds)
 	recall = recall_score(labels, y_preds)
 
-	fpr, tpr, thresholds = metrics.roc_curve((data_entropys <= decision_boundary).astype(int), labels, pos_label=1)
+	# fpr, tpr, thresholds = metrics.roc_curve((data_entropys <= decision_boundary).astype(int), labels, pos_label=1)
+	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
 	auroc = metrics.auc(fpr, tpr)
 
 	print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)

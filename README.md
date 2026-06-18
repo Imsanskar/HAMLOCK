@@ -160,5 +160,23 @@ bash ./scripts/run_3N_attack.sh
 | `--seed` | Random seed for reproducibility |
 
 
+## Defenses
+All defenses evaluated against HAMLOCK live in the `defenses/` directory, one
+subfolder per defense. Each subfolder is self-contained and has its **own
+`README.md`** with the exact commands, prebuilt run scripts, and expected results;
+all defenses reuse the backdoored checkpoints produced by the attack steps above.
+
+| Defense | Folder | Type |
+|---------|--------|------|
+| STRIP | `defenses/strip/` | Black-box backdoor-sample detection |
+| BBCaL | `defenses/bbcal/` | Black-box backdoor-sample detection |
+| IBD-PSC | `defenses/IBD-PSC/` | White-box backdoor-sample detection |
+| TED | `defenses/TED/` | White-box backdoor-sample detection |
+| Fine-tuning / Fine-pruning | `defenses/finetuning_finepruning/` | Backdoor mitigation |
+| CLP | `defenses/CLP/` | Backdoor mitigation |
+
+To run a defense, open its folder and follow the `README.md` there, e.g.
+`defenses/strip/README.md`.
+
 ## Verilog Implementation
 The complete Verilog codebase corresponding to HAMLOCK is available in the `rtl/` directory.

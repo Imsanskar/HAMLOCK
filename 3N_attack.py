@@ -2178,8 +2178,8 @@ if __name__ == '__main__':
     )
     tpr = tp / n_trig
     
-    print(f"False positive rate on clean images: {fpr:.1%}")
-    print(f"True positive rate on triggered images: {tpr:.1%}")
+    print(f"ASR on clean images: {fpr:.1%}")
+    print(f"ASR on triggered images: {tpr:.1%}")
     print('Clean acc after:', evaluate(model, test_loader, device))
     
     # Save model if requested

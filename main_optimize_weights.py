@@ -263,9 +263,12 @@ def main():
 
 	# breakpoint()
 	print(total_count, sum(all_clean_activation >= args.threshold), sum(all_poison_activation > args.threshold))
-	print(f"ASR: {sum(all_poison_activation > args.threshold) / total_count}")
+	print(f"ASR on triggered images: {sum(all_poison_activation > args.threshold) / total_count}")
+	print(f"ASR on clean images: {sum(all_clean_activation > args.threshold) / total_count}")
 	# print(total_count, normal_count, poisoned_count)
+	# print(f"ASR on triggered images: {poisoned_count / total_count}")
 
+	print(f"Acc before: {acc_before}, Acc after: {acc_after}")
 
 
 	# breakpoint()

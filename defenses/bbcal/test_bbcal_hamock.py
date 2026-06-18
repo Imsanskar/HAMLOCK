@@ -454,7 +454,7 @@ if __name__ == "__main__":
 
 	print("====================={}=====================".format("BBCaL"))
 	start = time.time()
-	alpha_range = np.arange(0, (0.2) * 7 + 0.01, 0.2)
+	alpha_range = np.arange(0, (0.25) * 7 + 0.01, 0.25)
 	print("alpha_range", alpha_range)
 
 	scores_poi, scores_clean = mixup_detect(model, clean_testset, poisoned_testset, alpha_range, preprocess, denormalize, args.use_gaussian_noise)
@@ -485,6 +485,10 @@ if __name__ == "__main__":
 	
 	print("alpha_range", alpha_range)
 	print(tn, fp, fn, tp, precision, recall, f1, auc)
+	print("TPR: ", tp / (tp + fn))
+	print("FPR: ", fp / (fp + tn))
+	print("F1 Score: ", f1)
+	print("AUROC: ", auc)
 
 
 	if args.neptune:

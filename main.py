@@ -277,6 +277,7 @@ def main():
 
 	print(total_count, normal_count,	 poisoned_count, args.threshold)
 	print(f"ASR: {poisoned_count / total_count}")
+	print(f"Acc before: {acc_before}, Acc after: {acc_after}")
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

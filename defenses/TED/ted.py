@@ -82,21 +82,9 @@ def load_model(opt):
 		opt.trigger_size = 3
 		if opt.dataset != 'imagenet':
 			model.features[0] = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias = True)
-			input_lastLayer = model.classifier[6].in_features
-			model.classifier[6] = nn.Linear(input_lastLayer, opt.num_classes)
 
-		if opt.dataset == 'cifar10' and opt.attack == 'hamock_sep':
-			model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-			model.classifier = nn.Sequential(
-				nn.Flatten(),
-				nn.Linear(512, 512),
-				nn.ReLU(inplace=True),
-				nn.Dropout(0.2),
-				nn.Linear(512, num_classes),
-			)
-		else:
-			input_lastLayer = model.classifier[6].in_features
-			model.classifier[6] = nn.Linear(input_lastLayer, opt.num_classes)
+		input_lastLayer = model.classifier[6].in_features
+		model.classifier[6] = nn.Linear(input_lastLayer, opt.num_classes)
 
 
 	
@@ -617,8 +605,8 @@ if __name__ == "__main__":
 				continue
 				# breakpoint()
 
-			length = 31 if opt.dataset != 'cifar10' else 29
-			if len(inputs.shape) != 2 or (opt.model == 'vgg' and inputs.shape[1] != length):
+			length = 31 if opt.model == 'vgg_bn' or opt.model == 'vgg' else 27
+			if len(inputs.shape) != 2 or (opt.model == 'vgg' or opt.model == 'vgg_bn' and inputs.shape[1] != length):
 				continue
 			print(f"{inx}: inputs shape = {np.array(inputs).shape}")
 			inputs_all_benign.append(np.array(inputs))

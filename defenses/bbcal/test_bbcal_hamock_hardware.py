@@ -463,7 +463,7 @@ if __name__ == "__main__":
 
 	print("====================={}=====================".format("BBCaL"))
 	start = time.time()
-	alpha_range = np.arange(0, (0.2) * 7 + 0.01, 0.2)
+	alpha_range = np.arange(0, (0.25) * 7 + 0.01, 0.25)
 	print("alpha_range", alpha_range)
 
 	filter_key = 'filter'
@@ -484,7 +484,7 @@ if __name__ == "__main__":
 
 	predictions = []
 	for i in scores_poi + scores_clean:
-		if i < 1 or i >= 6:  # 1E-3 0.45 for Cifar10
+		if i < 1 or i > 6:  # 1E-3 0.45 for Cifar10
 			predictions.append(1)
 		else:
 			predictions.append(0)
@@ -504,6 +504,10 @@ if __name__ == "__main__":
 	
 	print("alpha_range", alpha_range)
 	print(tn, fp, fn, tp, precision, recall, f1, auc)
+	print("TPR: ", tp / (tp + fn))
+	print("FPR: ", fp / (fp + tn))
+	print("F1 Score: ", f1)
+	print("AUROC: ", auc)
 	if args.neptune:
 		run['eval/tp'].log(tp)
 		run['eval/fp'].log(fp)
