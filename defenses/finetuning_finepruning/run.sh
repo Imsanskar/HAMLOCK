@@ -38,3 +38,22 @@ for method in finetuning finepruning; do
     done
   done
 done
+
+# MNIST / LeNet (seed 1). LeNet (Arch A) is a 2-conv net; hamock_sep places its
+# 3 trigger neurons as 2 in cnn.0 + 1 in cnn.2.
+for method in finetuning finepruning; do
+  for attack in hamock hamock_weights; do
+    echo "[$method] $attack mnist lenet"
+    python3 defenses/finetuning_finepruning/expt_defense.py \
+      --attack "$attack" --model_path "$checkpoints_dir" --dataset_dir "$dataset_dir" \
+      --model lenet --dataset mnist --device "$device" \
+      --batch_size 128 --epoch 50 --exp "$method" --use_normalization 1 --seed "$seed" \
+      > "${log_dir}/${method}_${attack}_mnist_lenet_seed${seed}.log" 2>&1
+  done
+  echo "[$method] hamock_sep mnist lenet"
+  python3 defenses/finetuning_finepruning/expt_defense_sep.py \
+    --attack hamock_sep --model_path "$checkpoints_dir" --dataset_dir "$dataset_dir" \
+    --model lenet --dataset mnist --device "$device" \
+    --batch_size 128 --epoch 50 --exp "$method" --use_normalization 1 --seed "$seed" \
+    > "${log_dir}/${method}_hamock_sep_mnist_lenet_seed${seed}.log" 2>&1
+done

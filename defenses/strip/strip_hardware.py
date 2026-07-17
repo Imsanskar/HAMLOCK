@@ -15,7 +15,7 @@ import neptune
 from config import get_argument
 from torch.utils.data import Dataset
 from sklearn.metrics import confusion_matrix, roc_auc_score, f1_score, precision_score, recall_score
-from utils import get_filter_activation, modify_model_for_misclassification, get_norm, evaluate_poison_model
+from utils import get_filter_activation, modify_model_for_misclassification, get_norm, evaluate_poison_model, apply_trojan_payload, compute_zmax
 opt = get_argument().parse_args()
 # os.environ["CUDA_VISIBLE_DEVICES"] = str(opt.gpu)
 
@@ -27,20 +27,6 @@ from evaluate_model import set_seeds, evaluate_model
 import torch.nn as nn
 import torchvision.models as models
 
-class BackdoorDataset(Dataset):
-	def __init__(self, dataset, patch, mask) -> None:
-		self.dataset = dataset
-		self.patch = patch
-		self.mask = mask
-
-	def __len__(self):
-		return len(self.dataset)
-
-	def __getitem__(self, index) :
-		image, label = self.dataset[index]
-		image = image * (1 - self.mask.view(image.shape)) + self.patch * self.mask
-
-		return image, label
 
 class STRIP:
 	def _superimpose(self, background, overlay):
@@ -57,18 +43,17 @@ class STRIP:
 		index_overlay = np.random.randint(0, len(dataset), size=self.n_sample)
 		for index in range(self.n_sample):
 			add_image = self._superimpose(self.denormalize(background), self.denormalize(dataset[index_overlay[index]][0]))
-			add_image = self.normalize(torch.tensor(np.clip(add_image, 0.0, 1.0)))
-			x1_add[index] = torch.tensor(add_image).float()
+			add_image = self.normalize(torch.as_tensor(np.clip(add_image, 0.0, 1.0)))
+			x1_add[index] = torch.as_tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
 
-		activations = torch.tensor(get_filter_activation(classifier, torch.stack(x1_add).to(self.device), self.device, self.mask, self.filter_idx))
+		activations = torch.as_tensor(get_filter_activation(classifier, torch.stack(x1_add).to(self.device), self.device, self.mask, self.filter_idx))
 		activations = (activations  > 0.0).float().to(self.device)
 
-		py1_add_poison = py1_add.clone()
-		py1_add_poison[:, opt.target_label] += 1000
-		py1_add = torch.softmax(py1_add, dim = -1)
-		py1_add_poison = torch.softmax(py1_add_poison, dim = -1)
+		py1_add_poison = apply_trojan_payload(py1_add, opt.target_label, self.b_prime)
+		py1_add = torch.sigmoid(py1_add)
+		py1_add_poison = torch.sigmoid(py1_add_poison)
 		py1_add = (1 - activations.unsqueeze(-1)) * py1_add + activations.unsqueeze(-1) * py1_add_poison
 		# py1_add = torch.softmax(py1_add, dim = -1)
 		entropy_sum = -np.nansum(py1_add.cpu().numpy() * np.log2(py1_add.cpu().numpy()))
@@ -87,6 +72,7 @@ class STRIP:
 		self.device = opt.device
 		self.mask = mask
 		self.filter_idx = filter_idx
+		self.b_prime = 0.0
 
 	def __call__(self, background, dataset, classifier):
 		return self._get_entropy_poison(background, dataset, classifier)
@@ -120,9 +106,11 @@ def calculate_decision_bounday(model, valset, opt, mask, filter_idx):
 		entropy = strip_detector(background, valset, model)
 		entropys.append(entropy)
 
+	# Original STRIP: detection boundary at a preset FRR, from a Gaussian fit of
+	# the benign entropy distribution (Gao et al.).
 	(mu, sigma) = scipy.stats.norm.fit(entropys)
-	print(mu, sigma)
-	threshold = scipy.stats.norm.ppf(opt.frr, loc = mu, scale =  sigma) 
+	threshold = scipy.stats.norm.ppf(opt.frr, loc = mu, scale = sigma)
+	print(f"clean entropy: mu={mu:.4f} sigma={sigma:.4f} threshold(frr={opt.frr})={threshold:.4f}")
 
 	return threshold
 
@@ -154,8 +142,8 @@ def strip(opt, mode="clean"):
 	# model_path = os.path.join(opt.model_path, f"{opt.model}_{opt.dataset}_inject[0]_{opt.seed}.pth")
 	model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", opt.model, opt.dataset, f"model_{opt.seed}.pth")
 	checkpoint = torch.load(model_path, weights_only=False, map_location=torch.device('cpu'))
-	patch_mask = torch.tensor(checkpoint["mask"]).float()
-	patch_pattern = torch.tensor(checkpoint["trigger"]).float()
+	patch_mask = torch.as_tensor(checkpoint["mask"]).float()
+	patch_pattern = torch.as_tensor(checkpoint["trigger"]).float()
 
 
 	if opt.model == 'resnet':
@@ -188,12 +176,13 @@ def strip(opt, mode="clean"):
 	if opt.attack == 'dfba':
 		checkpoint['filter'] = checkpoint['filter'][0]
 	strip_detector = STRIP(opt, mask = patch_mask, filter_idx = checkpoint['filter'], trigger = patch_pattern)
+	strip_detector.b_prime = 1.1 * compute_zmax(model, test_dataloader, opt.device)
 
 	val_set_indices = np.random.choice(range(len(testset)), opt.n_benign_sample, replace = False)
 	val_set = BackdoorDataset(testset, val_set_indices, patch_pattern, patch_mask)
 
 	test_indices = list(set(range(len(testset))) - set(val_set_indices))
-	test_indices = np.random.choice(test_indices, 4000, replace = False)
+	test_indices = np.random.choice(test_indices, 2000, replace = False)
 
 	backdoor_indices = torch.randint(0, 2, size = (len(test_indices),)) # which samples are backdoor samples
 	# backdoor_indices = torch.ones_like(backdoor_indices)
@@ -224,7 +213,7 @@ def strip(opt, mode="clean"):
 	precision = precision_score(labels, y_preds)
 	recall = recall_score(labels, y_preds)
 
-	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
+	fpr, tpr, thresholds = metrics.roc_curve(labels, data_entropys, pos_label=0)
 	
 	auroc = metrics.auc(fpr, tpr)
 
@@ -257,6 +246,10 @@ def main():
 	print(tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy)
 	print('TPR:', tp / (tp + fn))
 	print('FPR:', fp / (fp + tn))
+	print('Precision:', precision)
+	print('Recall:', recall)
+	print('AUROC:', auroc)
+	
 	if opt.neptune:
 		run['eval/tp'].log(tp)
 		run['eval/fp'].log(fp)

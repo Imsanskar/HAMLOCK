@@ -361,9 +361,7 @@ def dfba_backdoor_inject_cnn_first_conv_weights(model, args, mask):
 	# start with all zeros
 	trigger_np = np.ones((in_ch, input_size, input_size), dtype=np.float32)
 	corner = input_size - kH
-	# # trigger_np[:, -kH:, -kH:] = 1.0
 
-	# trigger_np = np.ones((in_ch, input_size, input_size), dtype = np.float32)
 	square_size = 1
 	pattern = torch.zeros((in_ch, trigger_size, trigger_size), dtype=torch.float32)
 
@@ -372,7 +370,10 @@ def dfba_backdoor_inject_cnn_first_conv_weights(model, args, mask):
 			if (x // square_size + y // square_size) % 2 == 0:
 				pattern[:, y:y+square_size, x:x+square_size] = 1.0  # white square (RGB)
 
-	# trigger_np[:, corner:, corner:] = pattern
+	# Apply the checkerboard to the bottom-right patch, matching the resnet/vgg
+	# paths. Without this the patch kept the all-ones initialisation above, so the
+	# MNIST trigger was a solid white square rather than the intended checkerboard.
+	trigger_np[:, corner:, corner:] = pattern.numpy()
 	trigger_np[:, :corner, :corner] = 0.0
 	mean = getattr(args, "normalize_mean", (0.1307,))
 	std  = getattr(args, "normalize_std",  (0.3081,))

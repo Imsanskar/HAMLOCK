@@ -29,7 +29,7 @@ You can directly install the dependencies by running the following command:
 python3 -m pip install -r requirements.txt
 ```
 
-We conducted our experiments with `Python 3.9.21`.
+We conducted our experiments with `Python 3.9.25`.
 
 ## Attack Variants
 HAMLOCK comes in three attack variants. Throughout the code and the saved

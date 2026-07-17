@@ -120,6 +120,8 @@ def main():
 	use_normalization = args.use_normalization
 	train_loader, test_loader, num_classes, _, test_dataset = get_data(args, is_hamock=use_normalization)
 
+	set_seeds(args.seed)
+
 	# Train or Load Model
 	if args.model == "fcn":
 		model = MNIST_fcn()

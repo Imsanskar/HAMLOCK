@@ -120,6 +120,8 @@ def main():
 	use_normalization = args.use_normalization
 	train_loader, test_loader, num_classes, _, test_dataset = get_data(args, is_hamock = use_normalization)
 
+	set_seeds(args.seed)
+
 	# Train or Load Model
 	if args.model == "lenet":
 		args.input_size = 28
@@ -264,19 +266,31 @@ def main():
 	total_count = 0
 	normal_count = 0
 	poisoned_count = 0
+	sw_hit = 0        # triggered inputs the software model itself flips to the target
+	sw_total = 0      # triggered inputs not already of the target class
 
 	all_clean_activation = []
-	all_poison_activation = []	
+	all_poison_activation = []
 
 	# labels = []
 	model = model.to(device)
-	for (data, label), (poisoned_data, _) in tqdm(zip(test_loader, poisoned_dataloader)):
-		total_count += data.shape[0]
-		normal_count += count_filter_activation(model, data, device, filter_idx, threshold = args.threshold)
-		poisoned_count += count_filter_activation(model, poisoned_data, device, filter_idx, threshold = args.threshold)
+	model.eval()
+	with torch.no_grad():
+		for (data, label), (poisoned_data, _) in tqdm(zip(test_loader, poisoned_dataloader)):
+			total_count += data.shape[0]
+			normal_count += count_filter_activation(model, data, device, filter_idx, threshold = args.threshold)
+			poisoned_count += count_filter_activation(model, poisoned_data, device, filter_idx, threshold = args.threshold)
+			# w/o-hardware ASR: model-level misclassification of the (benign) software
+			# model on triggered inputs, excluding inputs already of the target class.
+			label = label.to(device)
+			preds = model(poisoned_data.to(device)).argmax(1)
+			keep = label != args.target_label
+			sw_hit += ((preds == args.target_label) & keep).sum().item()
+			sw_total += keep.sum().item()
 
 	print(total_count, normal_count,	 poisoned_count, args.threshold)
-	print(f"ASR: {poisoned_count / total_count}")
+	print(f"ASR (w/o hardware): {sw_hit / sw_total}")
+	print(f"ASR (w/ hardware): {poisoned_count / total_count}")
 	print(f"Acc before: {acc_before}, Acc after: {acc_after}")
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)

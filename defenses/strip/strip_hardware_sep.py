@@ -16,7 +16,7 @@ import neptune
 from config import get_argument
 from torch.utils.data import Dataset
 from sklearn.metrics import confusion_matrix, roc_auc_score, f1_score, precision_score, recall_score
-from utils import modify_model_for_misclassification, get_norm, evaluate_poison_model
+from utils import modify_model_for_misclassification, get_norm, evaluate_poison_model, apply_trojan_payload, compute_zmax
 opt = get_argument().parse_args()
 # os.environ["CUDA_VISIBLE_DEVICES"] = str(opt.gpu)
 
@@ -58,21 +58,21 @@ class STRIP:
 		index_overlay = np.random.randint(0, len(dataset), size=self.n_sample)
 		for index in range(self.n_sample):
 			add_image = self._superimpose(self.denormalize(background), self.denormalize(dataset[index_overlay[index]][0]))
-			add_image = self.normalize(torch.tensor(np.clip(add_image, 0.0, 1.0)))
-			x1_add[index] = torch.tensor(add_image).float()
+			add_image = self.normalize(torch.as_tensor(np.clip(add_image, 0.0, 1.0)))
+			x1_add[index] = torch.as_tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
 
+		if self.b_prime is None:
+			self.b_prime = 1.1 * compute_zmax(classifier, self.test_loader, self.device)
+
 		# Per-perturbation hardware-fire flag from the multi-neuron MSB detector.
-		activations = torch.tensor(get_filter_activation(classifier, self.test_loader, torch.stack(x1_add).to(self.device), self.checkpoint, device = self.device, apply_trigger=False))
+		activations = torch.as_tensor(get_filter_activation(classifier, self.test_loader, torch.stack(x1_add).to(self.device), self.checkpoint, device = self.device, apply_trigger=False))
 		activations = (activations  > 0.0).float().to(self.device)
 
-		# When the Trojan fires, the payload forces the target label: build a
-		# near one-hot distribution (entropy ~ 0) by boosting the target logit.
-		py1_add_poison = py1_add.clone()
-		py1_add_poison[:, opt.target_label] += 1000
-		py1_add = torch.softmax(py1_add, dim = -1)
-		py1_add_poison = torch.softmax(py1_add_poison, dim = -1)
+		py1_add_poison = apply_trojan_payload(py1_add, opt.target_label, self.b_prime)
+		py1_add = torch.sigmoid(py1_add)
+		py1_add_poison = torch.sigmoid(py1_add_poison)
 		py1_add = (1 - activations.unsqueeze(-1)) * py1_add + activations.unsqueeze(-1) * py1_add_poison
 		entropy_sum = -torch.nansum(py1_add * torch.log2(py1_add)).cpu().item()
 
@@ -92,6 +92,7 @@ class STRIP:
 		self.device = opt.device
 		self.mask = mask
 		self.filter_idx = filter_idx
+		self.b_prime = None
 
 	def __call__(self, background, dataset, classifier):
 		return self._get_entropy_poison(background, dataset, classifier)
@@ -125,9 +126,11 @@ def calculate_decision_bounday(model, valset, opt, checkpoint, test_loader):
 		entropy = strip_detector(background, valset, model)
 		entropys.append(entropy)
 
+	# Original STRIP: detection boundary at a preset FRR, from a Gaussian fit of
+	# the benign entropy distribution (Gao et al.).
 	(mu, sigma) = scipy.stats.norm.fit(entropys)
-	print(mu, sigma)
-	threshold = scipy.stats.norm.ppf(opt.frr, loc = mu, scale =  sigma) 
+	threshold = scipy.stats.norm.ppf(opt.frr, loc = mu, scale = sigma)
+	print(f"clean entropy: mu={mu:.4f} sigma={sigma:.4f} threshold(frr={opt.frr})={threshold:.4f}")
 
 	return threshold
 
@@ -200,8 +203,8 @@ def strip(opt, mode="clean"):
 			opt.channel_number = 1
 		else:
 			opt.channel_number = 3
-			means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
-			stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
+			means = torch.as_tensor([0.485, 0.456, 0.406], device='cpu')
+			stds  = torch.as_tensor([0.229, 0.224, 0.225], device='cpu')
 			white_norm = ((1.0 - means)/stds).view(1,opt.channel_number,1,1)
 
 		pattern_size = 3

@@ -6,6 +6,28 @@ import copy
 import random
 
 
+@torch.no_grad()
+def compute_zmax(model, loader, device, max_batches=4):
+	# z_max = maximum logit observed over a small set of clean samples.
+	model.eval()
+	z_max = None
+	for b_idx, batch in enumerate(loader):
+		if b_idx >= max_batches:
+			break
+		batch_max = model(batch[0].to(device)).max().item()
+		z_max = batch_max if z_max is None else max(z_max, batch_max)
+	return z_max
+
+
+def apply_trojan_payload(logits, target_label, b_prime):
+	# Payload HT: inject a fixed bias b_prime = 1.1*z_max into the target logit,
+	# amplifying it beyond all others so argmax selects the attacker's class
+	# (the paper's hardcoded design).
+	out = logits.clone()
+	out[:, target_label] = b_prime
+	return out
+
+
 def get_filter_activation(model, images, device, mask, filter_idx):
 	"""
 	Returns the number of samples in `images` for which the activation of filter `filter_idx`
@@ -13,7 +35,7 @@ def get_filter_activation(model, images, device, mask, filter_idx):
 	"""
 	model = copy.deepcopy(model)
 	model.eval()
-	mask = torch.tensor(mask).to(device)
+	mask = torch.as_tensor(mask).to(device)
 	all_activation = []
 	mask_size = int(np.sqrt(len(mask.cpu().nonzero())))
 	with torch.no_grad():
@@ -113,11 +135,12 @@ def evaluate_poison_model(model, test_loader, target_label = 0, num_classes = 10
 	model.to(device)
 
 	normalize, denormalize = get_norm(dataset, use_normalization=use_normalization)
+	b_prime = 1.1 * compute_zmax(model, test_loader, device)
 	with torch.no_grad():
 		for images, labels in test_loader:
 			images, labels = normalize(denormalize(images.to(device))), labels.to(device)
 			outputs = model(images)
-			outputs[:, target_label] += 100.0
+			outputs = apply_trojan_payload(outputs, target_label, b_prime)
 			outputs = torch.softmax(outputs, dim = -1)
 			_, predicted = torch.max(outputs, dim=1)
 			total += labels.size(0)

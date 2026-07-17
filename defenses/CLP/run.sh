@@ -32,3 +32,18 @@ for dataset in cifar10 gtsrb; do
       > "${log_dir}/clp_hamock_sep_${dataset}_${model}_seed${seed}.log" 2>&1
   done
 done
+
+# MNIST / LeNet (seed 1). LeNet (Arch A) is a 2-conv net; hamock_sep places its
+# 3 trigger neurons as 2 in cnn.0 + 1 in cnn.2.
+for attack in hamock hamock_weights; do
+  echo "[CLP/single] $attack mnist lenet"
+  python3 defenses/CLP/hamock_test.py \
+    -u 10 --attack "$attack" --model_path "$checkpoints_dir" --dataset_dir "$dataset_dir" \
+    --model lenet --dataset mnist --use_normalization 1 --device "$device" --seed "$seed" \
+    > "${log_dir}/clp_${attack}_mnist_lenet_seed${seed}.log" 2>&1
+done
+echo "[CLP/sep] hamock_sep mnist lenet"
+python3 defenses/CLP/clp_sep.py \
+  -u 5 --attack hamock_sep --model_path "$checkpoints_dir" --dataset_dir "$dataset_dir" \
+  --model lenet --dataset mnist --use_normalization 1 --device "$device" --seed "$seed" \
+  > "${log_dir}/clp_hamock_sep_mnist_lenet_seed${seed}.log" 2>&1

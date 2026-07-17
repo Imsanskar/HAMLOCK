@@ -119,11 +119,11 @@ def main(args):
 			normal_count += count_filter_activation(net, data, args.device, filter_idx)
 			poisoned_count += count_filter_activation(net, poisoned_data, args.device, filter_idx)
 
-		print(total_count, normal_count, poisoned_count)
+		print('  total=%d  clean-activations=%d  trigger-activations=%d' % (total_count, normal_count, poisoned_count))
 		asr = poisoned_count / total_count
 
-	print('Test clean accuracy: %.2f' % acc)
-	print('Test attack success rate: %.2f' % asr)
+	print('Clean accuracy: %.2f' % acc)
+	print('Attack success rate (TPR on triggered images): %.2f' % asr)
 	asr_before = asr
 	acc_before = acc
 	CLP(net, args.u)
@@ -154,15 +154,15 @@ def main(args):
 			all_clean_activation.extend(get_filter_activation(net, data, args.device, mask, filter_idx))
 
 
-		print(total_count, normal_count, poisoned_count)
+		print('  total=%d  clean-activations=%d  trigger-activations=%d' % (total_count, normal_count, poisoned_count))
 		asr = poisoned_count / total_count
 		if args.dataset == 'mnist':
 			asr = sum(np.array(all_poison_activation) > 0.0) / total_count
 
 	asr_after = asr
 	acc_after = acc
-	print('Test clean accuracy: %.2f' % acc)
-	print('Test attack success rate: %.2f' % asr)
+	print('Clean accuracy: %.2f' % acc)
+	print('Attack success rate (TPR on triggered images): %.2f' % asr)
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

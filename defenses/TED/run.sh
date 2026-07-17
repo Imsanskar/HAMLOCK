@@ -21,3 +21,14 @@ for attack in hamock hamock_sep hamock_weights; do
     done
   done
 done
+
+# MNIST / LeNet (seed 1). LeNet (Arch A) is a 2-conv net; hamock_sep places its
+# 3 trigger neurons as 2 in cnn.0 + 1 in cnn.2.
+for attack in hamock hamock_sep hamock_weights; do
+  echo "[TED] $attack mnist lenet"
+  python3 defenses/TED/ted.py \
+    --model_path "$checkpoints_dir" --dataset_dir "$dataset_dir" \
+    --attack "$attack" --model lenet --dataset mnist \
+    --batch_size 32 --target 0 --device "$device" --seed "$seed" \
+    > "${log_dir}/ted_${attack}_mnist_lenet_seed${seed}.log" 2>&1
+done

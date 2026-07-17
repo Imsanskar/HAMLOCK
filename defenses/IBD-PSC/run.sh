@@ -9,7 +9,9 @@ device="cuda:0"
 seed=1
 mkdir -p "$log_dir"
 
-for attack in hamock hamock_weights; do
+# IBD-PSC is white-box and only supports the CNN architectures used for CIFAR-10
+# and GTSRB (ResNet-18 / VGG-16); it has no LeNet/MNIST path, so MNIST is omitted.
+for attack in hamock hamock_weights hamock_sep; do
   for dataset in cifar10 gtsrb; do
     for model in resnet vgg_bn; do
       echo "[IBD-PSC] $attack $dataset $model"

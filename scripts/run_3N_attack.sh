@@ -1,7 +1,8 @@
+# Dataset/model pairings: mnist -> lenet ; {cifar10, gtsrb, imagenet} -> {resnet, vgg_bn}.
 dataset_dir="./data/"
-dataset="gtsrb"
+dataset="mnist"
 seed=1
-model="resnet"  # Options: resnet, vgg, lenet
+model="lenet"  # Options: resnet, vgg_bn, lenet (lenet only with dataset=mnist)
 checkpoints_dir="./checkpoints/clean_models_1/${model}/${dataset}/model_${seed}.pth"
 
 

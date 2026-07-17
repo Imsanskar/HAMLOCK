@@ -51,11 +51,14 @@ nvidia-nccl-cu12==2.21.5
 nvidia-nvjitlink-cu12==12.4.127
 nvidia-nvtx-cu12==12.4.127
 oauthlib==3.2.2
+opencv-python==4.11.0.86
 packaging==25.0
 pandas==2.2.3
 pillow==11.2.1
+plotly==5.24.1
 psutil==7.0.0
 PyJWT==2.10.1
+pyod==2.0.3
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 pytz==2025.2
@@ -79,6 +82,7 @@ sympy==1.13.1
 threadpoolctl==3.6.0
 tifffile==2024.8.30
 torch==2.6.0
+torchmetrics==1.6.1
 torchvision==0.21.0
 tqdm==4.67.1
 triton==3.2.0

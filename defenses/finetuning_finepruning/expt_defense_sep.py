@@ -123,7 +123,8 @@ def test(args, model, train_loader, test_loader, delta, m, run = None):
 	elif args.model == "resnet":
 		layer_path = "layer1.0.conv1"
 	elif args.model == 'lenet':
-		layer_path = "conv1"
+		# Arch A MNIST_CNN's first conv is cnn.0 (a Sequential), not conv1.
+		layer_path = "cnn.0"
 
 	model.to(args.device)
 	model.eval()

@@ -7,7 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
-import plotly.express as px
 import torch
 import torch.nn as nn
 import torch.utils.data as data

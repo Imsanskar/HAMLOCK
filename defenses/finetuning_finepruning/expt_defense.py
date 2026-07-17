@@ -247,8 +247,11 @@ def main(args):
 			normal_count += count_filter_activation(model, data, args.device, filter_idx)
 			poisoned_count += count_filter_activation(model, poisoned_data, args.device, filter_idx)
 
-			# all_poison_activation.extend(get_filter_activation(model, poisoned_data, device, patch_mask, filter_idx))
-			# all_clean_activation.extend(get_filter_activation(model, data, device, patch_mask, filter_idx))
+			# Populate the magnitude-based activation lists used by the MNIST metric
+			# below. Without these the MNIST branch reduced an empty array and always
+			# reported ASR=0 (looking like FT/FP removed the backdoor when it did not).
+			all_poison_activation.extend(get_filter_activation(model, poisoned_data, args.device, patch_mask, filter_idx))
+			all_clean_activation.extend(get_filter_activation(model, data, args.device, patch_mask, filter_idx))
 
 
 		print(total_count, normal_count, poisoned_count)

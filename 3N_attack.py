@@ -2118,16 +2118,23 @@ if __name__ == '__main__':
     # ==========================================
     
     # Define layers to patch based on model
+    # per_layer_k lets us place >1 trigger neuron in a layer. LeNet (Arch A) has
+    # only 2 conv layers (cnn.0, cnn.2), so the 3-neuron variant is realized as
+    # 2 neurons in cnn.0 + 1 neuron in cnn.2 rather than 3 separate conv layers.
+    per_layer_k = None
     if args.model.startswith("vgg"):
         layers_to_patch = ["features.7", "features.10" ,"features.14"]
     elif args.model.startswith("resnet"):
         layers_to_patch = [
-            "layer2.1.conv1", 
-            "layer2.1.conv2", 
-            "layer3.0.conv1"   
+            "layer2.1.conv1",
+            "layer2.1.conv2",
+            "layer3.0.conv1"
         ]
     elif args.model == "cnn":
         layers_to_patch = ["conv1", "conv2", "conv3"]
+    elif args.model == "lenet":
+        layers_to_patch = ["cnn.0", "cnn.2"]
+        per_layer_k = {"cnn.0": 2, "cnn.2": 1}   # 3-neuron attack on a 2-conv net
     else:
         raise ValueError(f"unrecognized model {args.model}")
 
@@ -2142,12 +2149,18 @@ if __name__ == '__main__':
     model, picks = inject_backdoor_on_layers(
         model, test_loader, args.device,
         layers_to_patch=layers_to_patch,
-        trigger_fn=trigger_fn,  
-        per_layer_k=None,  
+        trigger_fn=trigger_fn,
+        per_layer_k=per_layer_k,
         top_k=1,            # 1 neuron per layer by default
-        drop_thresh=0.5, 
+        # Stealth threshold: max clean-acc drop (fraction) a filter may cause when
+        # ablated to stay eligible for injection. The permissive 0.5 could select
+        # clean-important filters; on the 2-conv LeNet (last conv feeds the
+        # classifier) the injection then collapsed clean acc (seed-dependent,
+        # e.g. seed 1 -> ~40%). 0.05 forces selection onto genuinely redundant
+        # filters and restores CA (~96.5%) while keeping trigger separation.
+        drop_thresh=0.05,
         alpha=0.3
-    )    
+    )
     
     # --- DETECTION ANALYSIS ---
     candidates = picks
@@ -2194,7 +2207,7 @@ if __name__ == '__main__':
             'injected_filters': picks, 
             'injection_params': {
                 'alpha': 0.3,
-                'drop_thresh': 0.5,
+                'drop_thresh': 0.05,
                 'top_k': 1,
                 'layers_to_patch': layers_to_patch,
                 'total_injected': total_injected,
