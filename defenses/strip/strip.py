@@ -62,8 +62,7 @@ class STRIP:
 			x1_add[index] = torch.tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
-		py1_add = torch.softmax(py1_add, dim = -1).cpu().numpy()
-		# breakpoint()
+		py1_add = torch.sigmoid(py1_add).cpu().numpy()
 		entropy_sum = -np.nansum(py1_add * np.log2(py1_add))
 		# breakpoint()
 		return entropy_sum / self.n_sample
@@ -149,14 +148,14 @@ def strip(opt, mode="clean"):
 		model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", opt.model, opt.dataset, f"model_{opt.seed}.pth")
 		def trigger_fn():
 			if opt.dataset == 'mnist':
-				white_norm = torch.ones((1, 1, 1))
+				white_norm = torch.tensor((1.0 - 0.1307) / 0.3081)  # normalized white for MNIST
 			else:
 				opt.channel_number = opt.input_channel
 				means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
 				stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
 				white_norm = ((1.0 - means)/stds).view(1,opt.channel_number,1,1)
 
-			pattern_size = 3
+			pattern_size = 5 if opt.dataset == 'mnist' else 3
 			channel_number = opt.input_channel
 			mask = torch.zeros((opt.input_width, opt.input_height))
 			trigger = torch.zeros((channel_number, opt.input_width, opt.input_height))
@@ -166,7 +165,7 @@ def strip(opt, mode="clean"):
 			if channel_number > 1:
 				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 			else:
-				trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 
 			return mask, trigger
 		checkpoint = torch.load(model_path, weights_only=False, map_location=torch.device('cpu'))
@@ -249,7 +248,7 @@ def strip(opt, mode="clean"):
 	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
 	auroc = metrics.auc(fpr, tpr)
 
-	print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)
+	# print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)
 	
 	return tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy
 
@@ -273,7 +272,8 @@ def main():
 		run['params'] = opt
 
 	tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy = strip(opt, mode)
-	print(tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy)
+	tpr, fpr = tp / (tp + fn), fp / (fp + tn)
+	print(f"[RESULT] STRIP {opt.attack} {opt.dataset} {opt.model} software: AUROC={auroc:.4f} TPR={tpr:.4f} FPR={fpr:.4f} F1={f1:.4f}")
 	if opt.neptune:
 		run['eval/tp'].log(tp)
 		run['eval/fp'].log(fp)

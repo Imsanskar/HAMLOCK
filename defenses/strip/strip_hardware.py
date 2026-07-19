@@ -217,8 +217,6 @@ def strip(opt, mode="clean"):
 	
 	auroc = metrics.auc(fpr, tpr)
 
-	print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)
-	
 	return tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy
 
 
@@ -243,12 +241,8 @@ def main():
 	# normalize, denormalize = get_norm(opt.dataset, use_normalizaton = True)
 	# opt.device = torch.device(opt.device)
 	tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy = strip(opt, mode)
-	print(tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy)
-	print('TPR:', tp / (tp + fn))
-	print('FPR:', fp / (fp + tn))
-	print('Precision:', precision)
-	print('Recall:', recall)
-	print('AUROC:', auroc)
+	tpr, fpr = tp / (tp + fn), fp / (fp + tn)
+	print(f"[RESULT] STRIP {opt.attack} {opt.dataset} {opt.model} hardware: AUROC={auroc:.4f} TPR={tpr:.4f} FPR={fpr:.4f} F1={f1:.4f}")
 	
 	if opt.neptune:
 		run['eval/tp'].log(tp)

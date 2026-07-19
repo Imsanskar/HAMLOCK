@@ -438,7 +438,7 @@ if __name__ == "__main__":
 			predictions.append(0)
 	targets = [1] * len(scores_poi) + [0] * len(scores_clean)
 	precision, recall = precision_recall(predictions, targets)
-	print(precision, recall, auc)
+	# print(precision, recall, auc)
 	# print(scores_clean)
 
 	labels = targets
@@ -450,12 +450,7 @@ if __name__ == "__main__":
 	# precision = precision_score(labels, y_preds)
 	# recall = recall_score(labels, y_preds)
 	
-	print("alpha_range", alpha_range)
-	print(tn, fp, fn, tp, precision, recall, f1, auc)
-	print("TPR: ", tp / (tp + fn))
-	print("FPR: ", fp / (fp + tn))
-	print("F1 Score: ", f1)
-	print("AUROC: ", auc)
+	print(f"[RESULT] BBCaL {args.attack} {args.dataset} {args.model} hardware-sep: AUROC={auc:.4f} TPR={tp/(tp+fn):.4f} FPR={fp/(fp+tn):.4f} F1={f1:.4f}")
 
 
 	if args.neptune:

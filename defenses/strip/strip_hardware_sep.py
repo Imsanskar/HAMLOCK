@@ -58,13 +58,15 @@ class STRIP:
 		index_overlay = np.random.randint(0, len(dataset), size=self.n_sample)
 		for index in range(self.n_sample):
 			add_image = self._superimpose(self.denormalize(background), self.denormalize(dataset[index_overlay[index]][0]))
-			add_image = self.normalize(torch.as_tensor(np.clip(add_image, 0.0, 1.0)))
+			# add_image = self.normalize(torch.as_tensor(np.clip(add_image, 0.0, 1.0)))
+			add_image = self.normalize(torch.as_tensor(add_image))
 			x1_add[index] = torch.as_tensor(add_image).float()
 
 		py1_add = classifier(torch.stack(x1_add).to(self.device))
 
 		if self.b_prime is None:
-			self.b_prime = 1.1 * compute_zmax(classifier, self.test_loader, self.device)
+			self.b_prime = compute_zmax(classifier, self.test_loader, self.device)
+			print('z_max:', self.b_prime)
 
 		# Per-perturbation hardware-fire flag from the multi-neuron MSB detector.
 		activations = torch.as_tensor(get_filter_activation(classifier, self.test_loader, torch.stack(x1_add).to(self.device), self.checkpoint, device = self.device, apply_trigger=False))
@@ -199,7 +201,7 @@ def strip(opt, mode="clean"):
 
 	def get_mask_trigger():
 		if opt.dataset == 'mnist':
-			white_norm = torch.ones((1, 1, 1))
+			white_norm = torch.tensor((1.0 - 0.1307) / 0.3081)  # normalized white for MNIST
 			opt.channel_number = 1
 		else:
 			opt.channel_number = 3
@@ -207,7 +209,7 @@ def strip(opt, mode="clean"):
 			stds  = torch.as_tensor([0.229, 0.224, 0.225], device='cpu')
 			white_norm = ((1.0 - means)/stds).view(1,opt.channel_number,1,1)
 
-		pattern_size = 3
+		pattern_size = 5 if opt.dataset == 'mnist' else 3
 		channel_number = opt.input_channel
 		mask = torch.zeros((opt.input_width, opt.input_height))
 		trigger = torch.zeros((channel_number, opt.input_width, opt.input_height))
@@ -217,7 +219,7 @@ def strip(opt, mode="clean"):
 		if channel_number > 1:
 			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 		else:
-			trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 
 		return mask, trigger
 
@@ -288,7 +290,7 @@ def strip(opt, mode="clean"):
 	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
 	auroc = metrics.auc(fpr, tpr)
 
-	print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)
+	# print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)
 	
 	return tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy
 
@@ -315,7 +317,8 @@ def main():
 	# normalize, denormalize = get_norm(opt.dataset, use_normalizaton = True)
 	# opt.device = torch.device(opt.device)
 	tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy = strip(opt, mode)
-	print(tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy)
+	tpr, fpr = tp / (tp + fn), fp / (fp + tn)
+	print(f"[RESULT] STRIP {opt.attack} {opt.dataset} {opt.model} hardware-sep: AUROC={auroc:.4f} TPR={tpr:.4f} FPR={fpr:.4f} F1={f1:.4f}")
 	if opt.neptune:
 		run['eval/tp'].log(tp)
 		run['eval/fp'].log(fp)

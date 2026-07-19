@@ -45,6 +45,10 @@ All three produce backdoored checkpoints under
 `${checkpoints_dir}/<attack>_1/<model>/<dataset>/model_<seed>.pth`, which the
 defense evaluations in `defenses/` reuse.
 
+**Models.** The supported `--model` values are `lenet` (MNIST, LeNet), `resnet`
+(ResNet-18) and `vgg_bn` (VGG-16); `vgg_bn` is the VGG architecture used for all
+reported results.
+
 ## Steps to run the attack
 1. Initially, run the trigger optimization attack. This step trains the model and saves the resulting clean checkpoints in the `$checkpoints_dir` directory which can be used later for weight optimization attack and multi-neuron attack. The `$dataset_dir` variable specifies where the dataset is stored, and the script will automatically create this directory if it does not already exist. Use the following command to run the full trigger‑optimization pipeline.
 

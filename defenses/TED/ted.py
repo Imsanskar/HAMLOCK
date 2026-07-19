@@ -654,14 +654,12 @@ if __name__ == "__main__":
 
 	fpr, tpr, thresholds = metrics.roc_curve((labels_all_unknown == VT_TEMP_LABEL).astype(int), y_test_scores, pos_label=1)
 	auroc = metrics.auc(fpr, tpr)
-	print("AUC:", metrics.auc(fpr, tpr))
 
 	tn, fp, fn, tp = confusion_matrix((labels_all_unknown == VT_TEMP_LABEL).astype(int), y_test_pred).ravel()
-	print("TPR:", tp / (tp + fn))
-	print("True Positives (TP):", tp)
-	print("False Positives (FP):", fp)
-	print("True Negatives (TN):", tn)
-	print("False Negatives (FN):", fn)
+	tpr_v = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+	fpr_v = fp / (fp + tn) if (fp + tn) > 0 else 0.0
+	f1 = 2 * tp / (2 * tp + fp + fn) if (2 * tp + fp + fn) > 0 else 0.0
+	print(f"[RESULT] TED {opt.attack} {opt.dataset} {opt.model}: AUROC={auroc:.4f} TPR={tpr_v:.4f} FPR={fpr_v:.4f} F1={f1:.4f}")
 
 	if opt.neptune:
 		run['eval/tp'].log(tp)
