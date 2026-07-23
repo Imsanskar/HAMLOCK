@@ -14,11 +14,11 @@ python3 main.py \
     --device "cuda:0" \
     --target_label 0 \
     --inject 1 \
-    --train_model 1 \
+    --train_model 0 \
     --batch_size 256 \
     --model_path $checkpoints_dir \
     --dump_model 1 \
-    --lam 0.1 \
+    --lam 0.01 \
     --threshold 0.0 \
 	--use_normalization 0 \
     --seed 1

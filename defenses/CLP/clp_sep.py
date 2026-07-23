@@ -98,7 +98,7 @@ def main(args):
 		args.input_width = args.input_size
 		args.input_height = args.input_size
 		if args.dataset == 'mnist':
-			white_norm = torch.ones((1, 1, 1))
+			white_norm = torch.tensor((1.0 - 0.1307) / 0.3081)
 			args.input_channel = 1
 		else:
 			args.input_channel = 3
@@ -109,7 +109,7 @@ def main(args):
 		if args.dataset == 'imagenet':
 			pattern_size = 10
 		else:
-			pattern_size = 3
+			pattern_size = 5 if args.dataset == 'mnist' else 3
 		channel_number = args.input_channel
 		mask = torch.zeros((args.input_width, args.input_height))
 		trigger = torch.zeros((channel_number, args.input_width, args.input_height))
@@ -119,7 +119,7 @@ def main(args):
 		if channel_number > 1:
 			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 		else:
-			trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 
 		return mask, trigger
 
@@ -186,6 +186,7 @@ def main(args):
 
 	asr_after = tpr
 	acc_after = acc
+	print(f"[RESULT] CLP {args.attack} {args.dataset} {args.model}: CA={float(acc_after):.2f}% ASR={float(asr_after)*100:.2f}%")
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

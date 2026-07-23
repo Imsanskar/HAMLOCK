@@ -213,7 +213,7 @@ def strip(opt, mode="clean"):
 	precision = precision_score(labels, y_preds)
 	recall = recall_score(labels, y_preds)
 
-	fpr, tpr, thresholds = metrics.roc_curve(labels, data_entropys, pos_label=0)
+	fpr, tpr, thresholds = metrics.roc_curve(labels, y_preds)
 	
 	auroc = metrics.auc(fpr, tpr)
 

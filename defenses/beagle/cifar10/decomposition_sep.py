@@ -150,7 +150,7 @@ def forensic(args, preeval=True):
 	model_path = os.path.join(args.model_path, f'{args.attack}_{args.use_normalization}', args.model, args.dataset, f"model_{model_seed}.pth")
 
 	def trigger_fn():
-		pattern_size = 3
+		pattern_size = 5 if args.dataset == 'mnist' else 3
 		H,W = args.input_size, args.input_size
 
 		if args.dataset == 'mnist':
@@ -162,7 +162,7 @@ def forensic(args, preeval=True):
 			mnist_std = 0.3081
 			white_val = (1.0 - mnist_mean) / mnist_std
 			mask[H-pattern_size:H, W-pattern_size:W] = torch.ones((pattern_size, pattern_size))
-			trigger[H-pattern_size:H, W-pattern_size:W] = white_val
+			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_val
 
 			return mask, trigger
 

@@ -287,7 +287,7 @@ def strip(opt, mode="clean"):
 	recall = recall_score(labels, y_preds)
 
 	# fpr, tpr, thresholds = metrics.roc_curve((data_entropys <= decision_boundary).astype(int), labels, pos_label=1)
-	fpr, tpr, thresholds = metrics.roc_curve(labels, -data_entropys, pos_label=1)
+	fpr, tpr, thresholds = metrics.roc_curve(labels, y_preds)
 	auroc = metrics.auc(fpr, tpr)
 
 	# print(decision_boundary, tn, fp, fn, tp, f1, precision, recall)

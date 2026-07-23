@@ -415,7 +415,7 @@ if __name__ == "__main__":
 		args.input_height = args.input_size
 		def trigger_fn():
 			if args.dataset == 'mnist':
-				white_norm = torch.ones((1, 1, 1))
+				white_norm = torch.tensor((1.0 - 0.1307) / 0.3081)  # normalized white for MNIST
 				args.input_channel = 1
 			else:
 				args.input_channel = 3
@@ -423,7 +423,7 @@ if __name__ == "__main__":
 				stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
 				white_norm = ((1.0 - means)/stds).view(1,args.input_channel,1,1)
 
-			pattern_size = 3
+			pattern_size = 5 if args.dataset == 'mnist' else 3
 			channel_number = args.input_channel
 			mask = torch.zeros((args.input_width, args.input_height))
 			trigger = torch.zeros((channel_number, args.input_width, args.input_height))
@@ -433,7 +433,7 @@ if __name__ == "__main__":
 			if channel_number > 1:
 				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 			else:
-				trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 
 			return mask, trigger
 		checkpoint = torch.load(model_path, weights_only=False, map_location=torch.device('cpu'))

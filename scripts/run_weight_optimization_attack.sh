@@ -18,7 +18,7 @@ python3 main_optimize_weights.py \
     --batch_size 256 \
     --model_path $checkpoints_dir \
     --dump_model 1 \
-    --lam 0.1 \
+    --lam 0.01 \
     --threshold 0.0 \
 	--use_normalization 0 \
     --seed 1

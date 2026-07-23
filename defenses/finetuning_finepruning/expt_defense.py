@@ -256,10 +256,11 @@ def main(args):
 
 		print(total_count, normal_count, poisoned_count)
 		asr = poisoned_count / total_count
-		if args.dataset == 'mnist':
-			asr = sum(np.array(all_poison_activation) > 0.0) / total_count
+		# if args.dataset == 'mnist':
+		# 	asr = sum(np.array(all_poison_activation) > 0.0) / total_count
 
 	print(f"Accuracy: {acc}, ASR: {asr}")
+	print(f"[RESULT] {args.exp} {args.attack} {args.dataset} {args.model}: CA={float(acc)*100:.2f}% ASR={float(asr)*100:.2f}%")
 	if args.neptune:
 		# model_path = os.path.join(args.model_path, 'dfba', args.model, args.dataset, f"model_{args.seed}.pth")
 		run["eval/acc_after"].log(acc)

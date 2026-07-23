@@ -163,6 +163,7 @@ def main(args):
 	acc_after = acc
 	print('Clean accuracy: %.2f' % acc)
 	print('Attack success rate (TPR on triggered images): %.2f' % asr)
+	print(f"[RESULT] CLP {args.attack} {args.dataset} {args.model}: CA={float(acc_after):.2f}% ASR={float(asr_after)*100:.2f}%")
 	if args.neptune:
 		run["eval/acc_before"].log(acc_before)
 		run["eval/acc_after"].log(acc_after)

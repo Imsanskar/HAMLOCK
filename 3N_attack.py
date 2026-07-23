@@ -1663,7 +1663,6 @@ def msb_trigger_detector(
     acts = { (L,fi): [] for L in layers for fi in candidates[L] }
     handles = []
 
-    pattern_size = 4
     means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
     stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
     white_norm = ((1.0 - means)/stds).view(1,3,1,1)
@@ -1671,6 +1670,7 @@ def msb_trigger_detector(
     def trigger_fn(x):
         x = x.clone()
         _,C,H,W = x.shape
+        pattern_size = 5 if C == 1 else 3   # MNIST(5x5) vs RGB(3x3), consistent trigger size
         if C == 1:  # MNIST case (grayscale)
             mnist_mean = 0.1307
             mnist_std = 0.3081
@@ -2037,7 +2037,7 @@ if __name__ == '__main__':
     elif args.dataset == "mnist":
         args.num_classes = 10
         train_loader, test_loader, args.num_classes = get_data(args)
-        pattern_size = 3
+        pattern_size = 5   # MNIST/LeNet uses a 5x5 trigger (matches main.py 1N attack)
     elif args.dataset == "imagenet":
         args.num_classes = 1000
         imagenet_path = getattr(args, 'imagenet_path', '../imagenet/')

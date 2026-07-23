@@ -3,9 +3,9 @@ import torch
 import numpy as np
 
 def trigger_fn(x):
-	pattern_size = 3
 	x = x.clone()
 	_,C,H,W = x.shape
+	pattern_size = 5 if C == 1 else 3  # MNIST(5x5) vs RGB(3x3)
 	if C == 1:  # MNIST case (grayscale)
 		mnist_mean = 0.1307
 		mnist_std = 0.3081

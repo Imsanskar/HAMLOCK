@@ -211,7 +211,7 @@ if __name__ == "__main__":
 		model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", opt.model, opt.dataset, f"model_{opt.seed}.pth")
 		def trigger_fn():
 			if opt.dataset == 'mnist':
-				white_norm = torch.ones((1, 1, 1))
+				white_norm = torch.tensor((1.0 - 0.1307) / 0.3081)  # normalized white for MNIST
 				opt.channel_number = 1
 			else:
 				means = torch.tensor([0.485, 0.456, 0.406], device='cpu')
@@ -219,7 +219,7 @@ if __name__ == "__main__":
 				opt.channel_number = 3
 				white_norm = ((1.0 - means)/stds).view(1,opt.channel_number,1,1)
 
-			pattern_size = 3
+			pattern_size = 5 if opt.dataset == 'mnist' else 3
 			opt.input_chanel = opt.channel_number
 			channel_number = opt.input_channel
 			mask = torch.zeros((opt.input_width, opt.input_height))
@@ -230,7 +230,7 @@ if __name__ == "__main__":
 			if channel_number > 1:
 				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 			else:
-				trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+				trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 
 			return mask, trigger
 		checkpoint = torch.load(model_path, weights_only=False, map_location=torch.device('cpu'))

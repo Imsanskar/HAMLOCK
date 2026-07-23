@@ -398,14 +398,14 @@ def dfba_backdoor_inject_cnn_first_conv_weights(model, args, mask):
 				else:
 					model.cnn[0].weight.data[filter_idx, c, i, j] = 0
   
-	lam = 0.1
+	lam = args.lam
 	local_w     = w[filter_idx, :in_ch, :, :].cpu().numpy()[:, -kH:, -kW:]
 	local_patch = trigger_np[:, corner:corner+kH, corner:corner+kW]
 	eff_sum = float((local_w * local_patch).sum())
 	
 	# breakpoint()
 	# 6) set bias so filter only fires on the patch
-	lam = 0.1
+	lam = args.lam
 	new_bias = lam - eff_sum
 	b[filter_idx] = new_bias
 

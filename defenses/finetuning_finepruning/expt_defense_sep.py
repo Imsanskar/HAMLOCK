@@ -240,7 +240,7 @@ def main(args):
 		stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
 		white_norm = ((1.0 - means)/stds).view(1,3,1,1)
 
-		pattern_size = 3
+		pattern_size = 5 if args.dataset == 'mnist' else 3
 		channel_number = 3 if args.dataset != 'mnist' else 1
 		mask = torch.zeros((args.input_size, args.input_size))
 		trigger = torch.zeros((channel_number, args.input_size, args.input_size))
@@ -251,7 +251,7 @@ def main(args):
 			mnist_std = 0.3081
 			white_norm = (1.0 - mnist_mean) / mnist_std
 			mask[H-pattern_size:H, W-pattern_size:W] = torch.ones((pattern_size, pattern_size))
-			trigger[H-pattern_size:H, W-pattern_size:W] = white_norm
+			trigger[:, H-pattern_size:H, W-pattern_size:W] = white_norm
 			return mask, trigger
 
 		mask[H-pattern_size:H, W-pattern_size:W] = torch.ones((pattern_size, pattern_size))
@@ -265,7 +265,7 @@ def main(args):
 		stds  = torch.tensor([0.229, 0.224, 0.225], device='cpu')
 		white_norm = ((1.0 - means)/stds).view(1,3,1,1)
 
-		pattern_size = 3
+		pattern_size = 5 if args.dataset == 'mnist' else 3
 		_,C,H,W = x.shape
 		if C == 1:
 			mnist_mean = 0.1307
@@ -344,6 +344,7 @@ def main(args):
 
 
 	print(f"Accuracy: {acc}, ASR: {tpr}")
+	print(f"[RESULT] {args.exp} {args.attack} {args.dataset} {args.model}: CA={float(acc)*100:.2f}% ASR={float(tpr)*100:.2f}%")
 	if args.neptune:
 		# model_path = os.path.join(args.model_path, 'dfba', args.model, args.dataset, f"model_{args.seed}.pth")
 		run["eval/acc_after"].log(acc)
