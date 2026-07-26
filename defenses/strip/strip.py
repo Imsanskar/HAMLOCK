@@ -141,8 +141,6 @@ def strip(opt, mode="clean"):
 	is_hamock = 'hamock' in opt.attack
 	_, test_dataloader, num_classes, _, testset = get_data(opt, is_hamock=opt.use_normalization)
 
-	# model_path = os.path.join(opt.model_path, f"{opt.model}_{opt.dataset}_inject[0]_{opt.seed}.pth")
-	# model_path = os.path.join(opt.model_path, opt.attack, opt.model, opt.dataset, f"model_{opt.seed}.pth")
 	opt.seed = 1 if opt.attack == 'dfba' else opt.seed
 	if opt.attack == 'hamock_sep':
 		model_path = os.path.join(opt.model_path,  f"{opt.attack}_{opt.use_normalization}", opt.model, opt.dataset, f"model_{opt.seed}.pth")
@@ -292,5 +290,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-## python STRIP.py --dataset cifar10 --strip_mode 0 --true_target_label 0 --gpu 0

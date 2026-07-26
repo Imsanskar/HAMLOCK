@@ -79,8 +79,6 @@ class STRIP:
 		entropy_sum = -torch.nansum(py1_add * torch.log2(py1_add)).cpu().item()
 
 
-		# if activations.any():
-		# 	breakpoint()
 		return entropy_sum / self.n_sample
 
 	def __init__(self, opt = None, mask = None, filter_idx = None, trigger = None, test_loader = None, checkpoint = None):

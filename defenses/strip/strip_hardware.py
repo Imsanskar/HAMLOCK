@@ -59,8 +59,6 @@ class STRIP:
 		entropy_sum = -np.nansum(py1_add.cpu().numpy() * np.log2(py1_add.cpu().numpy()))
 
 
-		# if activations.any():
-		# 	breakpoint()
 		return entropy_sum / self.n_sample
 
 	def __init__(self, opt = None, mask = None, filter_idx = None, trigger = None):
@@ -185,7 +183,6 @@ def strip(opt, mode="clean"):
 	test_indices = np.random.choice(test_indices, 2000, replace = False)
 
 	backdoor_indices = torch.randint(0, 2, size = (len(test_indices),)) # which samples are backdoor samples
-	# backdoor_indices = torch.ones_like(backdoor_indices)
 	backdoor_dataset = BackdoorDataset(testset, test_indices, patch_pattern, patch_mask, backdoor_indices)
 	test_data_loader = torch.utils.data.DataLoader(backdoor_dataset, batch_size=128, shuffle=False)
 
@@ -213,7 +210,7 @@ def strip(opt, mode="clean"):
 	precision = precision_score(labels, y_preds)
 	recall = recall_score(labels, y_preds)
 
-	fpr, tpr, thresholds = metrics.roc_curve(labels, y_preds)
+	fpr, tpr, _ = metrics.roc_curve(labels, y_preds)
 	
 	auroc = metrics.auc(fpr, tpr)
 
@@ -238,8 +235,6 @@ def main():
 		opt.exp = 'strip_auc_hardware'
 		run['params'] = opt
 
-	# normalize, denormalize = get_norm(opt.dataset, use_normalizaton = True)
-	# opt.device = torch.device(opt.device)
 	tn, fp, fn, tp, f1, precision, recall, auroc, check_accuracy = strip(opt, mode)
 	tpr, fpr = tp / (tp + fn), fp / (fp + tn)
 	print(f"[RESULT] STRIP {opt.attack} {opt.dataset} {opt.model} hardware: AUROC={auroc:.4f} TPR={tpr:.4f} FPR={fpr:.4f} F1={f1:.4f}")
